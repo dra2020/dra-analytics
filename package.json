@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/all/all.d.ts",
@@ -55,5 +55,6 @@
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
     "yargs": "^17.1.1"
-  }
+  },
+  "dependencies": {}
 }
