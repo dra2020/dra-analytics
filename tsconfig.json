@@ -1,0 +1,18 @@
+{
+  "include": [
+    "lib/**/*", "types/**/*"
+  ],
+
+	"compilerOptions": {
+    "sourceMap": true,
+		"noImplicitAny": true,
+		"target": "es6",
+    "esModuleInterop": true,
+		"module": "commonjs",
+		"declaration": true,
+    "declarationDir": "dist/",
+		"types": [
+			"node"
+		]
+	}
+}
