@@ -5,7 +5,7 @@
   "main": "dist/dra-analytics.js",
   "types": "./dist/all/all.d.ts",
   "scripts": {
-    "test": "echo \"No test defined.\"",
+    "test": "jest",
     "build": "webpack",
     "webpack": "node_modules/.bin/webpack"
   },
