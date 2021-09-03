@@ -12,3 +12,5 @@ These are the libraries:
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
 
 The analytics in DRA include metrics favored by and build on the work of [many scholars](./docs/attributions.md).
+
+*** FORCE A BUILD ***
