@@ -42,6 +42,9 @@ var libConfig = {
 // var cliConfig = {  <<< TODO: add a CLI
 
 var testConfig = {
+  entry: {
+    library: './lib/all/all.ts'
+  },
   target: 'node',
   mode: 'development',
   output: {
