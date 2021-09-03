@@ -1,18 +1,23 @@
 {
-  "include": [
-    "lib/**/*", "types/**/*"
-  ],
-
+	"include": [
+		"lib/**/*",
+		"types/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"**/_tests__/*"
+	],
 	"compilerOptions": {
-    "sourceMap": true,
+		"sourceMap": true,
 		"noImplicitAny": true,
 		"target": "es6",
-    "esModuleInterop": true,
+		"esModuleInterop": true,
 		"module": "commonjs",
 		"declaration": true,
-    "declarationDir": "dist/",
+		"declarationDir": "dist/",
 		"types": [
-			"node"
+			"node",
+			"jest"
 		]
 	}
 }

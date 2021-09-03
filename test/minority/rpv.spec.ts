@@ -19,7 +19,7 @@ describe('Racial polarization', () =>
       native: false,
       invertSelection: false
     }
-    const points: T.DemographicVotingByFeature | undefined = FU.readDemographicCSV("testdata/NC-116-District1.csv", groups);
+    const points: T.DemographicVotingByFeature | undefined = FU.readDemographicCSV("testdata/minority/NC-116-District1.csv", groups);
 
     const rpv: T.RPVAnalysis | undefined = analyzeRacialVoting(points, districtID, groups);
 
