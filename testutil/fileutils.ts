@@ -6,7 +6,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import parse from 'csv-parse/lib/sync';
 
-import * as T from '../lib/minority/types'
+import * as M from '../lib/minority/types'
+import * as G from '../lib/graph/types'
 
 
 // HELPERS TO LOAD SAMPLE DATA FROM DISK
@@ -102,9 +103,39 @@ export function readJSON(file: string): any
 }
 
 
+// For exercising GRAPH functionality at the CLI
+
+export function readPlanCSV(file: string): G.PlanByGeoID
+{
+  var plan = {} as G.PlanByGeoID;
+
+  let fullPath: string;
+  if (path.isAbsolute(file))
+  {
+    fullPath = file;
+  }
+  else
+  {
+    fullPath = path.resolve(file);
+  }
+
+  var csvArray: any = readCSV(fullPath);
+
+  for (let dictRow of csvArray)
+  {
+    let geoID: string = dictRow['GEOID'];
+    let districtID: number = Number(dictRow['DISTRICT']);
+
+    plan[geoID] = districtID;
+  }
+
+  return plan;
+}
+
+
 // RPV specific
 
-export function readDemographicCSV(file: string, groups: T.MinorityFilter): T.DemographicVotingByFeature /* | undefined */
+export function readDemographicCSV(file: string, groups: M.MinorityFilter): M.DemographicVotingByFeature /* | undefined */
 {
   let fullPath: string;
   if (path.isAbsolute(file))
@@ -123,13 +154,13 @@ export function readDemographicCSV(file: string, groups: T.MinorityFilter): T.De
   // Convert the non-empty CSV to points by demographic
 
   let ids: string[] = [];
-  let whitePts: T.Point[] = [];
-  let minorityPts: T.Point[] = [];
-  let blackPts: T.Point[] = [];
-  let hispanicPts: T.Point[] = [];
-  let pacificPts: T.Point[] = [];
-  let asianPts: T.Point[] = [];
-  let nativePts: T.Point[] = [];
+  let whitePts: M.Point[] = [];
+  let minorityPts: M.Point[] = [];
+  let blackPts: M.Point[] = [];
+  let hispanicPts: M.Point[] = [];
+  let pacificPts: M.Point[] = [];
+  let asianPts: M.Point[] = [];
+  let nativePts: M.Point[] = [];
 
   let i = 0;
   for (let dictRow of csvArray)
@@ -155,7 +186,7 @@ export function readDemographicCSV(file: string, groups: T.MinorityFilter): T.De
     if (groups.native) nativePts.push({x: n, y: d});
   }
 
-  const vbf: T.DemographicVotingByFeature = {
+  const vbf: M.DemographicVotingByFeature = {
     ids: ids,
     comparison: whitePts,
     minority: groups.minority ? minorityPts : [],

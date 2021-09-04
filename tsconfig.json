@@ -8,16 +8,18 @@
 		"**/_tests__/*"
 	],
 	"compilerOptions": {
-		"sourceMap": true,
-		"noImplicitAny": true,
 		"target": "es6",
-		"esModuleInterop": true,
 		"module": "commonjs",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
 		"declaration": true,
 		"declarationDir": "dist/",
+		"strict": true,
 		"types": [
 			"node",
 			"jest"
-		]
+		],
+		"sourceMap": true,
+		"noImplicitAny": true,
 	}
 }

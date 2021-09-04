@@ -1,4 +1,7 @@
-# Minority Representation
+# Minority
+
+This library supports analyzing the opportunity for minority representation 
+as well as the degree of racially polarized voting.
 
 TODO
 

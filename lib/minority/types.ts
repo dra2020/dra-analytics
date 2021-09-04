@@ -1,5 +1,5 @@
 //
-// TYPE DEFINITIONS
+// MINORITY TYPES
 //
 
 export type MinorityFilter = {
