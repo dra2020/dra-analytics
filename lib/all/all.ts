@@ -6,3 +6,6 @@ export {Graph};
 
 import * as Minority from '../minority/all';
 export {Minority};
+
+import * as Splitting from '../splitting/all';
+export {Splitting};

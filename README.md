@@ -12,6 +12,7 @@ These are the libraries:
 - [Compactness](./docs/compactness.md): [TODO: Describe compactness library].
 - [Graph](./docs/graph.md): [TODO: Describe graph library].
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
+- [Splitting](./docs/splitting.md): [TODO: Describe splitting library].
 
 The analytics in DRA include metrics favored by and build on the work of [many scholars](./docs/attributions.md).
 
