@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/dra2020/dra-analytics#readme",
   "devDependencies": {
+    "@types/geojson": "^7946.0.8",
     "@types/jest": "^27.0.1",
     "@types/node": "^12.20.20",
     "@types/yargs": "^16.0.4",
@@ -45,6 +46,7 @@
     "jest": "^27.0.6",
     "json-loader": "^0.5.7",
     "prettier": "^2.3.2",
+    "shapefile": "^0.6.6",
     "source-map-loader": "^3.0.0",
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.2.5",
@@ -55,5 +57,9 @@
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
     "yargs": "^17.1.1"
+  },
+  "dependencies": {
+    "@dra2020/baseclient": "^1.0.38",
+    "geojson": "^0.5.0"
   }
 }

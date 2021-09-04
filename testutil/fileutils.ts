@@ -5,9 +5,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import parse from 'csv-parse/lib/sync';
+import * as GeoJSON from 'geojson';
 
 import * as M from '../lib/minority/types'
 import * as G from '../lib/graph/types'
+import * as C from '../lib/compactness/types'
 
 
 // HELPERS TO LOAD SAMPLE DATA FROM DISK
@@ -103,7 +105,68 @@ export function readJSON(file: string): any
 }
 
 
-// For exercising GRAPH functionality at the CLI
+// COMPACTNESS-specific helpers
+
+function fileToPath(file: string): string
+{
+  let fullPath: string;
+  if (path.isAbsolute(file))
+  {
+    fullPath = file;
+  }
+  else
+  {
+    fullPath = path.resolve(file);
+  }
+
+  return fullPath;
+}
+
+export function readFeatureSets(file: string): C.FeaturesEntry[]
+{
+  let featureEntries: C.FeaturesEntry[] = [];
+
+  const fullPath: string = fileToPath(file);
+  const csvArray: any = readCSV(fullPath);
+
+  for (let dictRow of csvArray)
+  {
+    const featuresEntry: C.FeaturesEntry = {
+      n: Number(dictRow['n']),
+      features: {
+        sym_x: Number(dictRow['sym_x']),
+        sym_y: Number(dictRow['sym_y']),
+        reock: Number(dictRow['reock']),
+        bbox: Number(dictRow['bbox']),
+        polsby: Number(dictRow['polsby']),
+        hull: Number(dictRow['hull']),
+        schwartzberg: Number(dictRow['schwartzberg']),
+      },
+      score: Number(dictRow['score'])
+    };
+
+    featureEntries.push(featuresEntry);
+  }
+
+  return featureEntries;
+}
+
+// Read sample shapes
+
+var shp = require('shapefile');
+// https://www.npmjs.com/package/shapefile
+// https://digital-geography.com/gis-with-javascript-tutorial-part-1/
+
+export function readShapefile(file: string): Promise<GeoJSON.FeatureCollection>
+{
+  const fullPath: string = fileToPath(file);
+  const buf = fs.readFileSync(fullPath);
+
+  return shp.read(buf).catch((err: any) => console.error(err.stack));
+}
+
+
+// GRAPH-specific helper For exercising GRAPH functionality at the CLI
 
 export function readPlanCSV(file: string): G.PlanByGeoID
 {
@@ -133,7 +196,7 @@ export function readPlanCSV(file: string): G.PlanByGeoID
 }
 
 
-// RPV specific
+// RPV-specific helper
 
 export function readDemographicCSV(file: string, groups: M.MinorityFilter): M.DemographicVotingByFeature /* | undefined */
 {

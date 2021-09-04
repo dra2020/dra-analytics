@@ -9,6 +9,7 @@ Then the various functions of the different sets are available under their appro
 
 These are the libraries:
 
+- [Compactness](./docs/compactness.md): [TODO: Describe compactness library].
 - [Graph](./docs/graph.md): [TODO: Describe graph library].
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
 

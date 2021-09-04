@@ -1,3 +1,6 @@
+import * as Compactness from '../compactness/all';
+export {Compactness};
+
 import * as Graph from '../graph/all';
 export {Graph};
 

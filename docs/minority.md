@@ -5,7 +5,9 @@ as well as the degree of racially polarized voting.
 
 TODO
 
-## Racial &amp; Ethnic Voting Patterns
+## Exports
+
+### analyzeRacialVoting
 
 You can use this function analyze polarization in racial &amp; ethnic voting patterns:
 
