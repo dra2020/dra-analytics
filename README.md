@@ -1,7 +1,7 @@
 # dra-analytics
 The dra-analytics library consolidates all the metrics used in DRA in one place.
 
-These libraries are all packaged in this repository. Normally they are included like this:
+These libraries are normally included like this:
 
     import { Compactness, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
 
@@ -14,7 +14,7 @@ These are the libraries:
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
 - [Splitting](./docs/splitting.md): [TODO: Describe splitting library].
 
-The analytics in DRA include metrics favored by and build on the work of [many scholars](./docs/attributions.md).
+The analytics in DRA include metrics favored by, and build on the work of, [many scholars](./docs/attributions.md).
 
 ## Build status for master branch
 
