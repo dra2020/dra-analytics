@@ -1,0 +1,113 @@
+{
+  "partisan": {
+    "bias": {
+      "range": [
+        0.0,
+        0.20
+      ],
+      "weight": [
+        50,
+        80
+      ]
+    },
+    "impact": {
+      "weight": [
+        50,
+        0
+      ],
+      "threshold": 4.0
+    },
+    "competitiveness": {
+      "range": [
+        0.00,
+        0.75
+      ],
+      "distribution": [
+        0.25,
+        0.75
+      ],
+      "simpleRange": [
+        0.45,
+        0.55
+      ],
+      "weight": [
+        0,
+        20
+      ]
+    },
+    "bonus": 2
+  },
+  "minority": {
+    "range": [
+      0.37,
+      0.50
+    ],
+    "distribution": [
+      0.25,
+      0.75
+    ],
+    "shift": [
+      0.15,
+      0.50
+    ],
+    "coalition": {
+      "weight": 0.50
+    }
+  },
+  "compactness": {
+    "reock": {
+      "range": [
+        0.25,
+        0.50
+      ],
+      "weight": 50
+    },
+    "polsby": {
+      "range": [
+        0.10,
+        0.50
+      ],
+      "weight": 50
+    }
+  },
+  "splitting": {
+    "county": {
+      "range": [
+        [
+          1.26,
+          1.68
+        ],
+        [
+          1.09,
+          1.45
+        ]
+      ],
+      "weight": 50
+    },
+    "district": {
+      "range": [
+        [
+          1.26,
+          1.68
+        ],
+        [
+          1.09,
+          1.45
+        ]
+      ],
+      "weight": 50
+    }
+  },
+  "popdev": {
+    "range": [
+      [
+        0.0075,
+        0.0020
+      ],
+      [
+        0.10,
+        -1
+      ]
+    ]
+  }
+}
