@@ -4,18 +4,7 @@
       "range": [
         0.0,
         0.20
-      ],
-      "weight": [
-        50,
-        80
       ]
-    },
-    "impact": {
-      "weight": [
-        50,
-        0
-      ],
-      "threshold": 4.0
     },
     "competitiveness": {
       "range": [

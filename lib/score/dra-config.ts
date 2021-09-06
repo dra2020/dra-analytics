@@ -28,14 +28,6 @@ export function winnerBonus(overridesJSON?: any): number
   return bonus;
 }
 
-// The maximum # of unearned seats that scores positively
-export function unearnedThreshold(overridesJSON?: any): number
-{
-  const threshold = config.partisan.impact.threshold;
-
-  return threshold;
-}
-
 // The simple user-facing range, i.e., 45–55%.
 
 export function competitiveRange(overridesJSON?: any): number[]
