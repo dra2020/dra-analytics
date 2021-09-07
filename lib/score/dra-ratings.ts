@@ -28,6 +28,107 @@ export function scorePopulationDeviation(rawValue: number, bLegislative: boolean
 
 // PROPORTIONALITY
 
+export function scoreProportionality(deviation: number, Vf: number, Sf: number): number
+{
+  if (isAntimajoritarian(Vf, Sf))
+  {
+    return 0;
+  }
+  else
+  {
+    // Adjust bias to incorporate an acceptable winner's bonus based on Vf
+    const extra = extraBonus(Vf);
+    const adjusted = adjustDeviation(Vf, deviation, extra);
+
+    // Then normalize
+    const _normalizer = new N.Normalizer(adjusted);
+
+    const worst = C.biasRange()[C.BEG];
+    const best = C.biasRange()[C.END];
+
+    _normalizer.positive();
+    _normalizer.clip(worst, best);
+    _normalizer.unitize(worst, best);
+    _normalizer.invert();
+    _normalizer.rescale();
+
+    const score = _normalizer.normalizedNum as number;
+
+    return score;
+  }
+}
+
+export function extraBonus(Vf: number): number
+{
+  const over50Pct = (Vf > 0.5) ? (Vf - 0.5) : (0.5 - Vf);
+  const okExtra: number = over50Pct * (C.winnerBonus() - 1.0);
+
+  return okExtra;  // No longer trimming the result here
+}
+
+// Adjust deviation from proportionality to account for a winner's bonus
+// * If the bias is in the *same* direction as the statewide vote %, then
+//   discount the bias by the winner's bonus (extra).
+// * But if the bias and statewide vote % go in opposite directions, leave the
+//   bias unadjusted.
+export function adjustDeviation(Vf: number, deviation: number, extra: number): number
+{
+  let adjusted: number = deviation;
+
+  if ((Vf > 0.5) && (deviation < 0))
+  {
+    adjusted = Math.min(deviation + extra, 0);
+  }
+  else if ((Vf < 0.5) && (deviation > 0))
+  {
+    adjusted = Math.max(deviation - extra, 0);
+  }
+
+  return adjusted;
+}
+
+const avgSVError = 0.02;
+export function isAntimajoritarian(Vf: number, Sf: number): boolean
+{
+  const bDem = ((Vf < (0.5 - avgSVError)) && (Sf > 0.5)) ? true : false;
+  const bRep = (((1 - Vf) < (0.5 - avgSVError)) && ((1 - Sf) > 0.5)) ? true : false;
+
+  return bDem || bRep;
+}
+
+// DEPRECATED -- "Impact" == unearned seats
+/* 
+export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): number
+{
+  if (isAntimajoritarian(Vf, Sf))
+  {
+    return 0;
+  }
+  else
+  {
+    // Adjust impact to incorporate an acceptable winner's bonus based on Vf
+    const extra = extraBonus(Vf);
+    const adjustedBias = adjustDeviation(Vf, rawUE / N, extra);
+    const adjustedImpact = adjustedBias * N;
+
+    // Then normalize
+    const _normalizer = new Normalizer(adjustedImpact);
+
+    const worst = C.unearnedThreshold();
+    const best = 0.0;
+
+    _normalizer.positive();
+    _normalizer.clip(worst, best);
+    _normalizer.unitize(worst, best);
+    _normalizer.invert();
+    _normalizer.rescale();
+
+    const score = _normalizer.normalizedNum as number;
+
+    return score;
+  }
+}
+*/
 
 // Partisan Bias
 
