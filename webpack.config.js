@@ -4,8 +4,7 @@ var fs = require('fs');
 // Don't package up these - let ultimate client do so
 var externals = {};
 fs.readdirSync('node_modules').filter(s => s !== '.bin').forEach(s => {externals[s] = `commonjs ${s}`});
-// Commented out, because DRA-dependencies:
-// fs.readdirSync('node_modules/@dra2020').forEach(s => { s = `@dra2020/${s}`; externals[s] = `commonjs ${s}` });
+fs.readdirSync('node_modules/@dra2020').forEach(s => {s = `@dra2020/${s}`; externals[s] = `commonjs ${s}`});
 
 var libConfig = {
   entry: {
