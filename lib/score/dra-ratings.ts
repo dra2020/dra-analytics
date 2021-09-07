@@ -4,6 +4,7 @@
 
 import * as C from './dra-config';
 import * as N from './normalize';
+import * as T from '../types/all'
 
 
 // POPULATION DEVIATION
@@ -51,6 +52,7 @@ export function scorePolsbyPopper(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
+// TODO: change this function name
 export function weightCompactness(rS: number, ppS: number): number
 {
   const rW = C.reockWeight();
@@ -64,6 +66,64 @@ export function weightCompactness(rS: number, ppS: number): number
 
 // SPLITTING
 
+export function scoreCountySplitting(rawValue: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
+{
+  const _normalizer = new N.Normalizer(rawValue);
+
+  // The practical ideal score depends on the # of counties & districts
+  const avgBest = countySplitBest(nCounties, nDistricts, bLD);
+  const avgWorst = countySplitWorst(avgBest, bLD);
+
+  _normalizer.clip(avgBest, avgWorst);
+  _normalizer.unitize(avgBest, avgWorst);
+  _normalizer.invert();
+  _normalizer.rescale();
+
+  return _normalizer.normalizedNum as number;
+}
+
+export function countySplitBest(nCounties: number, nDistricts: number, bLD: boolean = false): number
+{
+  const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
+
+  const practicalBest = C.countySplittingRange(districtType)[C.BEG];
+  const nAllowableSplits = Math.min(nDistricts - 1, nCounties);
+  const threshold = ((nAllowableSplits * practicalBest) + ((nCounties - nAllowableSplits) * 1.0)) / nCounties;
+
+  return threshold;
+}
+export function countySplitWorst(avgBest: number, bLD: boolean = false): number
+{
+  const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
+
+
+  const singleBest = C.countySplittingRange(districtType)[C.BEG];
+  const singleWorst = C.countySplittingRange(districtType)[C.END];
+
+  // The practical ideal score depends on the # of counties & districts
+  const avgWorst = avgBest * (singleWorst / singleBest);
+
+  return avgWorst;
+}
+
+export function scoreDistrictSplitting(rawValue: number, bLD: boolean = false): number
+{
+  const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
+
+  const _normalizer = new N.Normalizer(rawValue);
+
+  const best = C.districtSplittingRange(districtType)[C.BEG];
+  const worst = C.districtSplittingRange(districtType)[C.END];
+
+  _normalizer.clip(best, worst);
+  _normalizer.unitize(best, worst);
+  _normalizer.invert();
+  _normalizer.rescale();
+
+  return _normalizer.normalizedNum as number;
+}
+
+// TODO: change this function name
 export function weightSplitting(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
