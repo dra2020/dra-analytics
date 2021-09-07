@@ -7,7 +7,7 @@ import * as N from './normalize';
 import * as T from '../types/all'
 
 
-// POPULATION DEVIATION
+// RATE POPULATION DEVIATION
 
 export function scorePopulationDeviation(rawValue: number, bLegislative: boolean): number
 {
@@ -26,7 +26,7 @@ export function scorePopulationDeviation(rawValue: number, bLegislative: boolean
 }
 
 
-// PROPORTIONALITY
+// RATE PROPORTIONALITY
 
 export function scoreProportionality(deviation: number, Vf: number, Sf: number): number
 {
@@ -96,7 +96,8 @@ export function isAntimajoritarian(Vf: number, Sf: number): boolean
   return bDem || bRep;
 }
 
-// DEPRECATED -- "Impact" == unearned seats
+
+// RATE Impact == "unearned seats" <<< DEPRECATED
 /* 
 export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): number
 {
@@ -130,13 +131,54 @@ export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): n
 }
 */
 
-// Partisan Bias
+
+// RATE Partisan Bias -- an ancillary rating
 
 
-// COMPETITIVENESS
+// RATE COMPETITIVENESS
+
+// Normalize overall competitiveness - Raw values are in the range [0.0–1.0]. 
+// But the practical max is more like 3/4's, so unitize that range to [0.0–1.0].
+// Then scale the values to [0–100].
+export function scoreCompetitiveness(Cdf: number): number
+{
+  const _normalizer = new N.Normalizer(Cdf);
+
+  let worst = C.overallCompetitivenessRange()[C.BEG];
+  let best = C.overallCompetitivenessRange()[C.END];
+
+  _normalizer.clip(worst, best);
+  _normalizer.unitize(worst, best);
+  _normalizer.rescale();
+
+  const score = _normalizer.normalizedNum as number;
+
+  return score;
+}
 
 
-// MINORITY REPRESENTATION
+// RATE MINORITY REPRESENTATION
+
+// NOTE - The probable # of opportunity & coalition districts can be *larger* than
+//   what would be a proportional # based on the statewide percentage, because of
+//   how minority opportunities are estimated (so that 37% minority shares score
+//   like 52% share).
+export function scoreMinority(oD: number, pOd: number, cD: number, pCd: number): number
+{
+  // Score minority opportunity [0–100]
+  const cDWeight = C.coalitionDistrictWeight();
+
+  // Cap opportunity & coalition districts
+  const oDCapped = Math.min(oD, pOd);
+  const cdCapped = Math.min(cD, pCd);
+
+  const opportunityScore = (pOd > 0) ? Math.round((oDCapped / pOd) * 100) : 0;
+  const coalitionScore = (pCd > 0) ? Math.round((cdCapped / pCd) * 100) : 0;
+
+  const score = Math.round(Math.min(opportunityScore + cDWeight * Math.max(coalitionScore - opportunityScore, 0), 100));
+
+  return score;
+}
 
 
 // RATE COMPACTNESS

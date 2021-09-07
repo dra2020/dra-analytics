@@ -2,6 +2,7 @@ import
 {
   scorePopulationDeviation,
   scoreProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
+  scoreCompetitiveness,
   scoreCompactness, scoreReock, scorePolsbyPopper,
   scoreSplitting, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/score/all';
@@ -261,7 +262,11 @@ describe('Score bias, with winner bonus', () =>
 })  // From hand-calculated benchmarks
 
 
-// DEPRECATED -- Impact == "unearned seats"
+// Partisan Bias SCORING
+
+
+
+// Impact SCORING <<< DEPRECATED
 /*
 describe('Score impact, no winner bonus', () =>
 {
@@ -348,6 +353,34 @@ describe('Score impact, with winner bonus', () =>
   });
 })  // From hand-calculated benchmarks
 */
+
+
+// COMPETITIVENESS SCORING
+
+describe('Score competitiveness', () =>
+{
+  test('Completely uncompetitive', () =>
+  {
+    expect(scoreCompetitiveness(0.00)).toBe(0);
+  });
+  test('25% / 50% competitive', () =>
+  {
+    expect(scoreCompetitiveness(0.25)).toBe(33);
+  });
+  test('50% / 50% competitive', () =>
+  {
+    expect(scoreCompetitiveness(0.50)).toBe(67);
+  });
+  test('Perfectly competitive', () =>
+  {
+    expect(scoreCompetitiveness(0.75)).toBe(100);
+  });
+  test('Over competitive', () =>
+  {
+    expect(scoreCompetitiveness(0.80)).toBe(100);
+  });
+})
+
 
 // COMPACTNESS SCORING
 
