@@ -1,6 +1,6 @@
 export
 {
-  ratePopulationDeviation,
+  // ratePopulationDeviation,
   rateProportionality,
   ratePartisanBias,
   rateCompetitiveness,

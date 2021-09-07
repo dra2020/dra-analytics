@@ -1,2 +1,2 @@
-export * from './connected';
-export * from './embedded';
+export {isConnected} from './connected';
+export {isEmbedded} from './embedded';
