@@ -5,9 +5,9 @@ import
   scorePartisanBias,
   scoreCompetitiveness,
   scoreMinority,
-  scoreCompactness, scoreReock, scorePolsbyPopper,
-  scoreSplitting, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
-} from '../../lib/score/all';
+  scoreCompactnessInternal, scoreReock, scorePolsbyPopper,
+  scoreSplittingInternal, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
+} from '../../lib/score/dra-ratings';
 
 import * as C from '../../lib/score/dra-config';
 import * as S from '../../lib/score/settings';
@@ -435,7 +435,7 @@ describe('Weight compactness measures', () =>
 {
   test('Weight Reock & Polsby-Popper compactness', () =>
   {
-    expect(scoreCompactness(30, 60)).toBeCloseTo(45);
+    expect(scoreCompactnessInternal(30, 60)).toBeCloseTo(45);
   });
 })
 
@@ -512,7 +512,7 @@ describe('Weight splitting measures', () =>
 {
   test('Weight county & district splitting', () =>
   {
-    expect(scoreSplitting(30, 60)).toBeCloseTo(45);
+    expect(scoreSplittingInternal(30, 60)).toBeCloseTo(45);
   });
 })
 

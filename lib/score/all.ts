@@ -1,4 +1,10 @@
-export * from './normalize';
-export * from './dra-config';
-export * from './dra-ratings';
-export * from './settings';
+export
+{
+  scorePopulationDeviation,
+  scoreProportionality,
+  scorePartisanBias,
+  scoreCompetitiveness,
+  scoreMinority,
+  scoreCompactness,
+  scoreSplitting
+} from '../../lib/score/dra-ratings';

@@ -1,4 +1,4 @@
-import * as C from '../../lib/score/all';
+import * as C from '../../lib/score/dra-config';
 
 describe('Population deviation range', () =>
 {

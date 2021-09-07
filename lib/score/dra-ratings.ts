@@ -9,9 +9,9 @@ import * as T from '../types/all'
 
 // RATE POPULATION DEVIATION
 
-export function scorePopulationDeviation(rawValue: number, bLegislative: boolean): number
+export function scorePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
 {
-  const _normalizer = new N.Normalizer(rawValue);
+  const _normalizer = new N.Normalizer(rawDeviation);
 
   // Raw range in not inverted (i.e., smaller is better)
   const range = C.popdevRange(bLegislative);
@@ -28,7 +28,7 @@ export function scorePopulationDeviation(rawValue: number, bLegislative: boolean
 
 // RATE PROPORTIONALITY
 
-export function scoreProportionality(deviation: number, Vf: number, Sf: number): number
+export function scoreProportionality(rawDisproportionality: number, Vf: number, Sf: number): number
 {
   if (isAntimajoritarian(Vf, Sf))
   {
@@ -38,7 +38,7 @@ export function scoreProportionality(deviation: number, Vf: number, Sf: number):
   {
     // Adjust bias to incorporate an acceptable winner's bonus based on Vf
     const extra = extraBonus(Vf);
-    const adjusted = adjustDeviation(Vf, deviation, extra);
+    const adjusted = adjustDeviation(Vf, rawDisproportionality, extra);
 
     // Then normalize
     const _normalizer = new N.Normalizer(adjusted);
@@ -71,17 +71,17 @@ export function extraBonus(Vf: number): number
 //   discount the bias by the winner's bonus (extra).
 // * But if the bias and statewide vote % go in opposite directions, leave the
 //   bias unadjusted.
-export function adjustDeviation(Vf: number, deviation: number, extra: number): number
+export function adjustDeviation(Vf: number, disproportionality: number, extra: number): number
 {
-  let adjusted: number = deviation;
+  let adjusted: number = disproportionality;
 
-  if ((Vf > 0.5) && (deviation < 0))
+  if ((Vf > 0.5) && (disproportionality < 0))
   {
-    adjusted = Math.min(deviation + extra, 0);
+    adjusted = Math.min(disproportionality + extra, 0);
   }
-  else if ((Vf < 0.5) && (deviation > 0))
+  else if ((Vf < 0.5) && (disproportionality > 0))
   {
-    adjusted = Math.max(deviation - extra, 0);
+    adjusted = Math.max(disproportionality - extra, 0);
   }
 
   return adjusted;
@@ -134,18 +134,18 @@ export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): n
 
 // RATE Partisan Bias -- an ancillary rating
 
-export function scorePartisanBias(seatsBias: number, votesBias: number): number
+export function scorePartisanBias(rawSeatsBias: number, rawVotesBias: number): number
 {
   // NOTE - John Nagle specified this thresholds
-  const seatsBiasRating = normalizePartisanBias(seatsBias, 0.06);
-  const votesBiasRating = normalizePartisanBias(votesBias, 0.02);
+  const seatsBiasRating = normalizePartisanBias(rawSeatsBias, 0.06);
+  const votesBiasRating = normalizePartisanBias(rawVotesBias, 0.02);
 
   const partisanBiasRating = Math.round((seatsBiasRating + votesBiasRating) / 2);
 
   return partisanBiasRating;
 }
 
-// NOTE - John Nagle specified this function
+// NOTE - John Nagle specified this function vs. simple linear normalization
 function normalizePartisanBias(biasPct: number, pctAt50: number): number 
 {
   const b: number = pctAt50 / Math.log(1 / 2);
@@ -160,9 +160,9 @@ function normalizePartisanBias(biasPct: number, pctAt50: number): number
 // Normalize overall competitiveness - Raw values are in the range [0.0–1.0]. 
 // But the practical max is more like 3/4's, so unitize that range to [0.0–1.0].
 // Then scale the values to [0–100].
-export function scoreCompetitiveness(Cdf: number): number
+export function scoreCompetitiveness(rawCdf: number): number
 {
-  const _normalizer = new N.Normalizer(Cdf);
+  const _normalizer = new N.Normalizer(rawCdf);
 
   let worst = C.overallCompetitivenessRange()[C.BEG];
   let best = C.overallCompetitivenessRange()[C.END];
@@ -183,14 +183,14 @@ export function scoreCompetitiveness(Cdf: number): number
 //   what would be a proportional # based on the statewide percentage, because of
 //   how minority opportunities are estimated (so that 37% minority shares score
 //   like 52% share).
-export function scoreMinority(oD: number, pOd: number, cD: number, pCd: number): number
+export function scoreMinority(rawOd: number, pOd: number, rawCd: number, pCd: number): number
 {
   // Score minority opportunity [0–100]
   const cDWeight = C.coalitionDistrictWeight();
 
   // Cap opportunity & coalition districts
-  const oDCapped = Math.min(oD, pOd);
-  const cdCapped = Math.min(cD, pCd);
+  const oDCapped = Math.min(rawOd, pOd);
+  const cdCapped = Math.min(rawCd, pCd);
 
   const opportunityScore = (pOd > 0) ? Math.round((oDCapped / pOd) * 100) : 0;
   const coalitionScore = (pCd > 0) ? Math.round((cdCapped / pCd) * 100) : 0;
@@ -231,7 +231,7 @@ export function scorePolsbyPopper(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-export function scoreCompactness(rS: number, ppS: number): number
+export function scoreCompactnessInternal(rS: number, ppS: number): number
 {
   const rW = C.reockWeight();
   const ppW = C.polsbyWeight();
@@ -239,6 +239,11 @@ export function scoreCompactness(rS: number, ppS: number): number
   const score = Math.round(((rS * rW) + (ppS * ppW)) / (rW + ppW));
 
   return score;
+}
+
+export function scoreCompactness(rawReock: number, rawPolsbyPopper: number): number
+{
+  return scoreCompactnessInternal(rawReock, rawPolsbyPopper);
 }
 
 
@@ -301,7 +306,7 @@ export function scoreDistrictSplitting(rawValue: number, bLD: boolean = false): 
   return _normalizer.normalizedNum as number;
 }
 
-export function scoreSplitting(csS: number, dsS: number): number
+export function scoreSplittingInternal(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
   const dsW = C.districtSplittingWeight();
@@ -309,4 +314,9 @@ export function scoreSplitting(csS: number, dsS: number): number
   const score = Math.round(((csS * csW) + (dsS * dsW)) / (csW + dsW));
 
   return score;
+}
+
+export function scoreSplitting(rawCountySplitting: number, rawDistrictSplitting: number): number
+{
+  return scoreSplittingInternal(rawCountySplitting, rawDistrictSplitting);
 }
