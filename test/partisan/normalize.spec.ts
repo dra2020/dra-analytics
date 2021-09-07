@@ -1,4 +1,4 @@
-import {Normalizer} from '../../lib/score/normalize';
+import {Normalizer} from '../../lib/rate/normalize';
 
 
 describe('Normalizer class', () =>

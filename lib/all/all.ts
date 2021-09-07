@@ -12,8 +12,8 @@ export {Minority};
 import * as Partisan from '../partisan/all';
 export {Partisan};
 
-import * as Score from '../score/all';
-export {Score};
+import * as Rate from '../rate/all';
+export {Rate};
 
 import * as Splitting from '../splitting/all';
 export {Splitting};

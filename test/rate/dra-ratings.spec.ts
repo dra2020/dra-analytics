@@ -1,16 +1,16 @@
 import
 {
-  scorePopulationDeviation,
-  scoreProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
-  scorePartisanBias,
-  scoreCompetitiveness,
-  scoreMinority,
-  scoreCompactnessInternal, scoreReock, scorePolsbyPopper,
-  scoreSplittingInternal, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
-} from '../../lib/score/dra-ratings';
+  ratePopulationDeviation,
+  rateProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
+  ratePartisanBias,
+  rateCompetitiveness,
+  rateMinorityRepresentation,
+  _rateCompactness, rateReock, ratePolsbyPopper,
+  _rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
+} from '../../lib/rate/dra-ratings';
 
-import * as C from '../../lib/score/dra-config';
-import * as S from '../../lib/score/settings';
+import * as C from '../../lib/rate/dra-config';
+import * as S from '../../lib/rate/settings';
 import * as T from '../../lib/types/all'
 
 
@@ -21,31 +21,31 @@ describe('Population Deviation scorer', () =>
   const bLegislative = false;
   test('Population Deviation: in range', () =>
   {
-    expect(scorePopulationDeviation(0.50 / 100, bLegislative)).toBe(45);
+    expect(ratePopulationDeviation(0.50 / 100, bLegislative)).toBe(45);
   });
 
   test('Population Deviation: min', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
   });
 
   test('Population Deviation: max', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
   });
 
   test('Population Deviation: too big', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
   });
 
   test('Population Deviation: unnecessarily small', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
   });
   test('Population Deviation: very large', () =>
   {
-    expect(scorePopulationDeviation(2.3006, false)).toBe(0);
+    expect(ratePopulationDeviation(2.3006, false)).toBe(0);
   });
 });
 
@@ -55,27 +55,27 @@ describe('Population Deviation scorer (LD)', () =>
   // Population for state legislative districting plans (w/ differnet threshold) 
   test('Population Deviation (LD): in range', () =>
   {
-    expect(scorePopulationDeviation(5.00 / 100, bLegislative)).toBe(68);
+    expect(ratePopulationDeviation(5.00 / 100, bLegislative)).toBe(68);
   });
 
   test('Population Deviation (LD): min', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
   });
 
   test('Population Deviation (LD): max', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
   });
 
   test('Population Deviation (LD): too big', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
   });
 
   test('Population Deviation (LD): unnecessarily small', () =>
   {
-    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
   });
 });
 
@@ -181,36 +181,36 @@ describe('Score proportionality, no winner bonus', () =>
   const Sf = 0.5;
   test('Completely unbiased', () =>
   {
-    expect(scoreProportionality(0.00, Vf, Sf)).toBe(100);
+    expect(rateProportionality(0.00, Vf, Sf)).toBe(100);
   });
   test('5% biased', () =>
   {
-    expect(scoreProportionality(0.05, Vf, Sf)).toBe(75);
+    expect(rateProportionality(0.05, Vf, Sf)).toBe(75);
   });
   test('10% biased', () =>
   {
-    expect(scoreProportionality(0.10, Vf, Sf)).toBe(50);
+    expect(rateProportionality(0.10, Vf, Sf)).toBe(50);
   });
   test('20% biased', () =>
   {
-    expect(scoreProportionality(0.20, Vf, Sf)).toBe(0);
+    expect(rateProportionality(0.20, Vf, Sf)).toBe(0);
   });
   test('25% biased', () =>
   {
-    expect(scoreProportionality(0.25, Vf, Sf)).toBe(0);
+    expect(rateProportionality(0.25, Vf, Sf)).toBe(0);
   });
   // 2/14/20 - Made the bias threshold a straight 20%, i.e., not dependent on N
   // test('bias w/ 20 districts', () =>
   // {
-  //   expect(scoreProportionality(0.06, Vf, Sf, 20)).toBe(0);
+  //   expect(rateProportionality(0.06, Vf, Sf, 20)).toBe(0);
   // });
   test('Dem antimajoritarian', () =>
   {
-    expect(scoreProportionality(0.01, 0.48 - S.EPSILON, 0.5 + S.EPSILON)).toBe(0);
+    expect(rateProportionality(0.01, 0.48 - S.EPSILON, 0.5 + S.EPSILON)).toBe(0);
   });
   test('Rep antimajoritarian', () =>
   {
-    expect(scoreProportionality(0.01, 1 - 0.48 + S.EPSILON, 1 - 0.5 - S.EPSILON)).toBe(0);
+    expect(rateProportionality(0.01, 1 - 0.48 + S.EPSILON, 1 - 0.5 - S.EPSILON)).toBe(0);
   });
 })
 
@@ -218,48 +218,48 @@ describe('Score proportionality, with winner bonus', () =>
 {
   test('CA 116th', () =>
   {
-    expect(scoreProportionality(-0.1714, 0.6404, 43.0850 / 53)).toBe(84);
+    expect(rateProportionality(-0.1714, 0.6404, 43.0850 / 53)).toBe(84);
   });
   test('CO 116th', () =>
   {
-    expect(scoreProportionality(0.0006, 0.5286, 3.9959 / 7)).toBe(100);
+    expect(rateProportionality(0.0006, 0.5286, 3.9959 / 7)).toBe(100);
   });
   test('IL 116th', () =>
   {
-    expect(scoreProportionality(-0.0585, 0.5838, 12.0531 / 18)).toBe(100);
+    expect(rateProportionality(-0.0585, 0.5838, 12.0531 / 18)).toBe(100);
   });
   test('MA 116th', () =>
   {
-    expect(scoreProportionality(-0.3331, 0.6321, 8.9985 / 9)).toBe(0);
+    expect(rateProportionality(-0.3331, 0.6321, 8.9985 / 9)).toBe(0);
   });
   test('MD 116th', () =>
   {
-    expect(scoreProportionality(-0.2500, 0.6336, 7.0000 / 8)).toBe(42);
+    expect(rateProportionality(-0.2500, 0.6336, 7.0000 / 8)).toBe(42);
   });
   test('NC 116th', () =>
   {
-    expect(scoreProportionality(0.2268, 0.4888, 3.0512 / 13)).toBe(0);
+    expect(rateProportionality(0.2268, 0.4888, 3.0512 / 13)).toBe(0);
   });
   test('OH 116th', () =>
   {
-    expect(scoreProportionality(0.2367, 0.4869, 4.2120 / 16)).toBe(0);
+    expect(rateProportionality(0.2367, 0.4869, 4.2120 / 16)).toBe(0);
   });
   // NOTE - Not considered antimajoritarian w/ a 2% average S(V) error.
   // test('PA 116th', () =>  // NOTE - 0 vs. 100 (!), because antimajoritarian
   // {
-  //   expect(scoreProportionality(0.0397, 0.5115, 8.2862 / 18)).toBe(0);
+  //   expect(rateProportionality(0.0397, 0.5115, 8.2862 / 18)).toBe(0);
   // });
   test('SC 116th', () =>
   {
-    expect(scoreProportionality(0.2857, 0.4072, 1 / 7)).toBe(4);
+    expect(rateProportionality(0.2857, 0.4072, 1 / 7)).toBe(4);
   });
   test('TN 116th', () =>
   {
-    expect(scoreProportionality(0.1111, 0.3802, 2 / 9)).toBe(100);
+    expect(rateProportionality(0.1111, 0.3802, 2 / 9)).toBe(100);
   });
   test('TX 116th', () =>
   {
-    expect(scoreProportionality(0.1216, 0.4370, 11.6218 / 36)).toBe(71);
+    expect(rateProportionality(0.1216, 0.4370, 11.6218 / 36)).toBe(71);
   });
 })  // From hand-calculated benchmarks
 
@@ -270,17 +270,17 @@ describe('Score partisan bias', () =>
 {
   test('Sample states & measurements from Nagle & Ramsay paper', () =>
   {
-    expect(scorePartisanBias(-0.0190, -0.0060)).toBe(81);  // CA
-    expect(scorePartisanBias(+0.0580, +0.0160)).toBe(54);  // IL
-    expect(scorePartisanBias(-0.0520, -0.0100)).toBe(63);  // MD
-    expect(scorePartisanBias(+0.0640, +0.0100)).toBe(60);  // MA
-    expect(scorePartisanBias(+0.0020, +0.0110)).toBe(83);  // CO
-    expect(scorePartisanBias(+0.1980, +0.0430)).toBe(17);  // NC
-    expect(scorePartisanBias(+0.1380, +0.0310)).toBe(27);  // OH
-    expect(scorePartisanBias(+0.1610, +0.0440)).toBe(19);  // PA
-    expect(scorePartisanBias(+0.1620, +0.0290)).toBe(26);  // TN
-    expect(scorePartisanBias(+0.0500, +0.0120)).toBe(61);  // TX
-    expect(scorePartisanBias(+0.1410, +0.0230)).toBe(33);  // SC
+    expect(ratePartisanBias(-0.0190, -0.0060)).toBe(81);  // CA
+    expect(ratePartisanBias(+0.0580, +0.0160)).toBe(54);  // IL
+    expect(ratePartisanBias(-0.0520, -0.0100)).toBe(63);  // MD
+    expect(ratePartisanBias(+0.0640, +0.0100)).toBe(60);  // MA
+    expect(ratePartisanBias(+0.0020, +0.0110)).toBe(83);  // CO
+    expect(ratePartisanBias(+0.1980, +0.0430)).toBe(17);  // NC
+    expect(ratePartisanBias(+0.1380, +0.0310)).toBe(27);  // OH
+    expect(ratePartisanBias(+0.1610, +0.0440)).toBe(19);  // PA
+    expect(ratePartisanBias(+0.1620, +0.0290)).toBe(26);  // TN
+    expect(ratePartisanBias(+0.0500, +0.0120)).toBe(61);  // TX
+    expect(ratePartisanBias(+0.1410, +0.0230)).toBe(33);  // SC
   });
 })  // Verified these benchmarks w/ John Nagle
 
@@ -380,23 +380,23 @@ describe('Score competitiveness', () =>
 {
   test('Completely uncompetitive', () =>
   {
-    expect(scoreCompetitiveness(0.00)).toBe(0);
+    expect(rateCompetitiveness(0.00)).toBe(0);
   });
   test('25% / 50% competitive', () =>
   {
-    expect(scoreCompetitiveness(0.25)).toBe(33);
+    expect(rateCompetitiveness(0.25)).toBe(33);
   });
   test('50% / 50% competitive', () =>
   {
-    expect(scoreCompetitiveness(0.50)).toBe(67);
+    expect(rateCompetitiveness(0.50)).toBe(67);
   });
   test('Perfectly competitive', () =>
   {
-    expect(scoreCompetitiveness(0.75)).toBe(100);
+    expect(rateCompetitiveness(0.75)).toBe(100);
   });
   test('Over competitive', () =>
   {
-    expect(scoreCompetitiveness(0.80)).toBe(100);
+    expect(rateCompetitiveness(0.80)).toBe(100);
   });
 })
 
@@ -408,23 +408,23 @@ describe('Score minority opportunity', () =>
   const bonus = 100;  // C.minorityBonus();
   test('No possibilities', () =>
   {
-    expect(scoreMinority(1, 0, 0, 0)).toBe(0);
+    expect(rateMinorityRepresentation(1, 0, 0, 0)).toBe(0);
   });
   test('No opportunities', () =>
   {
-    expect(scoreMinority(0, 10, 0, 0)).toBe(0);
+    expect(rateMinorityRepresentation(0, 10, 0, 0)).toBe(0);
   });
   test('Half', () =>
   {
-    expect(scoreMinority(5, 10, 0, 0)).toBe(Math.round(bonus / 2));
+    expect(rateMinorityRepresentation(5, 10, 0, 0)).toBe(Math.round(bonus / 2));
   });
   test('All', () =>
   {
-    expect(scoreMinority(10, 10, 0, 0)).toBe(bonus);
+    expect(rateMinorityRepresentation(10, 10, 0, 0)).toBe(bonus);
   });
   test('Extra', () =>
   {
-    expect(scoreMinority(11, 10, 0, 0)).toBe(bonus);
+    expect(rateMinorityRepresentation(11, 10, 0, 0)).toBe(bonus);
   });
 });
 
@@ -435,7 +435,7 @@ describe('Weight compactness measures', () =>
 {
   test('Weight Reock & Polsby-Popper compactness', () =>
   {
-    expect(scoreCompactnessInternal(30, 60)).toBeCloseTo(45);
+    expect(_rateCompactness(30, 60)).toBeCloseTo(45);
   });
 })
 
@@ -443,32 +443,32 @@ describe('Reock compactness scorer', () =>
 {
   test('Reock: in range (AL)', () =>
   {
-    expect(scoreReock(0.3848)).toBe(54);
+    expect(rateReock(0.3848)).toBe(54);
   });
 
   test('Reock: in range (NC)', () =>
   {
-    expect(scoreReock(0.3373)).toBe(35);
+    expect(rateReock(0.3373)).toBe(35);
   });
 
   test('Reock: min', () =>
   {
-    expect(scoreReock(C.reockRange()[C.BEG])).toBe(0);
+    expect(rateReock(C.reockRange()[C.BEG])).toBe(0);
   });
 
   test('Reock: max', () =>
   {
-    expect(scoreReock(C.reockRange()[C.END])).toBe(100);
+    expect(rateReock(C.reockRange()[C.END])).toBe(100);
   });
 
   test('Reock: too low', () =>
   {
-    expect(scoreReock(C.reockRange()[C.BEG] - S.EPSILON)).toBe(0);
+    expect(rateReock(C.reockRange()[C.BEG] - S.EPSILON)).toBe(0);
   });
 
   test('Reock: too high', () =>
   {
-    expect(scoreReock(C.reockRange()[C.END] + S.EPSILON)).toBe(100);
+    expect(rateReock(C.reockRange()[C.END] + S.EPSILON)).toBe(100);
   });
 });
 
@@ -476,32 +476,32 @@ describe('Polsby-Popper compactness scorer', () =>
 {
   test('Polsby-Popper: in range (AL)', () =>
   {
-    expect(scorePolsbyPopper(0.1860)).toBe(21);
+    expect(ratePolsbyPopper(0.1860)).toBe(21);
   });
 
   test('Polsby-Popper: in range (NC)', () =>
   {
-    expect(scorePolsbyPopper(0.2418)).toBe(35);
+    expect(ratePolsbyPopper(0.2418)).toBe(35);
   });
 
   test('Polsby-Popper: min', () =>
   {
-    expect(scorePolsbyPopper(C.polsbyRange()[C.BEG])).toBe(0);
+    expect(ratePolsbyPopper(C.polsbyRange()[C.BEG])).toBe(0);
   });
 
   test('Polsby-Popper: max', () =>
   {
-    expect(scorePolsbyPopper(C.polsbyRange()[C.END])).toBe(100);
+    expect(ratePolsbyPopper(C.polsbyRange()[C.END])).toBe(100);
   });
 
   test('Polsby-Popper: too low', () =>
   {
-    expect(scorePolsbyPopper(C.polsbyRange()[C.BEG] - S.EPSILON)).toBe(0);
+    expect(ratePolsbyPopper(C.polsbyRange()[C.BEG] - S.EPSILON)).toBe(0);
   });
 
   test('Polsby-Popper: too high', () =>
   {
-    expect(scorePolsbyPopper(C.polsbyRange()[C.END] + S.EPSILON)).toBe(100);
+    expect(ratePolsbyPopper(C.polsbyRange()[C.END] + S.EPSILON)).toBe(100);
   });
 });
 
@@ -512,7 +512,7 @@ describe('Weight splitting measures', () =>
 {
   test('Weight county & district splitting', () =>
   {
-    expect(scoreSplittingInternal(30, 60)).toBeCloseTo(45);
+    expect(_rateSplitting(30, 60)).toBeCloseTo(45);
   });
 })
 
@@ -520,44 +520,44 @@ describe('County-district splitting scorer', () =>
 {
   test('AZ county splitting', () =>
   {
-    expect(scoreCountySplitting(1.352, 15, 9)).toBe(44);
+    expect(rateCountySplitting(1.352, 15, 9)).toBe(44);
   });
   test('MD county splitting', () =>
   {
-    expect(scoreCountySplitting(1.531, 24, 8)).toBe(0);
+    expect(rateCountySplitting(1.531, 24, 8)).toBe(0);
   });
   test('NC county splitting', () =>
   {
-    expect(scoreCountySplitting(1.152, 100, 13)).toBe(65);
+    expect(rateCountySplitting(1.152, 100, 13)).toBe(65);
   });
   test('PA county splitting', () =>
   {
-    expect(scoreCountySplitting(1.178, 67, 18)).toBe(68);
+    expect(rateCountySplitting(1.178, 67, 18)).toBe(68);
   });
   test('VA county splitting', () =>
   {
-    expect(scoreCountySplitting(1.214, 133, 11)).toBe(43);
+    expect(rateCountySplitting(1.214, 133, 11)).toBe(43);
   });
 
   test('County splitting: min', () =>
   {
     const avgBest = countySplitBest(15, 9);
-    expect(scoreCountySplitting(avgBest, 15, 9)).toBe(99);
-    // expect(scoreCountySplitting(avgBest, 15, 9)).toBe(100);
+    expect(rateCountySplitting(avgBest, 15, 9)).toBe(99);
+    // expect(rateCountySplitting(avgBest, 15, 9)).toBe(100);
   });
 
   test('County splitting: max', () =>
   {
     const avgBest = countySplitBest(15, 9);
     const avgWorst = countySplitWorst(avgBest);
-    expect(scoreCountySplitting(avgWorst, 15, 9)).toBe(0);
+    expect(rateCountySplitting(avgWorst, 15, 9)).toBe(0);
   });
 
   test('County splitting: too much', () =>
   {
     const avgBest = countySplitBest(15, 9);
     const avgWorst = countySplitWorst(avgBest);
-    expect(scoreCountySplitting(avgWorst + S.EPSILON, 15, 9)).toBe(0);
+    expect(rateCountySplitting(avgWorst + S.EPSILON, 15, 9)).toBe(0);
   });
 });
 
@@ -565,38 +565,38 @@ describe('District-county splitting scorer', () =>
 {
   test('AZ district splitting: in range', () =>
   {
-    expect(scoreDistrictSplitting(1.424)).toBe(61);
+    expect(rateDistrictSplitting(1.424)).toBe(61);
   });
   test('MD district splitting: in range', () =>
   {
-    expect(scoreDistrictSplitting(1.760)).toBe(0);
+    expect(rateDistrictSplitting(1.760)).toBe(0);
   });
   test('NC district splitting: in range', () =>
   {
-    expect(scoreDistrictSplitting(1.519)).toBe(38);
+    expect(rateDistrictSplitting(1.519)).toBe(38);
   });
   test('PA district splitting: in range', () =>
   {
-    expect(scoreDistrictSplitting(1.690)).toBe(0);
+    expect(rateDistrictSplitting(1.690)).toBe(0);
   });
   test('VA district splitting: in range', () =>
   {
-    expect(scoreDistrictSplitting(1.424)).toBe(61);
+    expect(rateDistrictSplitting(1.424)).toBe(61);
   });
 
   test('District splitting: min', () =>
   {
-    expect(scoreDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END])).toBe(0);
+    expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END])).toBe(0);
   });
 
   test('District splitting: max', () =>
   {
-    expect(scoreDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.BEG])).toBe(99);
-    // expect(scoreDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.BEG])).toBe(100);
+    expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.BEG])).toBe(99);
+    // expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.BEG])).toBe(100);
   });
 
   test('District splitting: too much', () =>
   {
-    expect(scoreDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + S.EPSILON)).toBe(0);
+    expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + S.EPSILON)).toBe(0);
   });
 });

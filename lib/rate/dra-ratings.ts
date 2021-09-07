@@ -9,7 +9,7 @@ import * as T from '../types/all'
 
 // RATE POPULATION DEVIATION
 
-export function scorePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
+export function ratePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
 {
   const _normalizer = new N.Normalizer(rawDeviation);
 
@@ -28,7 +28,7 @@ export function scorePopulationDeviation(rawDeviation: number, bLegislative: boo
 
 // RATE PROPORTIONALITY
 
-export function scoreProportionality(rawDisproportionality: number, Vf: number, Sf: number): number
+export function rateProportionality(rawDisproportionality: number, Vf: number, Sf: number): number
 {
   if (isAntimajoritarian(Vf, Sf))
   {
@@ -52,9 +52,9 @@ export function scoreProportionality(rawDisproportionality: number, Vf: number, 
     _normalizer.invert();
     _normalizer.rescale();
 
-    const score = _normalizer.normalizedNum as number;
+    const rating = _normalizer.normalizedNum as number;
 
-    return score;
+    return rating;
   }
 }
 
@@ -134,7 +134,7 @@ export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): n
 
 // RATE Partisan Bias -- an ancillary rating
 
-export function scorePartisanBias(rawSeatsBias: number, rawVotesBias: number): number
+export function ratePartisanBias(rawSeatsBias: number, rawVotesBias: number): number
 {
   // NOTE - John Nagle specified this thresholds
   const seatsBiasRating = normalizePartisanBias(rawSeatsBias, 0.06);
@@ -160,7 +160,7 @@ function normalizePartisanBias(biasPct: number, pctAt50: number): number
 // Normalize overall competitiveness - Raw values are in the range [0.0–1.0]. 
 // But the practical max is more like 3/4's, so unitize that range to [0.0–1.0].
 // Then scale the values to [0–100].
-export function scoreCompetitiveness(rawCdf: number): number
+export function rateCompetitiveness(rawCdf: number): number
 {
   const _normalizer = new N.Normalizer(rawCdf);
 
@@ -171,9 +171,9 @@ export function scoreCompetitiveness(rawCdf: number): number
   _normalizer.unitize(worst, best);
   _normalizer.rescale();
 
-  const score = _normalizer.normalizedNum as number;
+  const rating = _normalizer.normalizedNum as number;
 
-  return score;
+  return rating;
 }
 
 
@@ -183,7 +183,7 @@ export function scoreCompetitiveness(rawCdf: number): number
 //   what would be a proportional # based on the statewide percentage, because of
 //   how minority opportunities are estimated (so that 37% minority shares score
 //   like 52% share).
-export function scoreMinority(rawOd: number, pOd: number, rawCd: number, pCd: number): number
+export function rateMinorityRepresentation(rawOd: number, pOd: number, rawCd: number, pCd: number): number
 {
   // Score minority opportunity [0–100]
   const cDWeight = C.coalitionDistrictWeight();
@@ -195,15 +195,15 @@ export function scoreMinority(rawOd: number, pOd: number, rawCd: number, pCd: nu
   const opportunityScore = (pOd > 0) ? Math.round((oDCapped / pOd) * 100) : 0;
   const coalitionScore = (pCd > 0) ? Math.round((cdCapped / pCd) * 100) : 0;
 
-  const score = Math.round(Math.min(opportunityScore + cDWeight * Math.max(coalitionScore - opportunityScore, 0), 100));
+  const rating = Math.round(Math.min(opportunityScore + cDWeight * Math.max(coalitionScore - opportunityScore, 0), 100));
 
-  return score;
+  return rating;
 }
 
 
 // RATE COMPACTNESS
 
-export function scoreReock(rawValue: number): number
+export function rateReock(rawValue: number): number
 {
   const _normalizer = new N.Normalizer(rawValue);
 
@@ -217,7 +217,7 @@ export function scoreReock(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-export function scorePolsbyPopper(rawValue: number): number
+export function ratePolsbyPopper(rawValue: number): number
 {
   const _normalizer = new N.Normalizer(rawValue);
 
@@ -231,29 +231,30 @@ export function scorePolsbyPopper(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-export function scoreCompactnessInternal(rS: number, ppS: number): number
+// Legacy note -- This is what dra-score used. 
+export function _rateCompactness(rS: number, ppS: number): number
 {
   const rW = C.reockWeight();
   const ppW = C.polsbyWeight();
 
-  const score = Math.round(((rS * rW) + (ppS * ppW)) / (rW + ppW));
+  const rating = Math.round(((rS * rW) + (ppS * ppW)) / (rW + ppW));
 
-  return score;
+  return rating;
 }
 
-export function scoreCompactness(rawReock: number, rawPolsbyPopper: number): number
+export function rateCompactness(rawReock: number, rawPolsbyPopper: number): number
 {
-  return scoreCompactnessInternal(rawReock, rawPolsbyPopper);
+  return _rateCompactness(rawReock, rawPolsbyPopper);
 }
 
 
 // SPLITTING
 
-export function scoreCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
+export function rateCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
 {
   const _normalizer = new N.Normalizer(rawCountySplitting);
 
-  // The practical ideal score depends on the # of counties & districts
+  // The practical ideal rating depends on the # of counties & districts
   const avgBest = countySplitBest(nCounties, nDistricts, bLD);
   const avgWorst = countySplitWorst(avgBest, bLD);
 
@@ -263,10 +264,10 @@ export function scoreCountySplitting(rawCountySplitting: number, nCounties: numb
   _normalizer.rescale();
 
   // 09-07-21 - Preserve max value (100) for only when no counties are split
-  let score = _normalizer.normalizedNum as number;
-  if ((score == 100) && (rawCountySplitting > 1.0)) score = 100 - 1;
+  let rating = _normalizer.normalizedNum as number;
+  if ((rating == 100) && (rawCountySplitting > 1.0)) rating = 100 - 1;
 
-  return score;
+  return rating;
 }
 
 export function countySplitBest(nCounties: number, nDistricts: number, bLD: boolean = false): number
@@ -293,7 +294,7 @@ export function countySplitWorst(avgBest: number, bLD: boolean = false): number
   return avgWorst;
 }
 
-export function scoreDistrictSplitting(rawDistrictSplitting: number, bLD: boolean = false): number
+export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean = false): number
 {
   const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
 
@@ -308,27 +309,28 @@ export function scoreDistrictSplitting(rawDistrictSplitting: number, bLD: boolea
   _normalizer.rescale();
 
   // 09-07-21 - Preserve max value (100) for only when no districts are split
-  let score = _normalizer.normalizedNum as number;
-  if ((score == 100) && (rawDistrictSplitting > 1.0)) score = 100 - 1;
+  let rating = _normalizer.normalizedNum as number;
+  if ((rating == 100) && (rawDistrictSplitting > 1.0)) rating = 100 - 1;
 
-  return score;
+  return rating;
 }
 
-export function scoreSplittingInternal(csS: number, dsS: number): number
+// Legacy note -- This is what dra-score used.
+export function _rateSplitting(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
   const dsW = C.districtSplittingWeight();
 
-  const score = Math.round(((csS * csW) + (dsS * dsW)) / (csW + dsW));
+  const rating = Math.round(((csS * csW) + (dsS * dsW)) / (csW + dsW));
 
-  return score;
+  return rating;
 }
 
-export function scoreSplitting(rawCountySplitting: number, rawDistrictSplitting: number): number
+export function rateSplitting(rawCountySplitting: number, rawDistrictSplitting: number): number
 {
   // 09-07-21 - Preserve max value (100) for only when no districts are split
-  let score = scoreSplittingInternal(rawCountySplitting, rawDistrictSplitting);
-  if ((score == 100) && ((rawCountySplitting > 1.0) || (rawDistrictSplitting > 1.0))) score = 100 - 1;
+  let rating = _rateSplitting(rawCountySplitting, rawDistrictSplitting);
+  if ((rating == 100) && ((rawCountySplitting > 1.0) || (rawDistrictSplitting > 1.0))) rating = 100 - 1;
 
-  return score;
+  return rating;
 }
