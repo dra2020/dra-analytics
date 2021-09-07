@@ -3,6 +3,7 @@ import
   scorePopulationDeviation,
   scoreProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
   scoreCompetitiveness,
+  scoreMinority,
   scoreCompactness, scoreReock, scorePolsbyPopper,
   scoreSplitting, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/score/all';
@@ -380,6 +381,34 @@ describe('Score competitiveness', () =>
     expect(scoreCompetitiveness(0.80)).toBe(100);
   });
 })
+
+
+// MINORITY REPRESENTATION SCORING
+
+describe('Score minority opportunity', () =>
+{
+  const bonus = 100;  // C.minorityBonus();
+  test('No possibilities', () =>
+  {
+    expect(scoreMinority(1, 0, 0, 0)).toBe(0);
+  });
+  test('No opportunities', () =>
+  {
+    expect(scoreMinority(0, 10, 0, 0)).toBe(0);
+  });
+  test('Half', () =>
+  {
+    expect(scoreMinority(5, 10, 0, 0)).toBe(Math.round(bonus / 2));
+  });
+  test('All', () =>
+  {
+    expect(scoreMinority(10, 10, 0, 0)).toBe(bonus);
+  });
+  test('Extra', () =>
+  {
+    expect(scoreMinority(11, 10, 0, 0)).toBe(bonus);
+  });
+});
 
 
 // COMPACTNESS SCORING
