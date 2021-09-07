@@ -249,9 +249,9 @@ export function scoreCompactness(rawReock: number, rawPolsbyPopper: number): num
 
 // SPLITTING
 
-export function scoreCountySplitting(rawValue: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
+export function scoreCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
 {
-  const _normalizer = new N.Normalizer(rawValue);
+  const _normalizer = new N.Normalizer(rawCountySplitting);
 
   // The practical ideal score depends on the # of counties & districts
   const avgBest = countySplitBest(nCounties, nDistricts, bLD);
@@ -262,7 +262,11 @@ export function scoreCountySplitting(rawValue: number, nCounties: number, nDistr
   _normalizer.invert();
   _normalizer.rescale();
 
-  return _normalizer.normalizedNum as number;
+  // 09-07-21 - Preserve max value (100) for only when no counties are split
+  let score = _normalizer.normalizedNum as number;
+  if ((score == 100) && (rawCountySplitting > 1.0)) score = 100 - 1;
+
+  return score;
 }
 
 export function countySplitBest(nCounties: number, nDistricts: number, bLD: boolean = false): number
@@ -289,11 +293,11 @@ export function countySplitWorst(avgBest: number, bLD: boolean = false): number
   return avgWorst;
 }
 
-export function scoreDistrictSplitting(rawValue: number, bLD: boolean = false): number
+export function scoreDistrictSplitting(rawDistrictSplitting: number, bLD: boolean = false): number
 {
   const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
 
-  const _normalizer = new N.Normalizer(rawValue);
+  const _normalizer = new N.Normalizer(rawDistrictSplitting);
 
   const best = C.districtSplittingRange(districtType)[C.BEG];
   const worst = C.districtSplittingRange(districtType)[C.END];
@@ -303,7 +307,11 @@ export function scoreDistrictSplitting(rawValue: number, bLD: boolean = false): 
   _normalizer.invert();
   _normalizer.rescale();
 
-  return _normalizer.normalizedNum as number;
+  // 09-07-21 - Preserve max value (100) for only when no districts are split
+  let score = _normalizer.normalizedNum as number;
+  if ((score == 100) && (rawDistrictSplitting > 1.0)) score = 100 - 1;
+
+  return score;
 }
 
 export function scoreSplittingInternal(csS: number, dsS: number): number
@@ -318,5 +326,9 @@ export function scoreSplittingInternal(csS: number, dsS: number): number
 
 export function scoreSplitting(rawCountySplitting: number, rawDistrictSplitting: number): number
 {
-  return scoreSplittingInternal(rawCountySplitting, rawDistrictSplitting);
+  // 09-07-21 - Preserve max value (100) for only when no districts are split
+  let score = scoreSplittingInternal(rawCountySplitting, rawDistrictSplitting);
+  if ((score == 100) && ((rawCountySplitting > 1.0) || (rawDistrictSplitting > 1.0))) score = 100 - 1;
+
+  return score;
 }
