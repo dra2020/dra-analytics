@@ -2,6 +2,7 @@ import
 {
   scorePopulationDeviation,
   scoreProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
+  scorePartisanBias,
   scoreCompetitiveness,
   scoreMinority,
   scoreCompactness, scoreReock, scorePolsbyPopper,
@@ -105,7 +106,7 @@ describe('Acceptable extra seat share fraction', () =>
   });
 })
 
-describe('Adjust bias for statewide vote share', () =>
+describe('Adjust disproportionality for statewide vote share', () =>
 {
   test('CA', () =>
   {
@@ -174,7 +175,7 @@ describe('Detect antimajoritarian results', () =>
   });
 })
 
-describe('Score bias, no winner bonus', () =>
+describe('Score proportionality, no winner bonus', () =>
 {
   const Vf = 0.5;
   const Sf = 0.5;
@@ -213,7 +214,7 @@ describe('Score bias, no winner bonus', () =>
   });
 })
 
-describe('Score bias, with winner bonus', () =>
+describe('Score proportionality, with winner bonus', () =>
 {
   test('CA 116th', () =>
   {
@@ -265,6 +266,23 @@ describe('Score bias, with winner bonus', () =>
 
 // Partisan Bias SCORING
 
+describe('Score partisan bias', () =>
+{
+  test('Sample states & measurements from Nagle & Ramsay paper', () =>
+  {
+    expect(scorePartisanBias(-0.0190, -0.0060)).toBe(81);  // CA
+    expect(scorePartisanBias(+0.0580, +0.0160)).toBe(54);  // IL
+    expect(scorePartisanBias(-0.0520, -0.0100)).toBe(63);  // MD
+    expect(scorePartisanBias(+0.0640, +0.0100)).toBe(60);  // MA
+    expect(scorePartisanBias(+0.0020, +0.0110)).toBe(83);  // CO
+    expect(scorePartisanBias(+0.1980, +0.0430)).toBe(17);  // NC
+    expect(scorePartisanBias(+0.1380, +0.0310)).toBe(27);  // OH
+    expect(scorePartisanBias(+0.1610, +0.0440)).toBe(19);  // PA
+    expect(scorePartisanBias(+0.1620, +0.0290)).toBe(26);  // TN
+    expect(scorePartisanBias(+0.0500, +0.0120)).toBe(61);  // TX
+    expect(scorePartisanBias(+0.1410, +0.0230)).toBe(33);  // SC
+  });
+})  // Verified these benchmarks w/ John Nagle
 
 
 // Impact SCORING <<< DEPRECATED

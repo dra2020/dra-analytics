@@ -134,6 +134,26 @@ export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): n
 
 // RATE Partisan Bias -- an ancillary rating
 
+export function scorePartisanBias(seatsBias: number, votesBias: number): number
+{
+  // NOTE - John Nagle specified this thresholds
+  const seatsBiasRating = normalizePartisanBias(seatsBias, 0.06);
+  const votesBiasRating = normalizePartisanBias(votesBias, 0.02);
+
+  const partisanBiasRating = Math.round((seatsBiasRating + votesBiasRating) / 2);
+
+  return partisanBiasRating;
+}
+
+// NOTE - John Nagle specified this function
+function normalizePartisanBias(biasPct: number, pctAt50: number): number 
+{
+  const b: number = pctAt50 / Math.log(1 / 2);
+  const rating: number = 100 * Math.exp(-Math.abs(biasPct / b));
+
+  return Math.round(rating);
+}
+
 
 // RATE COMPETITIVENESS
 
