@@ -9,9 +9,11 @@ export {Minority};
 
 // TODO - Add Partisan
 
-// TODO - Add Score
+import * as Score from '../score/all';
+export {Score};
 
 import * as Splitting from '../splitting/all';
 export {Splitting};
 
-// TODO - Add Types
+import * as Types from '../types/all';
+export {Types};

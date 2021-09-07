@@ -1,12 +1,79 @@
 import
 {
-  weightCompactness, scoreReock, scorePolsbyPopper,
-  weightSplitting, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
+  scorePopulationDeviation,
+  scoreCompactness, scoreReock, scorePolsbyPopper,
+  scoreSplitting, scoreCountySplitting, scoreDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/score/all';
 
 import * as C from '../../lib/score/dra-config';
 import * as S from '../../lib/score/settings';
 import * as T from '../../lib/types/all'
+
+
+// POPULATION DEVIATION SCORING
+
+describe('Population Deviation scorer', () =>
+{
+  const bLegislative = false;
+  test('Population Deviation: in range', () =>
+  {
+    expect(scorePopulationDeviation(0.50 / 100, bLegislative)).toBe(45);
+  });
+
+  test('Population Deviation: min', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
+  });
+
+  test('Population Deviation: max', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
+  });
+
+  test('Population Deviation: too big', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+  });
+
+  test('Population Deviation: unnecessarily small', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+  });
+  test('Population Deviation: very large', () =>
+  {
+    expect(scorePopulationDeviation(2.3006, false)).toBe(0);
+  });
+});
+
+describe('Population Deviation scorer (LD)', () =>
+{
+  const bLegislative = true;
+  // Population for state legislative districting plans (w/ differnet threshold) 
+  test('Population Deviation (LD): in range', () =>
+  {
+    expect(scorePopulationDeviation(5.00 / 100, bLegislative)).toBe(68);
+  });
+
+  test('Population Deviation (LD): min', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG], bLegislative)).toBe(0);
+  });
+
+  test('Population Deviation (LD): max', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END], bLegislative)).toBe(100);
+  });
+
+  test('Population Deviation (LD): too big', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+  });
+
+  test('Population Deviation (LD): unnecessarily small', () =>
+  {
+    expect(scorePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+  });
+});
 
 
 // COMPACTNESS SCORING
@@ -15,10 +82,9 @@ describe('Weight compactness measures', () =>
 {
   test('Weight Reock & Polsby-Popper compactness', () =>
   {
-    expect(weightCompactness(30, 60)).toBeCloseTo(45);
+    expect(scoreCompactness(30, 60)).toBeCloseTo(45);
   });
 })
-
 
 describe('Reock compactness scorer', () =>
 {
@@ -93,7 +159,7 @@ describe('Weight splitting measures', () =>
 {
   test('Weight county & district splitting', () =>
   {
-    expect(weightSplitting(30, 60)).toBeCloseTo(45);
+    expect(scoreSplitting(30, 60)).toBeCloseTo(45);
   });
 })
 

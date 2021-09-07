@@ -9,6 +9,22 @@ import * as T from '../types/all'
 
 // POPULATION DEVIATION
 
+export function scorePopulationDeviation(rawValue: number, bLegislative: boolean): number
+{
+  const _normalizer = new N.Normalizer(rawValue);
+
+  // Raw range in not inverted (i.e., smaller is better)
+  const range = C.popdevRange(bLegislative);
+
+  _normalizer.clip(0.0, 1.0);  // Handle deviations bigger than a whole district
+  _normalizer.invert();
+  _normalizer.clip(1.0 - range[C.BEG], 1.0 - range[C.END]);
+  _normalizer.unitize(1.0 - range[C.BEG], 1.0 - range[C.END]);
+  _normalizer.rescale();
+
+  return _normalizer.normalizedNum as number;
+}
+
 
 // PROPORTIONALITY
 
@@ -52,8 +68,7 @@ export function scorePolsbyPopper(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-// TODO: change this function name
-export function weightCompactness(rS: number, ppS: number): number
+export function scoreCompactness(rS: number, ppS: number): number
 {
   const rW = C.reockWeight();
   const ppW = C.polsbyWeight();
@@ -123,8 +138,7 @@ export function scoreDistrictSplitting(rawValue: number, bLD: boolean = false): 
   return _normalizer.normalizedNum as number;
 }
 
-// TODO: change this function name
-export function weightSplitting(csS: number, dsS: number): number
+export function scoreSplitting(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
   const dsW = C.districtSplittingWeight();
