@@ -9,7 +9,6 @@ import * as T from '../types/all'
 
 // RATE POPULATION DEVIATION
 
-// Note - Not used
 export function ratePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
 {
   const _normalizer = new N.Normalizer(rawDeviation);
