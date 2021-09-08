@@ -2,9 +2,11 @@ export
 {
   ratePopulationDeviation,
   rateProportionality,
-  ratePartisanBias,
   rateCompetitiveness,
   rateMinorityRepresentation,
   rateCompactness,
-  rateSplitting
+  rateSplitting,
+  // Also
+  ratePartisanBias,
+  isAntimajoritarian
 } from './dra-ratings';
