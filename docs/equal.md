@@ -9,17 +9,17 @@ TODO
 ### calcPopulationDeviation
 
 ``` TypeScript
-export function calcPopulationDeviation(max: number, min: number, targetSize: number): number;
+export declare function calcPopulationDeviation(max: number, min: number, targetSize: number): number;
 ``` 
 
 ### isRoughlyEqual
 
 ``` TypeScript
-export function isRoughlyEqual(devation: number, bLegislative: boolean): boolean;
+export declare function isRoughlyEqual(devation: number, bLegislative: boolean): boolean;
 ``` 
 
 ### makePopulationScorecard
 
 ``` TypeScript
-export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard;
+export declare function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard;
 ``` 

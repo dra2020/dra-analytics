@@ -15,7 +15,7 @@ Both take arrays of split percentages and return numbers.
 Defined in Footnote 121 (P. 21).
 
 ``` TypeScript
-export function uncertaintyOfMembership(splits: number[]): number;
+export declare function uncertaintyOfMembership(splits: number[]): number;
 ``` 
 
 ### effectiveSplits
@@ -23,6 +23,6 @@ export function uncertaintyOfMembership(splits: number[]): number;
 Defined in Footnote 123 (P. 22).
 
 ``` TypeScript
-export function effectiveSplits(splits: number[]): number;
+export declare function effectiveSplits(splits: number[]): number;
 ``` 
 

@@ -12,7 +12,7 @@ TODO
 You can use this function analyze polarization in racial &amp; ethnic voting patterns:
 
 ``` TypeScript
-export function analyzeRacialVoting(points: DemographicVotingByFeature | undefined, districtID: number, groups: MinorityFilter): RPVAnalysis | undefined;
+export declare function analyzeRacialVoting(points: DemographicVotingByFeature | undefined, districtID: number, groups: MinorityFilter): RPVAnalysis | undefined;
 ``` 
 
 It takes arrays of points by demographic (x = demographic %, y = Democratic %) and
