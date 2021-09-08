@@ -19,7 +19,7 @@ to be computed later when the full shapes themselves are no longer available.
 Use the [poly package](https://www.npmjs.com/package/@dra2020/poly) to extract the geometric properties.
 The properties themselves can either use geodesic (curved earth) or cartesian (flat earth) calculations.
 
-The final routine -- scoreShapes -- scores each shape in a GeoJSON feature collection
+The final routine -- kiwysiScoreShapes -- scores each shape in a GeoJSON feature collection
 using the simplified KIWYSI compactness model.
 
 ### calcReock (REOCK)
@@ -138,10 +138,10 @@ Here this is defined as the ratio of the area of the
 district to the area of the minimum bounding box of the district. It's not a
 simple bounding box!
 
-### scoreShapes
+### kiwysiScoreShapes
 
 ``` TypeScript
-export declare function scoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[];
+export declare function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[];
 ```
 
 Takes a GeoJSON feature collection of shapes and returns an array of 1–100 KIWYSI compactness scores.

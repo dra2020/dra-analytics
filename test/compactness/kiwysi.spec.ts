@@ -1,7 +1,7 @@
 import * as FU from '../../testutil/fileutils';
 import * as GeoJSON from 'geojson';
 
-import {scoreShape} from '../../lib/compactness/kiwysi';
+import {kiwysiScoreShapeRAW} from '../../lib/compactness/kiwysi';
 
 import * as T from '../../lib/compactness/types'
 
@@ -20,7 +20,7 @@ describe('Score the first 20 reference shapes', () =>
       const featureEntry: T.FeaturesEntry = featureEntries[i];
       const score: number = featureEntry.score;
 
-      const prediction: number = scoreShape(shapes.features[i], T.PCAModel.Original);
+      const prediction: number = kiwysiScoreShapeRAW(shapes.features[i], T.PCAModel.Original);
 
       // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 1);
@@ -40,7 +40,7 @@ describe('Score the evenly spaced 20 reference shapes', () =>
       const featureEntry: T.FeaturesEntry = featureEntries[i];
       const score: number = featureEntry.score;
 
-      const prediction: number = scoreShape(shapes.features[i], T.PCAModel.Revised);
+      const prediction: number = kiwysiScoreShapeRAW(shapes.features[i], T.PCAModel.Revised);
 
       // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 0);

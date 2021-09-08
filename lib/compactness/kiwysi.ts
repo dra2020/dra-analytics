@@ -3,14 +3,15 @@
 //
 
 import * as GeoJSON from 'geojson';
-import { Poly } from '@dra2020/baseclient';
+import {Poly} from '@dra2020/baseclient';
 
-import { featureizePoly } from './features';
+import {featureizePoly} from './features';
 import * as T from './types';
 import * as M from './matrix';
 
 
-export function scoreShape(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number
+// For verifying replication w/ Aaron Kaufman & Gary King's results
+export function kiwysiScoreShapeRAW(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number
 {
   // Feature-ize the shape
   const features: T.CompactnessFeatures = featureizePoly(poly, options);
@@ -21,15 +22,22 @@ export function scoreShape(poly: any, pca: T.PCAModel, options?: Poly.PolyOption
   return score;
 }
 
-export function scoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[]
+export function kiwysiScoreShape(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number
+{
+  const rawScore = kiwysiScoreShapeRAW(poly, pca, options);
+  const rangedScore = Math.min(Math.max(rawScore, 1), 100);
+
+  return rangedScore;
+}
+
+export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[]
 {
   let scores: number[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
-    const rawScore = scoreShape(shapes.features[i], pca, options);
-    const rangedScore = Math.min(Math.max(rawScore, 1), 100);
-    scores.push(rangedScore);
+    const score = kiwysiScoreShape(shapes.features[i], pca, options);
+    scores.push(score);
   }
 
   return scores;

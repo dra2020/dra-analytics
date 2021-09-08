@@ -15,7 +15,8 @@ export
 
 export
 {
-  scoreShapes
+  kiwysiScoreShape,
+  kiwysiScoreShapes
 } from './kiwysi';
 
 export

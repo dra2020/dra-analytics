@@ -4,18 +4,20 @@
 
 import * as T from './general';
 
+
+// For backward compatibility
 export type GeoProperties = {
   area: number,
   perimeter: number,
   diameter: number
 }
-export type ShapeProfile = GeoProperties[];
 
 export type CompactnessScorecard = {
-  score?: number;
-  reock: T.Measurement;
-  polsby: T.Measurement;
+  avgReock: number;
+  avgPolsbyPopper: number;
+  byDistrict: CompactnessByDistrict;
   details: T.Dict;
+  rating?: number;
 };
 
 export type CompactnessByDistrict = {
