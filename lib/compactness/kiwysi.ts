@@ -32,6 +32,7 @@ export function kiwysiScoreShape(poly: any, pca: T.PCAModel, options?: Poly.Poly
   return rangedScore;
 }
 
+// Use this to get KIWYSI compactness scores ("ranks") for a set of shapes
 export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[]
 {
   let scores: number[] = [];

@@ -11,6 +11,7 @@ import * as T from '../types/compactness';
 import {ratePolsby, rateReock} from '../rate/dra-ratings';
 
 
+// Use this to get average Reock, Polsby-Popper, and KIWYSI compactness and by district for a set of shapes
 export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.CompactnessScorecard
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
@@ -19,6 +20,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.C
   let byDistrict: T.CompactnessByDistrict[] = [];
   let totReock: number = 0;
   let totPolsby: number = 0;
+  let totKIWYSI: number = 0;
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -38,6 +40,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.C
 
     totReock += reock;
     totPolsby += polsby;
+    totKIWYSI += kiwysiScore;
 
     const measures: T.CompactnessByDistrict = {
       rawReock: reock,
@@ -52,10 +55,12 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.C
 
   const avgReock: number = totReock / shapes.features.length;
   const avgPolsby: number = totPolsby / shapes.features.length;
+  const avgKWIWYSI: number = totKIWYSI / shapes.features.length;
 
   const s: T.CompactnessScorecard = {
     avgReock: avgReock,
     avgPolsby: avgPolsby,
+    avgKWIWYSI: avgKWIWYSI,
     byDistrict: byDistrict,
     details: {},             // None
     // rating?: 

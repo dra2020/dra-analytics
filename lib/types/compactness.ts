@@ -45,6 +45,7 @@ export type GeoProperties = {
 export type CompactnessScorecard = {
   avgReock: number;
   avgPolsby: number;
+  avgKWIWYSI: number;
   byDistrict: CompactnessByDistrict[];
   details: T.Dict;
   rating?: number;
