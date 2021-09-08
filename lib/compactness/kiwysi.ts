@@ -1,12 +1,12 @@
 //
-// KIWYSI COMPACTNESS
+// KIWYSI COMPACTNESS - See Aaron Kaufman and Gary King's paper
 //
 
 import * as GeoJSON from 'geojson';
 import {Poly} from '@dra2020/baseclient';
 
 import {featureizePoly} from './features';
-import * as T from './types';
+import * as T from '../types/compactness';
 import * as M from './matrix';
 
 
@@ -44,7 +44,7 @@ export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAM
 }
 
 
-// SCORE THE FEATURES FROM A FEATURE-IZED SHAPE
+// KIWYSI SCORE THE FEATURES FROM A FEATURE-IZED SHAPE
 
 export function scoreFeatureSet(features: T.CompactnessFeatures, pca: T.PCAModel): number
 {

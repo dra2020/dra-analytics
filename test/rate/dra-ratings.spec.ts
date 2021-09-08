@@ -5,7 +5,7 @@ import
   ratePartisanBias,
   rateCompetitiveness,
   rateMinorityRepresentation,
-  _rateCompactness, rateReock, ratePolsbyPopper,
+  _rateCompactness, rateReock, ratePolsby,
   _rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/rate/dra-ratings';
 
@@ -476,32 +476,32 @@ describe('Polsby-Popper compactness scorer', () =>
 {
   test('Polsby-Popper: in range (AL)', () =>
   {
-    expect(ratePolsbyPopper(0.1860)).toBe(21);
+    expect(ratePolsby(0.1860)).toBe(21);
   });
 
   test('Polsby-Popper: in range (NC)', () =>
   {
-    expect(ratePolsbyPopper(0.2418)).toBe(35);
+    expect(ratePolsby(0.2418)).toBe(35);
   });
 
   test('Polsby-Popper: min', () =>
   {
-    expect(ratePolsbyPopper(C.polsbyRange()[C.BEG])).toBe(0);
+    expect(ratePolsby(C.polsbyRange()[C.BEG])).toBe(0);
   });
 
   test('Polsby-Popper: max', () =>
   {
-    expect(ratePolsbyPopper(C.polsbyRange()[C.END])).toBe(100);
+    expect(ratePolsby(C.polsbyRange()[C.END])).toBe(100);
   });
 
   test('Polsby-Popper: too low', () =>
   {
-    expect(ratePolsbyPopper(C.polsbyRange()[C.BEG] - S.EPSILON)).toBe(0);
+    expect(ratePolsby(C.polsbyRange()[C.BEG] - S.EPSILON)).toBe(0);
   });
 
   test('Polsby-Popper: too high', () =>
   {
-    expect(ratePolsbyPopper(C.polsbyRange()[C.END] + S.EPSILON)).toBe(100);
+    expect(ratePolsby(C.polsbyRange()[C.END] + S.EPSILON)).toBe(100);
   });
 });
 

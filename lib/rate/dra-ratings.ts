@@ -217,7 +217,7 @@ export function rateReock(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-export function ratePolsbyPopper(rawValue: number): number
+export function ratePolsby(rawValue: number): number
 {
   const _normalizer = new N.Normalizer(rawValue);
 

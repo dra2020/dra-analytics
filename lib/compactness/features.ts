@@ -1,13 +1,13 @@
 //
-// COMPACTNESS FEATURES
+// COMPACTNESS "FEATURES" (METRICS)
 //
-//   Measures of compactness compare district shapes to various ideally compact
-//   benchmarks, such as circles. All else equal, more compact districts are better.
+// Measures of compactness compare district shapes to various ideally compact
+// benchmarks, such as circles. All else equal, more compact districts are better.
 
 
-import { Util, Poly } from '@dra2020/baseclient';
+import {Util, Poly} from '@dra2020/baseclient';
 
-import * as T from './types';
+import * as T from '../types/compactness';
 
 
 // FEATURES (FOR AN ML MODEL)
@@ -28,7 +28,7 @@ import * as T from './types';
 
 export function calcXSymmetry(poly: any): number
 {
-  const [cx, ] = meanCentroid(poly);
+  const [cx,] = meanCentroid(poly);
   const sym_x = calcSymmetry(poly, reflectOverX(cx))
 
   return sym_x;
@@ -78,7 +78,7 @@ function meanCentroid(poly: any): T.Point
   let y_tot: number = 0;
 
   let coords: any = poly.geometry.coordinates;
-  if (Util.depthof(coords) == 4) coords = [ coords ];  // normalize to multipolygon
+  if (Util.depthof(coords) == 4) coords = [coords];  // normalize to multipolygon
 
   const nPolys: number = coords.length;
   for (let i = 0; i < nPolys; i++)                     // for each polygon
@@ -99,7 +99,7 @@ function meanCentroid(poly: any): T.Point
   }
 
   const centroid: T.Point = [x_tot / n, y_tot / n];
- 
+
   return centroid;
 }
 

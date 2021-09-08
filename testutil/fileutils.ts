@@ -9,7 +9,7 @@ import * as GeoJSON from 'geojson';
 
 import * as M from '../lib/minority/types'
 import * as G from '../lib/graph/types'
-import * as C from '../lib/compactness/types'
+import * as C from '../lib/types/compactness'
 
 
 // HELPERS TO LOAD SAMPLE DATA FROM DISK

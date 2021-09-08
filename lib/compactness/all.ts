@@ -2,6 +2,8 @@
 // COMPACTNESS PACKAGE API
 //
 
+export {makeCompactnessScorecard} from './compactness';
+
 export
 {
   calcXSymmetry,
@@ -19,7 +21,3 @@ export
   kiwysiScoreShapes
 } from './kiwysi';
 
-export
-{
-  PCAModel
-} from './types';

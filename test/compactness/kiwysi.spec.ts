@@ -3,7 +3,7 @@ import * as GeoJSON from 'geojson';
 
 import {kiwysiScoreShapeRAW} from '../../lib/compactness/kiwysi';
 
-import * as T from '../../lib/compactness/types'
+import * as T from '../../lib/types/compactness'
 
 
 // TEST SCORING REFERENCE SHAPES (FEATURE-IZE + SCORE)

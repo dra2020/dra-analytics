@@ -4,7 +4,7 @@ import * as GeoJSON from 'geojson';
 import {scoreFeatureSet} from '../../lib/compactness/kiwysi';
 import {featureizePoly} from '../../lib/compactness/features';
 
-import * as T from '../../lib/compactness/types'
+import * as T from '../../lib/types/compactness'
 
 
 // TEST SCORING REFERENCE FEATURE-IZED SHAPES
