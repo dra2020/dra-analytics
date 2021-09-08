@@ -11,6 +11,7 @@ import * as M from './matrix';
 
 
 // For verifying replication w/ Aaron Kaufman & Gary King's results
+// Note: These scores are smaller is better (ranks) and potentially out of range
 export function kiwysiScoreShapeRAW(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number
 {
   // Feature-ize the shape
@@ -22,6 +23,7 @@ export function kiwysiScoreShapeRAW(poly: any, pca: T.PCAModel, options?: Poly.P
   return score;
 }
 
+// Note: These scores are still smaller is better (ranks)
 export function kiwysiScoreShape(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number
 {
   const rawScore = kiwysiScoreShapeRAW(poly, pca, options);

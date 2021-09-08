@@ -28,7 +28,13 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.C
     const normalizedReock: number = rateReock(reock);
     const polsby: number = features.polsby;
     const normalizedPolsby: number = ratePolsby(features.polsby);
-    const kiwysiScore: number = scoreFeatureSet(features, pca);
+
+    let kiwysiRank: number = scoreFeatureSet(features, pca);
+    // Constrain values to the range [1–100]
+    kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
+    // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
+    // Round & invert into scores where bigger is better [0–100]
+    const kiwysiScore: number = 100 - Math.round(kiwysiRank) + 1
 
     totReock += reock;
     totPolsby += polsby;
