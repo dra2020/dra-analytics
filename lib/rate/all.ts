@@ -8,5 +8,6 @@ export
   rateSplitting,
   // Also
   ratePartisanBias,
-  isAntimajoritarian
+  isAntimajoritarian,
+  avgSVError
 } from './dra-ratings';
