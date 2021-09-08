@@ -8,31 +8,35 @@ import * as C from '../rate/dra-config';
 import * as T from '../types/general';
 import * as U from '../utils/all';
 
-// TODO
-// * Rename to makePopulationScorecard()
-// * Pull out calcPopulationDeviation()
-// * Pull out isRoughlyEqual()
-//
-export function doPopulationDeviation(e: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard
+
+export function calcPopulationDeviation(max: number, min: number, targetSize: number): number
 {
-  // Remove empty districts
-  const totPopByDistrict = e.filter(x => x > 0);
+  return (max - min) / targetSize;  // Don't trim the result here!
+}
+
+export function isRoughlyEqual(devation: number, bLegislative: boolean): boolean
+{
+  const threshold = C.popdevThreshold(bLegislative);
+
+  return (devation <= threshold) ? true : false;
+}
+
+export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard
+{
+  const nonEmptyDistricts = totPopByDistrict.filter(x => x > 0);
 
   let min = 0;
   let max = 0;
 
-  // Compute the min & max district populations
-  // If there's more than 1 non-empty district, calculate a non-zero deviation
-  if (totPopByDistrict.length > 1)
+  if (nonEmptyDistricts.length > 1)
   {
-    min = U.minArray(totPopByDistrict);
-    max = U.maxArray(totPopByDistrict);
+    min = U.minArray(nonEmptyDistricts);
+    max = U.maxArray(nonEmptyDistricts);
   }
 
-  // Calculate the raw population deviation - NOTE: Always >= 0.
-  const popDev = (max - min) / targetSize;  // Don't trim the result here!
-  // const popDev = U.trim((max - min) / targetSize);  DELETE
-  const rating = ratePopulationDeviation(popDev, bLegislative);
+  const deviation = calcPopulationDeviation(max, min, targetSize);
+  // const rating = ratePopulationDeviation(deviation, bLegislative);
+  const roughlyEqual = ((nonEmptyDistricts.length > 1) && isRoughlyEqual(deviation, bLegislative)) ? true : false;
 
   const threshold = C.popdevThreshold(bLegislative);
 
@@ -43,9 +47,9 @@ export function doPopulationDeviation(e: number[], targetSize: number, bLegislat
 
   // Populate the measurement
   const s: PopulationScorecard = {
-    deviation: popDev,
-    rating: rating,
-    roughlyEqual: true,  // TODO
+    deviation: deviation,
+    // rating: rating,
+    roughlyEqual: roughlyEqual,
     notes: notes
   }
 

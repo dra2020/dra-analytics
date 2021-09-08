@@ -10,6 +10,7 @@ Then the various functions of the different sets are available under their appro
 These are the libraries:
 
 - [Compactness](./docs/compactness.md): [TODO: Describe compactness library].
+- [Equal](./docs/equal.md): [TODO: Describe equal population library].
 - [Graph](./docs/graph.md): [TODO: Describe graph library].
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
 - [Splitting](./docs/splitting.md): [TODO: Describe splitting library].

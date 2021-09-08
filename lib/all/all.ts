@@ -1,7 +1,8 @@
 import * as Compactness from '../compactness/all';
 export {Compactness};
 
-// TODO - Equal
+import * as Equal from '../equal/all';
+export {Equal};
 
 import * as Graph from '../graph/all';
 export {Graph};
