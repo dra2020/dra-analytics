@@ -8,8 +8,12 @@ import * as U from '../utils/all';
 import * as C from '../rate/dra-config';
 import * as S from '../rate/settings';
 
-import {estDistrictResponsiveness, estFPTPSeats} from './method';
+import {estDistrictResponsiveness, estFPTPSeats, findBracketingLowerVf, findBracketingUpperVf} from './method';
 import {bestSeats} from './bias';
+
+
+// TODO - RESPONSIVENESS SCORECARD
+
 
 // RESPONSIVENESS
 
@@ -31,89 +35,6 @@ export function estResponsiveness(Vf: number, inferredSVpoints: T.SVpoint[]): nu
   }
 
   return r;
-}
-
-// Find the S(V) point that brackets a Vf value on the lower end
-function findBracketingLowerVf(Vf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
-{
-  let lowerPt: T.SVpoint = inferredSVpoints[0];
-  let smallerPoints: T.SVpoint[] = [];
-
-  for (let pt of inferredSVpoints)
-  {
-    if (pt.v <= Vf)
-    {
-      smallerPoints.push(pt);
-    }
-    else
-    {
-      break;
-    }
-  }
-  // The last smaller point
-  lowerPt = smallerPoints.slice(-1)[0];
-
-  return lowerPt;
-}
-
-// Find the S(V) point that brackets a Vf value on the upper end
-function findBracketingUpperVf(Vf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
-{
-  let upperPt: T.SVpoint = inferredSVpoints[-1];
-
-  for (let pt of inferredSVpoints)
-  {
-    if (pt.v >= Vf)
-    {
-      // The first bigger point
-      upperPt = {v: pt.v, s: pt.s};
-      break;
-    }
-  }
-
-  return upperPt;
-}
-
-// The corresponding functions via the Sf y-axis (vs. Vf x-axis)
-// Find the S(V) point that brackets a Sf value on the lower end
-function findBracketingLowerSf(Sf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
-{
-  let lowerPt: T.SVpoint = inferredSVpoints[0];
-  let smallerPoints: T.SVpoint[] = [];
-
-  for (let pt of inferredSVpoints)
-  {
-    if (pt.s <= Sf)
-    {
-      smallerPoints.push(pt);
-    }
-    else
-    {
-      break;
-    }
-  }
-  // The last smaller point
-  lowerPt = smallerPoints.slice(-1)[0];
-
-  return lowerPt;
-}
-
-// Find the S(V) point that brackets a Sf value on the upper end
-function findBracketingUpperSf(Sf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
-{
-  let upperPt: T.SVpoint = inferredSVpoints[-1];
-
-  for (let pt of inferredSVpoints)
-  {
-    if (pt.s >= Sf)
-    {
-      // The first bigger point
-      upperPt = {v: pt.v, s: pt.s};
-      break;
-    }
-  }
-
-  return upperPt;
 }
 
 // rD -  Estimate the number of responsive districts, given a set of Vf's

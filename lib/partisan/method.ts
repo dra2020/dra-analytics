@@ -138,6 +138,89 @@ function shiftRange(): number[]
   return axisRange;
 }
 
+// Find the S(V) point that brackets a Vf value on the lower end
+export function findBracketingLowerVf(Vf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
+{
+  let lowerPt: T.SVpoint = inferredSVpoints[0];
+  let smallerPoints: T.SVpoint[] = [];
+
+  for (let pt of inferredSVpoints)
+  {
+    if (pt.v <= Vf)
+    {
+      smallerPoints.push(pt);
+    }
+    else
+    {
+      break;
+    }
+  }
+  // The last smaller point
+  lowerPt = smallerPoints.slice(-1)[0];
+
+  return lowerPt;
+}
+
+// Find the S(V) point that brackets a Vf value on the upper end
+export function findBracketingUpperVf(Vf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
+{
+  let upperPt: T.SVpoint = inferredSVpoints[-1];
+
+  for (let pt of inferredSVpoints)
+  {
+    if (pt.v >= Vf)
+    {
+      // The first bigger point
+      upperPt = {v: pt.v, s: pt.s};
+      break;
+    }
+  }
+
+  return upperPt;
+}
+
+// The corresponding functions via the Sf y-axis (vs. Vf x-axis)
+// Find the S(V) point that brackets a Sf value on the lower end
+export function findBracketingLowerSf(Sf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
+{
+  let lowerPt: T.SVpoint = inferredSVpoints[0];
+  let smallerPoints: T.SVpoint[] = [];
+
+  for (let pt of inferredSVpoints)
+  {
+    if (pt.s <= Sf)
+    {
+      smallerPoints.push(pt);
+    }
+    else
+    {
+      break;
+    }
+  }
+  // The last smaller point
+  lowerPt = smallerPoints.slice(-1)[0];
+
+  return lowerPt;
+}
+
+// Find the S(V) point that brackets a Sf value on the upper end
+export function findBracketingUpperSf(Sf: number, inferredSVpoints: T.SVpoint[]): T.SVpoint
+{
+  let upperPt: T.SVpoint = inferredSVpoints[-1];
+
+  for (let pt of inferredSVpoints)
+  {
+    if (pt.s >= Sf)
+    {
+      // The first bigger point
+      upperPt = {v: pt.v, s: pt.s};
+      break;
+    }
+  }
+
+  return upperPt;
+}
+
 
 // Miscellaneous
 

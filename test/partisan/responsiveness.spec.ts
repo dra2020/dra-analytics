@@ -1,8 +1,5 @@
 import * as T from '../../lib/types/all'
 import * as S from '../../lib/rate/settings';
-import * as C from '../../lib/rate/dra-config';
-
-import * as FU from '../../testutil/fileutils';
 
 import
 {

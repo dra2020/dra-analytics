@@ -1,3 +1,7 @@
+//
+// GENERAL UTILITIES
+//
+
 // Deal with decimal census "counts" due to disagg/re-agg
 export function areRoughlyEqual(x: number, y: number, tolerance: number): boolean
 {
