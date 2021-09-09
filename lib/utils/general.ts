@@ -1,3 +1,12 @@
+// Deal with decimal census "counts" due to disagg/re-agg
+export function areRoughlyEqual(x: number, y: number, tolerance: number): boolean
+{
+  let delta = Math.abs(x - y);
+  let result = (delta < tolerance) ? true : false;
+
+  return result;
+}
+
 export function deepCopy(src: any): any
 {
   if (Array.isArray(src))

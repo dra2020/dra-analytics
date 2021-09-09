@@ -147,20 +147,6 @@ export function estFPTPSeats(VfArray: T.VfArray): number
 
   // Python: sum([1.0 for vpi in vpi_by_district if (vpi > 0.5)])
   return U.sumArray(VfArray.map(v => fptpWin(v)));
-
-  /* DELETE
-  return U.sumArray(VfArray.map(v =>
-  {
-    if (v > 0.5)
-    {
-      return 1.0;
-    }
-    else
-    {
-      return 0.0;
-    }
-  }));
-  */
 }
 
 export function fptpWin(demPct: number): number
