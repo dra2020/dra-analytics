@@ -1,0 +1,80 @@
+{
+  "state": "RI",
+  "name": "RI 116th Congressional",
+  "nDistricts": 2,
+  "nCounties": 5,
+  "bStateLeg": false,
+  "population": {
+    "byDistrict": [
+      526283,
+      526284
+    ],
+    "targetSize": 526284
+  },
+  "shapes": [
+    {
+      "area": 0.143095,
+      "perimeter": 2.619688,
+      "diameter": 0.787723
+    },
+    {
+      "area": 0.289004,
+      "perimeter": 3.354526,
+      "diameter": 0.944678
+    }
+  ],
+  "counties": [
+    [
+      49875,
+      0,
+      82888,
+      393520,
+      0
+    ],
+    [
+      0,
+      166158,
+      0,
+      233147,
+      126979
+    ]
+  ],
+  "partisanship": {
+    "statewide": 0.657001,
+    "byDistrict": [
+      0.700367,
+      0.618066
+    ]
+  },
+  "demographics": {
+    "statewide": {
+      "white": 0.797507,
+      "minority": 0.202493,
+      "black": 0.062028,
+      "hispanic": 0.102237,
+      "pacific": 0.001827,
+      "asian": 0.032301,
+      "native": 0.01139
+    },
+    "byDistrict": [
+      {
+        "white": 0.756436,
+        "minority": 0.243564,
+        "black": 0.080365,
+        "hispanic": 0.119442,
+        "pacific": 0.002432,
+        "asian": 0.034173,
+        "native": 0.011813
+      },
+      {
+        "white": 0.838276,
+        "minority": 0.161724,
+        "black": 0.043825,
+        "hispanic": 0.085159,
+        "pacific": 0.001226,
+        "asian": 0.030443,
+        "native": 0.010971
+      }
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "state": "CT",
+  "name": "CT 116th Congressional",
+  "nDistricts": 5,
+  "nCounties": 8,
+  "bStateLeg": false,
+  "population": {
+    "byDistrict": [
+      714820,
+      714819,
+      714819,
+      714819,
+      714820
+    ],
+    "targetSize": 714819
+  },
+  "shapes": [
+    {
+      "area": 0.195118,
+      "perimeter": 3.778001,
+      "diameter": 0.755447
+    },
+    {
+      "area": 0.588687,
+      "perimeter": 4.18609,
+      "diameter": 1.158041
+    },
+    {
+      "area": 0.138505,
+      "perimeter": 2.913502,
+      "diameter": 0.728517
+    },
+    {
+      "area": 0.151114,
+      "perimeter": 2.459319,
+      "diameter": 0.753374
+    },
+    {
+      "area": 0.359078,
+      "perimeter": 4.409339,
+      "diameter": 0.953145
+    }
+  ],
+  "counties": [
+    [
+      0,
+      647876,
+      38914,
+      28030,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      68674,
+      0,
+      82702,
+      18269,
+      274055,
+      152691,
+      118428
+    ],
+    [
+      53742,
+      0,
+      0,
+      54944,
+      606133,
+      0,
+      0,
+      0
+    ],
+    [
+      702136,
+      0,
+      0,
+      0,
+      12683,
+      0,
+      0,
+      0
+    ],
+    [
+      160951,
+      177464,
+      151013,
+      0,
+      225392,
+      0,
+      0,
+      0
+    ]
+  ],
+  "partisanship": {
+    "statewide": 0.5795,
+    "byDistrict": [
+      0.628795,
+      0.540989,
+      0.607476,
+      0.588876,
+      0.532435
+    ]
+  },
+  "demographics": {
+    "statewide": {
+      "white": 0.742288,
+      "minority": 0.257712,
+      "black": 0.101889,
+      "hispanic": 0.115683,
+      "pacific": 0.001366,
+      "asian": 0.04052,
+      "native": 0.007714
+    },
+    "byDistrict": [
+      {
+        "white": 0.688653,
+        "minority": 0.311347,
+        "black": 0.145212,
+        "hispanic": 0.124717,
+        "pacific": 0.001451,
+        "asian": 0.046099,
+        "native": 0.007368
+      },
+      {
+        "white": 0.860445,
+        "minority": 0.139555,
+        "black": 0.045218,
+        "hispanic": 0.056448,
+        "pacific": 0.00125,
+        "asian": 0.032512,
+        "native": 0.011123
+      },
+      {
+        "white": 0.724923,
+        "minority": 0.275077,
+        "black": 0.128816,
+        "hispanic": 0.106106,
+        "pacific": 0.001249,
+        "asian": 0.041767,
+        "native": 0.007134
+      },
+      {
+        "white": 0.667253,
+        "minority": 0.332747,
+        "black": 0.121779,
+        "hispanic": 0.162506,
+        "pacific": 0.001703,
+        "asian": 0.050236,
+        "native": 0.006031
+      },
+      {
+        "white": 0.766428,
+        "minority": 0.233572,
+        "black": 0.069146,
+        "hispanic": 0.131407,
+        "pacific": 0.001188,
+        "asian": 0.032325,
+        "native": 0.006809
+      }
+    ]
+  }
+}

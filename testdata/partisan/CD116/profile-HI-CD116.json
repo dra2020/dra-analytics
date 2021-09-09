@@ -1,0 +1,80 @@
+{
+  "state": "HI",
+  "name": "HI 116th Congressional",
+  "nDistricts": 2,
+  "nCounties": 5,
+  "bStateLeg": false,
+  "population": {
+    "byDistrict": [
+      680496,
+      679805
+    ],
+    "targetSize": 680151
+  },
+  "shapes": [
+    {
+      "area": 0.086892,
+      "perimeter": 1.685554,
+      "diameter": 0.585957
+    },
+    {
+      "area": 2.382627,
+      "perimeter": 21.515153,
+      "diameter": 25.313257
+    }
+  ],
+  "counties": [
+    [
+      0,
+      680496,
+      0,
+      0,
+      0
+    ],
+    [
+      185079,
+      272711,
+      90,
+      67091,
+      154834
+    ]
+  ],
+  "partisanship": {
+    "statewide": 0.696301,
+    "byDistrict": [
+      0.69683,
+      0.695793
+    ]
+  },
+  "demographics": {
+    "statewide": {
+      "white": 0.25512,
+      "minority": 0.74488,
+      "black": 0.022275,
+      "hispanic": 0.071534,
+      "pacific": 0.212061,
+      "asian": 0.558045,
+      "native": 0.016521
+    },
+    "byDistrict": [
+      {
+        "white": 0.184086,
+        "minority": 0.815914,
+        "black": 0.025648,
+        "hispanic": 0.056718,
+        "pacific": 0.16088,
+        "asian": 0.668273,
+        "native": 0.012131
+      },
+      {
+        "white": 0.329236,
+        "minority": 0.670764,
+        "black": 0.018755,
+        "hispanic": 0.086992,
+        "pacific": 0.265463,
+        "asian": 0.443034,
+        "native": 0.021102
+      }
+    ]
+  }
+}

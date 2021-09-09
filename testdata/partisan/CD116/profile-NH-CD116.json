@@ -1,0 +1,90 @@
+{
+  "state": "NH",
+  "name": "NH 116th Congressional",
+  "nDistricts": 2,
+  "nCounties": 10,
+  "bStateLeg": false,
+  "population": {
+    "byDistrict": [
+      658233,
+      658237
+    ],
+    "targetSize": 658235
+  },
+  "shapes": [
+    {
+      "area": 0.779302,
+      "perimeter": 7.449049,
+      "diameter": 1.615603
+    },
+    {
+      "area": 1.923567,
+      "perimeter": 12.51322,
+      "diameter": 2.921915
+    }
+  ],
+  "counties": [
+    [
+      58992,
+      47818,
+      0,
+      0,
+      3333,
+      173913,
+      13451,
+      237583,
+      123143,
+      0
+    ],
+    [
+      1096,
+      0,
+      77117,
+      33055,
+      85785,
+      226808,
+      132994,
+      57640,
+      0,
+      43742
+    ]
+  ],
+  "partisanship": {
+    "statewide": 0.495384,
+    "byDistrict": [
+      0.481496,
+      0.509701
+    ]
+  },
+  "demographics": {
+    "statewide": {
+      "white": 0.935578,
+      "minority": 0.064422,
+      "black": 0.012436,
+      "hispanic": 0.022283,
+      "pacific": 0.000735,
+      "asian": 0.022997,
+      "native": 0.00732
+    },
+    "byDistrict": [
+      {
+        "white": 0.936631,
+        "minority": 0.063369,
+        "black": 0.013458,
+        "hispanic": 0.022113,
+        "pacific": 0.000851,
+        "asian": 0.021746,
+        "native": 0.006809
+      },
+      {
+        "white": 0.934526,
+        "minority": 0.065474,
+        "black": 0.011415,
+        "hispanic": 0.022452,
+        "pacific": 0.00062,
+        "asian": 0.024247,
+        "native": 0.007831
+      }
+    ]
+  }
+}

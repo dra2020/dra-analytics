@@ -1,0 +1,102 @@
+{
+  "state": "ME",
+  "name": "ME 116th Congressional",
+  "nDistricts": 2,
+  "nCounties": 16,
+  "bStateLeg": false,
+  "population": {
+    "byDistrict": [
+      664180,
+      664181
+    ],
+    "targetSize": 664181
+  },
+  "shapes": [
+    {
+      "area": 1.482447,
+      "perimeter": 10.553303,
+      "diameter": 2.583938
+    },
+    {
+      "area": 9.026533,
+      "perimeter": 19.484237,
+      "diameter": 4.646939
+    }
+  ],
+  "counties": [
+    [
+      0,
+      0,
+      281674,
+      0,
+      0,
+      75889,
+      39736,
+      34457,
+      0,
+      0,
+      0,
+      35293,
+      0,
+      0,
+      0,
+      197131
+    ],
+    [
+      107702,
+      71870,
+      0,
+      30768,
+      54418,
+      46262,
+      0,
+      0,
+      57833,
+      153923,
+      17535,
+      0,
+      52228,
+      38786,
+      32856,
+      0
+    ]
+  ],
+  "partisanship": {
+    "statewide": 0.486359,
+    "byDistrict": [
+      0.538069,
+      0.427952
+    ]
+  },
+  "demographics": {
+    "statewide": {
+      "white": 0.955586,
+      "minority": 0.044414,
+      "black": 0.010814,
+      "hispanic": 0.009987,
+      "pacific": 0.000597,
+      "asian": 0.011504,
+      "native": 0.012504
+    },
+    "byDistrict": [
+      {
+        "white": 0.951372,
+        "minority": 0.048628,
+        "black": 0.012903,
+        "hispanic": 0.011661,
+        "pacific": 0.000613,
+        "asian": 0.015376,
+        "native": 0.009339
+      },
+      {
+        "white": 0.959794,
+        "minority": 0.040206,
+        "black": 0.008727,
+        "hispanic": 0.008316,
+        "pacific": 0.00058,
+        "asian": 0.007637,
+        "native": 0.015665
+      }
+    ]
+  }
+}
