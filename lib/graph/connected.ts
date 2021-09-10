@@ -3,7 +3,7 @@
 //
 
 import * as T from './types'
-import * as U from './utils';
+import * as G from './utils';
 
 
 export function isConnected(featureIDs: T.FeatureGroup, graph: T.ContiguityGraph, bLog: boolean = false): boolean
@@ -25,7 +25,7 @@ export function isConnected(featureIDs: T.FeatureGroup, graph: T.ContiguityGraph
 
     // Get its actual neighbors in the graph proper, i.e., ignore any virtual 
     // out-of-bounds neighbors
-    let actualNeighbors = U.neighbors(node, graph).filter(x => (!U.isOutOfBounds(x)));
+    let actualNeighbors = G.neighbors(node, graph).filter(x => (!G.isOutOfBounds(x)));
 
     // Add neighbors to visit, if they're in the same set & haven't already been visited
     let neighborsToVisit = actualNeighbors.filter(x => featureIDs.has(x) && (!visited.has(x)));

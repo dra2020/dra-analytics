@@ -3,7 +3,8 @@
 //
 
 import * as T from './types'
-import * as U from './utils';
+import * as U from '../utils/all';
+import * as G from './utils';
 
 //
 // A district is NOT a "donut hole" district:
@@ -22,13 +23,13 @@ export function isEmbedded(districtID: number, featureIDs: T.FeatureGroup, plan:
   for (let feature of featuresToCheck)
   {
     // Get its neighbors (including the virtual "out of bounds" ones)
-    let neighbors = U.neighbors(feature, graph);
+    let neighbors = G.neighbors(feature, graph);
 
     for (let neighbor of neighbors)
     {
-      if (U.isOutOfBounds(neighbor)) return false;
+      if (G.isOutOfBounds(neighbor)) return false;
 
-      let neighboringDistrict = U.getDistrict(neighbor, plan);
+      let neighboringDistrict = G.getDistrict(neighbor, plan);
 
       // Assume that a missing district assignment means that the feature is 
       // "water-only" AND part of the border (vs.internal) and, therefore,

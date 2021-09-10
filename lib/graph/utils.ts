@@ -5,18 +5,19 @@
 
 import * as T from './types'
 import * as S from './settings';
+import * as U from '../utils/all';
 
 
 export function getDistrict(geoID: string, plan: T.PlanByGeoID): number | undefined
 {
-  if (keyExists(geoID, plan)) return plan[geoID];
+  if (U.keyExists(geoID, plan)) return plan[geoID];
 
   return undefined;
 }
 
 export function neighbors(node: string, graph: T.ContiguityGraph): string[]
 {
-  if (!keyExists(node, graph)) return [];
+  if (!U.keyExists(node, graph)) return [];
 
   // Handle both unweighted & weighted neighbors
   const n = graph[node];
@@ -41,7 +42,7 @@ export function invertPlan(plan: T.PlanByGeoID): T.PlanByDistrictID
   {
     let districtID = plan[geoID];
 
-    if (!(keyExists(districtID, invertedPlan))) invertedPlan[districtID] = new Set();
+    if (!(U.keyExists(districtID, invertedPlan))) invertedPlan[districtID] = new Set();
 
     invertedPlan[districtID].add(geoID);
   }
@@ -49,23 +50,4 @@ export function invertPlan(plan: T.PlanByGeoID): T.PlanByDistrictID
   return invertedPlan;
 }
 
-
-// GENERIC HELPERS
-
-export function isArrayEmpty(a: any[]): boolean
-{
-  if (a === undefined || a.length == 0) return true;
-
-  return false;
-}
-
-export function keyExists(k: any, o: object): boolean
-{
-  return k in o;
-}
-
-export function isObjectEmpty(o: object): boolean
-{
-  return Object.keys(o).length === 0;
-}
 

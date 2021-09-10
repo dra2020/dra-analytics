@@ -49,3 +49,20 @@ export function initArray(n: number, value: any): any[]
 {
   return Array.from(Array(n), () => value);
 }
+
+export function isArrayEmpty(a: any[]): boolean
+{
+  if (a === undefined || a.length == 0) return true;
+
+  return false;
+}
+
+export function keyExists(k: any, o: object): boolean
+{
+  return k in o;
+}
+
+export function isObjectEmpty(o: object): boolean
+{
+  return Object.keys(o).length === 0;
+}
