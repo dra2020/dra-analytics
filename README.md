@@ -13,6 +13,7 @@ These are the libraries:
 - [Equal](./docs/equal.md): [TODO: Describe equal population library].
 - [Graph](./docs/graph.md): [TODO: Describe graph library].
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
+- [Partisan](./docs/partisan.md): [TODO: Describe partisan library].
 - [Splitting](./docs/splitting.md): [TODO: Describe splitting library].
 
 The analytics in DRA include metrics favored by, and build on the work of, [many scholars](./docs/attributions.md).

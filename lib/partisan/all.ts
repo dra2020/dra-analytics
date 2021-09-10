@@ -11,9 +11,7 @@ import * as U from '../utils/all';
 
 import
 {
-  estSeatProbability,
   estSeats,
-  estDistrictResponsiveness,
   estFPTPSeats,
   inferSVpoints
 } from '../../lib/partisan/method'
@@ -25,10 +23,10 @@ import
   calcDisproportionalityFromBest,
   estUnearnedSeats,
   calcTurnoutBias,
-  estSeatBias, estVotesBias,
+  estVotesBias,
   estPartisanBias,
   calcEfficiencyGap,
-  invertSVPoints, isASweep, radiansToDegrees, keyRVpoints, calcDeclination,
+  invertSVPoints, keyRVpoints, calcDeclination,
   calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, estMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
   calcMinimalInverseResponsiveness
 } from '../../lib/partisan/bias'
@@ -36,12 +34,10 @@ import
 import
 {
   estResponsiveness, estResponsiveDistricts,
-  estResponsiveDistrictsShare,   // NOTE - Just a division; no tests
+  estResponsiveDistrictsShare,
   countCompetitiveDistricts,
-  estDistrictCompetitiveness,
-  estCompetitiveDistricts,       // NOTE - Just a sum over a tested fn; no tests
-  estCompetitiveDistrictsShare,  // NOTE - Just a division; no tests
-  estMarginalCompetitiveShare    // NOTE - Tested indirectly via the hypothetical & sample state profiles
+  estCompetitiveDistricts,
+  estCompetitiveDistrictsShare
 } from '../../lib/partisan/responsiveness'
 
 
