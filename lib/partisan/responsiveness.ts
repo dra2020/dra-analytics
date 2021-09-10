@@ -6,7 +6,6 @@ import * as N from '../rate/normalize';
 import * as T from '../types/partisan';
 import * as U from '../utils/all';
 import * as C from '../rate/dra-config';
-import * as S from '../rate/settings';
 
 import {estDistrictResponsiveness, estFPTPSeats, findBracketingLowerVf, findBracketingUpperVf} from './method';
 import {bestSeats} from './bias';
@@ -42,7 +41,7 @@ export function estResponsiveness(Vf: number, inferredSVpoints: T.SVpoint[]): nu
 
   if (lowerPt && upperPt)
   {
-    if (!(U.areRoughlyEqual((upperPt.v - lowerPt.v), 0, S.EPSILON)))
+    if (!(U.areRoughlyEqual((upperPt.v - lowerPt.v), 0, U.EPSILON)))
     {
       r = ((upperPt.s - lowerPt.s) / (upperPt.v - lowerPt.v));
     }

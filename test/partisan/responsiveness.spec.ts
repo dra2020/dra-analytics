@@ -1,5 +1,5 @@
 import * as T from '../../lib/types/all'
-import * as S from '../../lib/rate/settings';
+import * as U from '../../lib/utils/all';
 
 import
 {
@@ -17,7 +17,7 @@ describe('Count competitive districts', () =>
 {
   test('3 of 7 competitive', () =>
   {
-    const rV: T.VfArray = [0.40, 0.45 - S.EPSILON, 0.45, 0.50, 0.55, 0.55 + S.EPSILON, 0.60];
+    const rV: T.VfArray = [0.40, 0.45 - U.EPSILON, 0.45, 0.50, 0.55, 0.55 + U.EPSILON, 0.60];
     expect(countCompetitiveDistricts(rV)).toBe(3);
   });
 })

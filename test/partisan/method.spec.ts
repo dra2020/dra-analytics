@@ -1,5 +1,5 @@
 import * as T from '../../lib/types/all'
-import * as S from '../../lib/rate/settings';
+import * as U from '../../lib/utils/all';
 import * as C from '../../lib/rate/dra-config';
 
 import * as FU from '../../testutil/fileutils';
@@ -943,12 +943,12 @@ describe('Estimate FPTP seats', () =>
   });
   test('Split 1–2', () =>
   {
-    const rV: T.VfArray = [(0.50 - S.EPSILON), (0.50 - S.EPSILON), (0.50 + S.EPSILON)];
+    const rV: T.VfArray = [(0.50 - U.EPSILON), (0.50 - U.EPSILON), (0.50 + U.EPSILON)];
     expect(estFPTPSeats(rV)).toBe(1);
   });
   test('Split 2–1', () =>
   {
-    const rV: T.VfArray = [(0.50 + S.EPSILON), (0.50 + S.EPSILON), (0.50 - S.EPSILON)];
+    const rV: T.VfArray = [(0.50 + U.EPSILON), (0.50 + U.EPSILON), (0.50 - U.EPSILON)];
     expect(estFPTPSeats(rV)).toBe(2);
   });
   test('Perfectly balanced 0–3', () =>

@@ -10,7 +10,7 @@ import
 } from '../../lib/rate/dra-ratings';
 
 import * as C from '../../lib/rate/dra-config';
-import * as S from '../../lib/rate/settings';
+import * as U from '../../lib/utils/all';
 import * as T from '../../lib/types/all'
 
 
@@ -36,12 +36,12 @@ describe('Population Deviation scorer', () =>
 
   test('Population Deviation: too big', () =>
   {
-    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + U.EPSILON, bLegislative)).toBe(0);
   });
 
   test('Population Deviation: unnecessarily small', () =>
   {
-    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - U.EPSILON, bLegislative)).toBe(100);
   });
   test('Population Deviation: very large', () =>
   {
@@ -70,12 +70,12 @@ describe('Population Deviation scorer (LD)', () =>
 
   test('Population Deviation (LD): too big', () =>
   {
-    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + S.EPSILON, bLegislative)).toBe(0);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.BEG] + U.EPSILON, bLegislative)).toBe(0);
   });
 
   test('Population Deviation (LD): unnecessarily small', () =>
   {
-    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - S.EPSILON, bLegislative)).toBe(100);
+    expect(ratePopulationDeviation(C.popdevRange(bLegislative)[C.END] - U.EPSILON, bLegislative)).toBe(100);
   });
 });
 
@@ -155,11 +155,11 @@ describe('Detect antimajoritarian results', () =>
   const avgSVError = 0.02;
   test('Dem antimajoritarian', () =>
   {
-    expect(isAntimajoritarian(0.5 - avgSVError - S.EPSILON, 0.50 + S.EPSILON)).toBe(true);
+    expect(isAntimajoritarian(0.5 - avgSVError - U.EPSILON, 0.50 + U.EPSILON)).toBe(true);
   });
   test('Rep antimajoritarian', () =>
   {
-    expect(isAntimajoritarian(0.5 + avgSVError + S.EPSILON, 0.5 - S.EPSILON)).toBe(true);
+    expect(isAntimajoritarian(0.5 + avgSVError + U.EPSILON, 0.5 - U.EPSILON)).toBe(true);
   });
   test('Majority but not antimajoritarian', () =>
   {
@@ -171,7 +171,7 @@ describe('Detect antimajoritarian results', () =>
   });
   test('Not big enough to be called antimajoritarian', () =>
   {
-    expect(isAntimajoritarian(0.5 - S.EPSILON, 0.5 - S.EPSILON)).toBe(false);
+    expect(isAntimajoritarian(0.5 - U.EPSILON, 0.5 - U.EPSILON)).toBe(false);
   });
 })
 
@@ -206,11 +206,11 @@ describe('Score proportionality, no winner bonus', () =>
   // });
   test('Dem antimajoritarian', () =>
   {
-    expect(rateProportionality(0.01, 0.48 - S.EPSILON, 0.5 + S.EPSILON)).toBe(0);
+    expect(rateProportionality(0.01, 0.48 - U.EPSILON, 0.5 + U.EPSILON)).toBe(0);
   });
   test('Rep antimajoritarian', () =>
   {
-    expect(rateProportionality(0.01, 1 - 0.48 + S.EPSILON, 1 - 0.5 - S.EPSILON)).toBe(0);
+    expect(rateProportionality(0.01, 1 - 0.48 + U.EPSILON, 1 - 0.5 - U.EPSILON)).toBe(0);
   });
 })
 
@@ -319,7 +319,7 @@ describe('Score impact, no winner bonus', () =>
   });
   test('Excessive impact', () =>
   {
-    expect(scoreImpact(C.unearnedThreshold() + S.EPSILON, Vf, Sf, N)).toBe(0);
+    expect(scoreImpact(C.unearnedThreshold() + U.EPSILON, Vf, Sf, N)).toBe(0);
   });
 })
 
@@ -463,12 +463,12 @@ describe('Reock compactness scorer', () =>
 
   test('Reock: too low', () =>
   {
-    expect(rateReock(C.reockRange()[C.BEG] - S.EPSILON)).toBe(0);
+    expect(rateReock(C.reockRange()[C.BEG] - U.EPSILON)).toBe(0);
   });
 
   test('Reock: too high', () =>
   {
-    expect(rateReock(C.reockRange()[C.END] + S.EPSILON)).toBe(100);
+    expect(rateReock(C.reockRange()[C.END] + U.EPSILON)).toBe(100);
   });
 });
 
@@ -496,12 +496,12 @@ describe('Polsby-Popper compactness scorer', () =>
 
   test('Polsby-Popper: too low', () =>
   {
-    expect(ratePolsby(C.polsbyRange()[C.BEG] - S.EPSILON)).toBe(0);
+    expect(ratePolsby(C.polsbyRange()[C.BEG] - U.EPSILON)).toBe(0);
   });
 
   test('Polsby-Popper: too high', () =>
   {
-    expect(ratePolsby(C.polsbyRange()[C.END] + S.EPSILON)).toBe(100);
+    expect(ratePolsby(C.polsbyRange()[C.END] + U.EPSILON)).toBe(100);
   });
 });
 
@@ -557,7 +557,7 @@ describe('County-district splitting scorer', () =>
   {
     const avgBest = countySplitBest(15, 9);
     const avgWorst = countySplitWorst(avgBest);
-    expect(rateCountySplitting(avgWorst + S.EPSILON, 15, 9)).toBe(0);
+    expect(rateCountySplitting(avgWorst + U.EPSILON, 15, 9)).toBe(0);
   });
 });
 
@@ -597,6 +597,6 @@ describe('District-county splitting scorer', () =>
 
   test('District splitting: too much', () =>
   {
-    expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + S.EPSILON)).toBe(0);
+    expect(rateDistrictSplitting(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + U.EPSILON)).toBe(0);
   });
 });

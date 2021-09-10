@@ -5,8 +5,7 @@
 import {approximateERF} from './erf';
 import * as N from '../rate/normalize';
 import * as T from '../types/partisan';
-import * as U from '../utils/array';
-import * as S from '../rate/settings';
+import * as U from '../utils/all';
 
 
 // CORE CAPABILITIES FROM JOHN NAGLE'S METHOD
@@ -130,7 +129,7 @@ function shiftRange(): number[]
   const axisRange: number[] = [];
   const step = (1 / 100) / 2;
 
-  for (let v = range[0]; v <= range[1] + S.EPSILON; v += step)
+  for (let v = range[0]; v <= range[1] + U.EPSILON; v += step)
   {
     axisRange.push(v);
   }

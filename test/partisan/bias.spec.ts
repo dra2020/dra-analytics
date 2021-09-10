@@ -1,5 +1,4 @@
-import * as T from '../../lib/types/all'
-import * as S from '../../lib/rate/settings';
+import * as U from '../../lib/utils/all'
 
 import
 {
@@ -17,7 +16,7 @@ describe('Determine sweeps', () =>
   });
   test('Sweep', () =>
   {
-    expect(isASweep(10 - (1 / 10) + S.EPSILON, 10)).toBe(true);
+    expect(isASweep(10 - (1 / 10) + U.EPSILON, 10)).toBe(true);
   });
   test('Swept', () =>
   {
@@ -25,7 +24,7 @@ describe('Determine sweeps', () =>
   });
   test('Swept', () =>
   {
-    expect(isASweep((1 / 10 - S.EPSILON), 10)).toBe(true);
+    expect(isASweep((1 / 10 - U.EPSILON), 10)).toBe(true);
   });
 })
 

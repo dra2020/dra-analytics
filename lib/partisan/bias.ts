@@ -5,7 +5,6 @@
 import * as T from '../types/all';
 import * as U from '../utils/all';
 import * as C from '../rate/dra-config';
-import * as S from '../rate/settings';
 
 import
 {
@@ -50,7 +49,7 @@ import
 // The "expected number of seats" from http://bit.ly/2Fcuf4q
 export function bestSeats(N: number, Vf: number): number
 {
-  return Math.round((N * Vf) - S.EPSILON);
+  return Math.round((N * Vf) - U.EPSILON);
 }
 
 // ^S% - The corresponding Democratic seat share 
@@ -344,8 +343,8 @@ export function calcDeclination(VfArray: T.VfArray): number | undefined
   const {Sb, Ra, Rb, Va, Vb} = keyRVpoints(VfArray);
   const bSweep: boolean = isASweep(Sb, VfArray.length);
   const bTooFewDistricts: boolean = (VfArray.length < 5) ? true : false;
-  const bVaAt50: boolean = (U.areRoughlyEqual((Va - 0.5), 0.0, S.EPSILON)) ? true : false;
-  const bVbAt50: boolean = (U.areRoughlyEqual((0.5 - Vb), 0.0, S.EPSILON)) ? true : false;
+  const bVaAt50: boolean = (U.areRoughlyEqual((Va - 0.5), 0.0, U.EPSILON)) ? true : false;
+  const bVbAt50: boolean = (U.areRoughlyEqual((0.5 - Vb), 0.0, U.EPSILON)) ? true : false;
 
   let decl: number | undefined;
 
@@ -428,7 +427,7 @@ export function calcBigR(Vf: number, Sf: number): number | undefined
 {
   let bigR: number | undefined = undefined;
 
-  if (!(U.areRoughlyEqual(Vf, 0.5, S.EPSILON)))
+  if (!(U.areRoughlyEqual(Vf, 0.5, U.EPSILON)))
   {
     bigR = (Sf - 0.5) / (Vf - 0.5);
   }
@@ -445,7 +444,7 @@ export function calcMinimalInverseResponsiveness(Vf: number, r: number): number 
 {
   let MIR: number | undefined = undefined;
 
-  if (!(U.areRoughlyEqual(r, 0, S.EPSILON)))
+  if (!(U.areRoughlyEqual(r, 0, U.EPSILON)))
   {
     const bBalanced = isBalanced(Vf);
     const ideal = bBalanced ? 0.1 : 0.2;
