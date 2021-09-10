@@ -9,6 +9,9 @@ import * as C from '../rate/dra-config';
 import {Normalizer} from '../rate/normalize';
 import {estSeatProbability} from '../partisan/method';
 
+
+// MINORITY SCORECARD
+
 // evalMinorityOpportunity: Pivot the by-district profile into a 2D array:
 // * Demographic dimension
 // * VAP % bucket dimension + statewide VAP % and proportional seats
@@ -114,6 +117,9 @@ export function evalMinorityOpportunity(statewideDemos: T.Demographics, demosByD
 
   return s;
 }
+
+
+// HELPERS
 
 // Convert the 2D working array to a fixed table, so the rows & columns can be
 // addressed logically by name as opposed to using array indices.

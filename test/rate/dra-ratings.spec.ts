@@ -431,6 +431,15 @@ describe('Score minority opportunity', () =>
   {
     expect(rateMinorityRepresentation(11, 10, 0, 0)).toBe(bonus);
   });
+
+  test('Combined score', () =>
+  {
+    // * Opportunity districts = (12.56 / 18) * 100 <<< 70
+    // * Coalition districts = (22.92 / 18) * 100 <<< capped
+    // * Combined = 70 + [0.5 * (100 - 70)]
+    const correct = 85;
+    expect(rateMinorityRepresentation(12.56, 18, 22.92, 18)).toBe(correct);
+  });
 });
 
 
