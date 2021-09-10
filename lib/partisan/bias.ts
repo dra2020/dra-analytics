@@ -9,7 +9,7 @@ import * as S from '../rate/settings';
 
 import
 {
-  estSeatProbability,
+  estSeatProbability, estSeats,
   findBracketingLowerVf, findBracketingUpperVf,
   findBracketingLowerSf, findBracketingUpperSf
 } from './method';
@@ -33,13 +33,6 @@ export function bestSeats(N: number, Vf: number): number
 export function bestSeatShare(bestS: number, N: number): number
 {
   return bestS / N;
-}
-
-// S# - The estimated # of Democratic seats, using seat probabilities
-export function estSeats(VfArray: T.VfArray, range?: number[]): number
-{
-  // Python: sum([est_seat_probability(vpi) for vpi in vpi_by_district])
-  return U.sumArray(VfArray.map(v => estSeatProbability(v, range)));
 }
 
 // S% - The estimated Democratic seat share fraction

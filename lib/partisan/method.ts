@@ -222,7 +222,7 @@ export function findBracketingUpperSf(Sf: number, inferredSVpoints: T.SVpoint[])
 }
 
 
-// Miscellaneous
+// MISC
 
 // The estimated number of Democratic seats using first past the post
 export function estFPTPSeats(VfArray: T.VfArray): number
