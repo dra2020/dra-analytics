@@ -10,12 +10,11 @@ import * as S from '../rate/settings';
 import
 {
   estSeatProbability, estSeats,
+  inferSVpoints,
   findBracketingLowerVf, findBracketingUpperVf,
-  findBracketingLowerSf, findBracketingUpperSf
+  findBracketingLowerSf, findBracketingUpperSf,
+  estFPTPSeats
 } from './method';
-
-
-// TODO - BIAS SCORECARD
 
 
 // ESTIMATE BASIC BIAS

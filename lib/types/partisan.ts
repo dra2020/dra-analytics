@@ -44,47 +44,45 @@ export type Bias = {
   estS: number;
   estSf: number;
   deviation: number;
-  score?: number;
+  rating?: number;
 
-  tOf?: number;
-  fptpS?: number;
-  bS50?: number;
+  tOf: number;
+  fptpS: number;
+  bS50: number;
   bV50?: number;
   decl?: number | undefined;
   rvPoints?: rVpoints;
-  gSym?: number;
+  gSym: number;
   gamma?: number;
-  eG?: number;
+  eG: number;
   bSV?: number;
-  prop?: number;
-  mMs?: number;
-  mMd?: number;
-  lO?: number | undefined;
+  prop: number;
+  mMs: number;
+  mMd: number;
+  lO: number | undefined;
 }
 
 
 // IMPACT - Note: This is a legacy of DRA analytics that is not used.
-
 export type Impact = {
   unearnedS: number;
-  score?: number;
+  rating?: number;
 }
 
 
 // RESPONSIVENESS
-// TODO: Remove the unnecessary undefined's
 
 export type Responsiveness = {
-  bigR?: number | undefined;
-  littleR?: number | undefined;
-  mIR?: number | undefined;
-  rD?: number;
-  rDf?: number;
+  bigR?: number;
+  littleR?: number;
+  mIR?: number;
+  rD: number;
+  rDf: number;
 
   cSimple: number;
   cD: number;
   cDf: number;
-  score?: number;
+  rating?: number;
 }
 
 
