@@ -2,8 +2,8 @@
 // RESPONSIVENESS METRICS -- includes "competitiveness" metrics
 //
 
-import * as N from '../rate/normalize';
-import * as T from '../types/partisan';
+import {Normalizer} from '../rate/normalize';
+import * as T from '../types/all';
 import * as U from '../utils/all';
 import * as C from '../rate/dra-config';
 
@@ -84,7 +84,7 @@ export function estCompetitiveDistricts(VfArray: T.VfArray, bCompress: boolean =
 
 export function estDistrictCompetitiveness(Vf: number, bCompress: boolean = false): number
 {
-  const _normalizer = new N.Normalizer(Vf);
+  const _normalizer = new Normalizer(Vf);
 
   // The end points of the probability distribution
   // NOTE - These aren't the points where races start or stop being contested,

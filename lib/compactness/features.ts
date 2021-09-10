@@ -7,7 +7,7 @@
 
 import {Util, Poly} from '@dra2020/baseclient';
 
-import * as T from '../types/compactness';
+import * as T from '../types/all';
 
 
 // FEATURES (FOR AN ML MODEL)

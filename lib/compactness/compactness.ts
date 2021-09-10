@@ -7,7 +7,7 @@ import {Poly} from '@dra2020/baseclient';
 
 import {featureizePoly} from './features';
 import {scoreFeatureSet} from './kiwysi';
-import * as T from '../types/compactness';
+import * as T from '../types/all';
 import {ratePolsby, rateReock} from '../rate/dra-ratings';
 
 

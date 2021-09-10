@@ -6,7 +6,7 @@ import * as GeoJSON from 'geojson';
 import {Poly} from '@dra2020/baseclient';
 
 import {featureizePoly} from './features';
-import * as T from '../types/compactness';
+import * as T from '../types/all';
 import * as M from './matrix';
 
 

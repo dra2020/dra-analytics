@@ -8,7 +8,6 @@ export * from './responsiveness';
 
 import * as T from '../../lib/types/all'
 import * as U from '../utils/all';
-import * as C from '../../lib/rate/dra-config';
 
 import
 {

@@ -4,35 +4,16 @@ import * as FU from '../../testutil/fileutils';
 
 import
 {
-  estSeatProbability,
   estSeats,
-  estDistrictResponsiveness,
   estFPTPSeats,
-  inferSVpoints
-} from '../../lib/partisan/method'
-
-import
-{
+  inferSVpoints,
   keyRVpoints,
   estSeatShare,
   estSeatBias, estVotesBias,
-  isASweep, radiansToDegrees,
   calcEfficiencyGap,
-  calcMinimalInverseResponsiveness
-} from '../../lib/partisan/bias'
-
-import
-{
   estResponsiveness, estResponsiveDistricts,
-  estResponsiveDistrictsShare,   // NOTE - Just a division; no tests
-  countCompetitiveDistricts,
-  estDistrictCompetitiveness,
-  estCompetitiveDistricts,       // NOTE - Just a sum over a tested fn; no tests
-  estCompetitiveDistrictsShare,  // NOTE - Just a division; no tests
-  estMarginalCompetitiveShare    // NOTE - Tested indirectly via the hypothetical & sample state profiles
-} from '../../lib/partisan/responsiveness'
-
-import {makePartisanScorecard} from '../../lib/partisan/all';
+  makePartisanScorecard
+} from '../../lib/partisan/all';
 
 
 // PA SCOPA-7S PLAN

@@ -3,14 +3,9 @@ import * as U from '../../lib/utils/all';
 
 import
 {
-  estResponsiveness, estResponsiveDistricts,
-  estResponsiveDistrictsShare,   // NOTE - Just a division; no tests
   countCompetitiveDistricts,
-  estDistrictCompetitiveness,
-  estCompetitiveDistricts,       // NOTE - Just a sum over a tested fn; no tests
-  estCompetitiveDistrictsShare,  // NOTE - Just a division; no tests
-  estMarginalCompetitiveShare    // NOTE - Tested indirectly via the hypothetical & sample state profiles
-} from '../../lib/partisan/responsiveness'
+  estDistrictCompetitiveness
+} from '../../lib/partisan/all'
 
 
 describe('Count competitive districts', () =>

@@ -1,10 +1,15 @@
 import
 {
   ratePopulationDeviation,
-  rateProportionality, extraBonus, adjustDeviation, isAntimajoritarian,
+  rateProportionality, isAntimajoritarian,
   ratePartisanBias,
   rateCompetitiveness,
-  rateMinorityRepresentation,
+  rateMinorityRepresentation
+} from '../../lib/rate/all';
+
+import
+{
+  extraBonus, adjustDeviation,
   _rateCompactness, rateReock, ratePolsby,
   _rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/rate/dra-ratings';

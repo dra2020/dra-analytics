@@ -3,8 +3,8 @@
 //
 
 import {approximateERF} from './erf';
-import * as N from '../rate/normalize';
-import * as T from '../types/partisan';
+import {Normalizer} from '../rate/normalize';
+import * as T from '../types/all';
 import * as U from '../utils/all';
 
 
@@ -20,7 +20,7 @@ export function estSeatProbability(Vf: number, range?: number[]): number
     // contested, just the end points of a distribution that yields the desired
     // probabilities in the typical competitive range [45-55%].
 
-    const _normalizer = new N.Normalizer(Vf);
+    const _normalizer = new Normalizer(Vf);
 
     const distBeg = range[0];
     const distEnd = range[1];

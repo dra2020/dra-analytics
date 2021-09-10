@@ -3,7 +3,7 @@
 //
 
 import * as C from './dra-config';
-import * as N from './normalize';
+import {Normalizer} from '../rate/normalize';
 import * as T from '../types/all'
 
 
@@ -11,7 +11,7 @@ import * as T from '../types/all'
 
 export function ratePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
 {
-  const _normalizer = new N.Normalizer(rawDeviation);
+  const _normalizer = new Normalizer(rawDeviation);
 
   // Raw range in not inverted (i.e., smaller is better)
   const range = C.popdevRange(bLegislative);
@@ -41,7 +41,7 @@ export function rateProportionality(rawDisproportionality: number, Vf: number, S
     const adjusted = adjustDeviation(Vf, rawDisproportionality, extra);
 
     // Then normalize
-    const _normalizer = new N.Normalizer(adjusted);
+    const _normalizer = new Normalizer(adjusted);
 
     const worst = C.biasRange()[C.BEG];
     const best = C.biasRange()[C.END];
@@ -162,7 +162,7 @@ function normalizePartisanBias(biasPct: number, pctAt50: number): number
 // Then scale the values to [0–100].
 export function rateCompetitiveness(rawCdf: number): number
 {
-  const _normalizer = new N.Normalizer(rawCdf);
+  const _normalizer = new Normalizer(rawCdf);
 
   let worst = C.overallCompetitivenessRange()[C.BEG];
   let best = C.overallCompetitivenessRange()[C.END];
@@ -205,7 +205,7 @@ export function rateMinorityRepresentation(rawOd: number, pOd: number, rawCd: nu
 
 export function rateReock(rawValue: number): number
 {
-  const _normalizer = new N.Normalizer(rawValue);
+  const _normalizer = new Normalizer(rawValue);
 
   const worst = C.reockRange()[C.BEG];
   const best = C.reockRange()[C.END];
@@ -219,7 +219,7 @@ export function rateReock(rawValue: number): number
 
 export function ratePolsby(rawValue: number): number
 {
-  const _normalizer = new N.Normalizer(rawValue);
+  const _normalizer = new Normalizer(rawValue);
 
   const worst = C.polsbyRange()[C.BEG];
   const best = C.polsbyRange()[C.END];
@@ -252,7 +252,7 @@ export function rateCompactness(rawReock: number, rawPolsbyPopper: number): numb
 
 export function rateCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
 {
-  const _normalizer = new N.Normalizer(rawCountySplitting);
+  const _normalizer = new Normalizer(rawCountySplitting);
 
   // The practical ideal rating depends on the # of counties & districts
   const avgBest = countySplitBest(nCounties, nDistricts, bLD);
@@ -298,7 +298,7 @@ export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean
 {
   const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
 
-  const _normalizer = new N.Normalizer(rawDistrictSplitting);
+  const _normalizer = new Normalizer(rawDistrictSplitting);
 
   const best = C.districtSplittingRange(districtType)[C.BEG];
   const worst = C.districtSplittingRange(districtType)[C.END];

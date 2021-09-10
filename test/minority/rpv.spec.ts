@@ -1,7 +1,7 @@
 import * as FU from '../../testutil/fileutils';
 
 import * as T from '../../lib/minority/types'
-import {analyzeRacialVoting} from '../../lib/minority/rpv';
+import {analyzeRacialVoting} from '../../lib/minority/all';
 
 
 describe('Racial polarization', () =>

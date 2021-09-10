@@ -3,7 +3,7 @@ import * as FU from '../../testutil/fileutils';
 import
 {
   makePopulationScorecard
-} from '../../lib/equal/population';
+} from '../../lib/equal/all';
 
 
 describe('Population Deviation calculation', () =>

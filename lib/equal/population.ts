@@ -2,10 +2,10 @@
 // POPULATION DEVIATION
 //
 
-import {PopulationScorecard} from '../types/population';
+import {PopulationScorecard} from '../types/all';
 import {ratePopulationDeviation} from '../rate/dra-ratings';
 import * as C from '../rate/dra-config';
-import * as T from '../types/general';
+import * as T from '../types/all';
 import * as U from '../utils/all';
 
 

@@ -1,7 +1,4 @@
-import * as FU from '../../testutil/fileutils';
-
-// import * as T from '../../lib/splitting/types'
-import {uncertaintyOfMembership, effectiveSplits} from '../../lib/splitting/coi';
+import {uncertaintyOfMembership, effectiveSplits} from '../../lib/splitting/all';
 
 
 describe('COI splitting', () =>
