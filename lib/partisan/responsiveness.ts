@@ -12,9 +12,6 @@ import {estDistrictResponsiveness, estFPTPSeats, findBracketingLowerVf, findBrac
 import {bestSeats} from './bias';
 
 
-// TODO - RESPONSIVENESS SCORECARD
-
-
 // RESPONSIVENESS
 
 // R# - Estimate responsiveness at the statewide vote share

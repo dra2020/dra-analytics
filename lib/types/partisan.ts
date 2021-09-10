@@ -28,13 +28,6 @@ export const enum Shift
   Uniform
 }
 
-// TODO - Figure out if this is needed.
-export type Options = {
-  advanced: boolean;
-  constrained: boolean;  // Use a more narrow probability distribution?
-  shift: Shift;          // Type of shift to use
-}
-
 
 // BIAS
 
