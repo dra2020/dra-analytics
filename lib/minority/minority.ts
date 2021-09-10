@@ -12,7 +12,7 @@ import {estSeatProbability} from '../partisan/method';
 
 // MINORITY SCORECARD
 
-// evalMinorityOpportunity: Pivot the by-district profile into a 2D array:
+// makeMinorityScorecard: Pivot the by-district profile into a 2D array:
 // * Demographic dimension
 // * VAP % bucket dimension + statewide VAP % and proportional seats
 // Then convert the 2D array back into a static structure.
@@ -43,7 +43,7 @@ const enum PivotField
 const MINORITY = 1 - 1;                // Demographic dimension offset
 const PROPSEATS = 8 - 1;               // Pivot dimension offset
 
-export function evalMinorityOpportunity(statewideDemos: T.Demographics, demosByDistrict: T.Demographics[], bLog: boolean = false): T.MinorityScorecard
+export function makeMinorityScorecard(statewideDemos: T.Demographics, demosByDistrict: T.Demographics[], bLog: boolean = false): T.MinorityScorecard
 {
   const nDemos = 6;          // Profile includes 'White'
   const offset: number = 1;  // But don't process 'White'

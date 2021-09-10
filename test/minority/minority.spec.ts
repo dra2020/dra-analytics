@@ -7,7 +7,7 @@ import '../../testutil/match-closeto-array';
 
 import
 {
-  evalMinorityOpportunity, convertTableToArray,
+  makeMinorityScorecard, convertTableToArray,
   estMinorityOpportunity,
   calcDistrictsByDemo,
   calcProportionalDistricts
@@ -82,7 +82,7 @@ describe('Evaluate TX minority opportunity', () =>
     const correct = [18, 4, 12, 0, 2, 0];
     expect(calcDistrictsByDemo(statewide, N)).toBeArrayWithValuesCloseTo(correct);
   });
-  const mS: T.MinorityScorecard = evalMinorityOpportunity(p.demographics.statewide, p.demographics.byDistrict);
+  const mS: T.MinorityScorecard = makeMinorityScorecard(p.demographics.statewide, p.demographics.byDistrict);
   const a: number[][] = convertTableToArray(mS.pivotByDemographic);
   test('Pivot by demographic', () =>
   {
