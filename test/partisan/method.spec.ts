@@ -11,7 +11,7 @@ import
   estDistrictResponsiveness,
   estFPTPSeats,
   inferSVpoints
-} from '../../lib/partisan/all'
+} from '../../lib/partisan/method'
 
 
 describe('Estimate seat probabilities (uncompressed)', () =>

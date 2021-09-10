@@ -1,1 +1,1 @@
-export * from './coi';
+export {effectiveSplits, uncertaintyOfMembership} from './coi';

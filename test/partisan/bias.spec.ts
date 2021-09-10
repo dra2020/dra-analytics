@@ -5,7 +5,7 @@ import
   isASweep, radiansToDegrees,
   calcEfficiencyGap,
   calcMinimalInverseResponsiveness
-} from '../../lib/partisan/all'
+} from '../../lib/partisan/bias'
 
 
 describe('Determine sweeps', () =>

@@ -6,12 +6,24 @@ import
 {
   estSeats,
   estFPTPSeats,
-  inferSVpoints,
-  keyRVpoints,
+  inferSVpoints
+} from '../../lib/partisan/method';
+
+import
+{
   estSeatShare,
   estSeatBias, estVotesBias,
   calcEfficiencyGap,
-  estResponsiveness, estResponsiveDistricts,
+  keyRVpoints
+} from '../../lib/partisan/bias';
+
+import
+{
+  estResponsiveness, estResponsiveDistricts
+} from '../../lib/partisan/responsiveness';
+
+import
+{
   makePartisanScorecard
 } from '../../lib/partisan/all';
 

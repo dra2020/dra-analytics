@@ -5,7 +5,7 @@ import
 {
   countCompetitiveDistricts,
   estDistrictCompetitiveness
-} from '../../lib/partisan/all'
+} from '../../lib/partisan/responsiveness'
 
 
 describe('Count competitive districts', () =>

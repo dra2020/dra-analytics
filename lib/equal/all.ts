@@ -1,1 +1,1 @@
-export * from './population';
+export {makePopulationScorecard} from './population';

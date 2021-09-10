@@ -1,9 +1,10 @@
 //
-// COMPACTNESS PACKAGE API
+// COMPACTNESS
 //
 
 export {makeCompactnessScorecard} from './compactness';
 
+// Legacy compactness calculations
 export
 {
   calcXSymmetry,
@@ -15,6 +16,7 @@ export
   calcSchwartzberg
 } from './features';
 
+// For KIWYSI compactness only
 export
 {
   kiwysiScoreShape,

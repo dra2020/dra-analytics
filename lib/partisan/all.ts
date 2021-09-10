@@ -1,10 +1,13 @@
-export * from './erf';
-export * from './method';
-export * from './bias';
-export * from './responsiveness';
+// TODO - Is any of this needed in district-analytics?
+// export * from './erf';
+// export * from './method';
+// export * from './bias';
+// export * from './responsiveness';
 
 
 // COMBINE EVERYTHING INTO A PARTISAN "SCORECARD"
+// * The bias & responsiveness calculations both depend on the same underlying method, and
+//   everything is too intertwined to do separate bias & responsiveness passes & scorecards
 
 import * as T from '../../lib/types/all'
 import * as U from '../utils/all';
