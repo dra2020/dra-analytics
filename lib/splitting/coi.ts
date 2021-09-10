@@ -1,5 +1,5 @@
 //
-// Sam Wang's COI splitting metrics
+// COI SPLITTING -- using Sam Wang's metrics
 //
 
 import * as U from './utils';
