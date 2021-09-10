@@ -1,4 +1,4 @@
-import {uncertaintyOfMembership, effectiveSplits} from '../../lib/splitting/all';
+import {uncertaintyOfMembership, effectiveSplits} from '../../lib/splitting/coi';
 
 
 describe('COI splitting', () =>

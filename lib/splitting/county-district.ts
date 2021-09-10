@@ -6,7 +6,22 @@ import * as T from '../types/all';
 import * as U from '../utils/all';
 
 
-// TODO - Add a splitting scorecard
+export function makeSplittingScorecard(CxD: T.CountyProfile): T.SplittingScorecard
+{
+  const dT = totalDistricts(CxD);
+  const cT = totalCounties(CxD);
+  const countyM = doCountySplittingReduced(CxD, dT, cT);
+  const districtM = doDistrictSplittingReduced(CxD, dT, cT);
+
+  const s: T.SplittingScorecard = {
+    county: countyM,
+    district: districtM,
+    details: {}          // None
+    // rating?: 
+  }
+
+  return s;
+}
 
 
 // CALCULATE ENHANCED SQRT ENTROPY METRIC
