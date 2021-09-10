@@ -2,7 +2,7 @@
 // CONTIGUOUS - Is a district in a plan fully connected?
 //
 
-import * as T from './types'
+import * as T from '../types/all'
 import * as G from './utils';
 
 

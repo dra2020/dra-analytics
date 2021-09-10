@@ -7,7 +7,7 @@ import * as T from './general';
 
 // KIWYSI 
 
-export type Point = [number, number];
+export type arrPoint = [number, number];
 
 export type CompactnessFeatures = {
   sym_x: number,

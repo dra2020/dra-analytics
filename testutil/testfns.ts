@@ -1,6 +1,6 @@
 import * as FU from './fileutils';
 
-import * as T from '../lib/graph/types'
+import * as T from '../lib/types/all'
 import * as U from '../lib/graph/utils';
 import {isConnected} from '../lib/graph/connected';
 import {isEmbedded} from '../lib/graph/embedded';

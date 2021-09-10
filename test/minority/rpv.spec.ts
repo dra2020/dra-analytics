@@ -1,6 +1,6 @@
 import * as FU from '../../testutil/fileutils';
 
-import * as T from '../../lib/minority/types'
+import * as T from '../../lib/types/all'
 import {analyzeRacialVoting} from '../../lib/minority/all';
 
 

@@ -3,7 +3,7 @@
 //
 
 
-import * as T from './types'
+import * as T from '../types/all'
 import * as S from './settings';
 import * as U from '../utils/all';
 

@@ -7,9 +7,10 @@ import * as path from 'path';
 import parse from 'csv-parse/lib/sync';
 import * as GeoJSON from 'geojson';
 
-import * as M from '../lib/minority/types'
-import * as G from '../lib/graph/types'
-import * as C from '../lib/types/all'
+import * as T from '../lib/types/all'
+// import * as M from '../lib/minority/types'
+// import * as G from '../lib/graph/types'
+// import * as C from '../lib/types/all'
 
 
 // HELPERS TO LOAD SAMPLE DATA FROM DISK
@@ -122,16 +123,16 @@ function fileToPath(file: string): string
   return fullPath;
 }
 
-export function readFeatureSets(file: string): C.FeaturesEntry[]
+export function readFeatureSets(file: string): T.FeaturesEntry[]
 {
-  let featureEntries: C.FeaturesEntry[] = [];
+  let featureEntries: T.FeaturesEntry[] = [];
 
   const fullPath: string = fileToPath(file);
   const csvArray: any = readCSV(fullPath);
 
   for (let dictRow of csvArray)
   {
-    const featuresEntry: C.FeaturesEntry = {
+    const featuresEntry: T.FeaturesEntry = {
       n: Number(dictRow['n']),
       features: {
         sym_x: Number(dictRow['sym_x']),
@@ -168,9 +169,9 @@ export function readShapefile(file: string): Promise<GeoJSON.FeatureCollection>
 
 // GRAPH-specific helper For exercising GRAPH functionality at the CLI
 
-export function readPlanCSV(file: string): G.PlanByGeoID
+export function readPlanCSV(file: string): T.PlanByGeoID
 {
-  var plan = {} as G.PlanByGeoID;
+  var plan = {} as T.PlanByGeoID;
 
   let fullPath: string;
   if (path.isAbsolute(file))
@@ -198,7 +199,7 @@ export function readPlanCSV(file: string): G.PlanByGeoID
 
 // RPV-specific helper
 
-export function readDemographicCSV(file: string, groups: M.MinorityFilter): M.DemographicVotingByFeature /* | undefined */
+export function readDemographicCSV(file: string, groups: T.MinorityFilter): T.DemographicVotingByFeature /* | undefined */
 {
   let fullPath: string;
   if (path.isAbsolute(file))
@@ -214,16 +215,16 @@ export function readDemographicCSV(file: string, groups: M.MinorityFilter): M.De
 
   // 12-29-2020
   // if (csvArray.length == 0) return undefined;
-  // Convert the non-empty CSV to points by demographic
+  // Convert the non-empty CSV to dictPoints by demographic
 
   let ids: string[] = [];
-  let whitePts: M.Point[] = [];
-  let minorityPts: M.Point[] = [];
-  let blackPts: M.Point[] = [];
-  let hispanicPts: M.Point[] = [];
-  let pacificPts: M.Point[] = [];
-  let asianPts: M.Point[] = [];
-  let nativePts: M.Point[] = [];
+  let whitePts: T.dictPoint[] = [];
+  let minorityPts: T.dictPoint[] = [];
+  let blackPts: T.dictPoint[] = [];
+  let hispanicPts: T.dictPoint[] = [];
+  let pacificPts: T.dictPoint[] = [];
+  let asianPts: T.dictPoint[] = [];
+  let nativePts: T.dictPoint[] = [];
 
   let i = 0;
   for (let dictRow of csvArray)
@@ -249,7 +250,7 @@ export function readDemographicCSV(file: string, groups: M.MinorityFilter): M.De
     if (groups.native) nativePts.push({x: n, y: d});
   }
 
-  const vbf: M.DemographicVotingByFeature = {
+  const vbf: T.DemographicVotingByFeature = {
     ids: ids,
     comparison: whitePts,
     minority: groups.minority ? minorityPts : [],

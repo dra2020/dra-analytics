@@ -2,31 +2,31 @@
 // RACIALLY POLARIZED VOTING
 //
 
-import * as T from './types'
+import * as T from '../types/all'
 
 
 // Analyze the degree of racially polarized voting for a district
-export function analyzeRacialVoting(points: T.DemographicVotingByFeature /* | undefined */, districtID: number, groups: T.MinorityFilter): T.RPVAnalysis | undefined
+export function analyzeRacialVoting(dictPoints: T.DemographicVotingByFeature /* | undefined */, districtID: number, groups: T.MinorityFilter): T.RPVAnalysis | undefined
 {
   // 12-29-2020 - Moved these guards up into district-analytics
-  // Make sure the district is not empty, there are enough points, & that a minority is specified.
-  // if (points === undefined) return undefined;
-  // if (points.comparison === undefined) return undefined;
-  // if (points.comparison.length <= 10) return undefined;
+  // Make sure the district is not empty, there are enough dictPoints, & that a minority is specified.
+  // if (dictPoints === undefined) return undefined;
+  // if (dictPoints.comparison === undefined) return undefined;
+  // if (dictPoints.comparison.length <= 10) return undefined;
   // if (!(groups.black || groups.hispanic || groups.pacific || groups.asian || groups.native || groups.minority)) return undefined;
 
-  // NOTE - If (groups.invertSelection == true), the comparison points are everything 
+  // NOTE - If (groups.invertSelection == true), the comparison dictPoints are everything 
   //   except the selected minority, i.e., 1 – <selected minority>.
 
   const result: T.RPVAnalysis = {
-    ids: points.ids,
-    comparison: characterizeDemographicVoting(points.comparison),
-    hispanic: groups.hispanic ? characterizeDemographicVoting(points.hispanic) : undefined,
-    black: groups.black ? characterizeDemographicVoting(points.black) : undefined,
-    pacific: groups.pacific ? characterizeDemographicVoting(points.pacific) : undefined,
-    asian: groups.asian ? characterizeDemographicVoting(points.asian) : undefined,
-    native: groups.native ? characterizeDemographicVoting(points.native) : undefined,
-    minority: groups.minority ? characterizeDemographicVoting(points.minority) : undefined
+    ids: dictPoints.ids,
+    comparison: characterizeDemographicVoting(dictPoints.comparison),
+    hispanic: groups.hispanic ? characterizeDemographicVoting(dictPoints.hispanic) : undefined,
+    black: groups.black ? characterizeDemographicVoting(dictPoints.black) : undefined,
+    pacific: groups.pacific ? characterizeDemographicVoting(dictPoints.pacific) : undefined,
+    asian: groups.asian ? characterizeDemographicVoting(dictPoints.asian) : undefined,
+    native: groups.native ? characterizeDemographicVoting(dictPoints.native) : undefined,
+    minority: groups.minority ? characterizeDemographicVoting(dictPoints.minority) : undefined
   }
 
   return result;
@@ -34,11 +34,11 @@ export function analyzeRacialVoting(points: T.DemographicVotingByFeature /* | un
 
 // https://trentrichardson.com/compute-linear-regressions-in-javascript.html
 // https://www2.isye.gatech.edu/~yxie77/isye2028/lecture12.pdf
-function linearRegression(points: T.Point[]): T.LinearRegression
+function linearRegression(dictPoints: T.dictPoint[]): T.LinearRegression
 {
   // First pass - fit the line
 
-  const n: number = points.length;
+  const n: number = dictPoints.length;
 
   let sum_x = 0;
   let sum_y = 0;
@@ -48,7 +48,7 @@ function linearRegression(points: T.Point[]): T.LinearRegression
 
   for (let i = 0; i < n; i++) 
   {
-    const pt = points[i];
+    const pt = dictPoints[i];
 
     sum_x += pt.x;
     sum_y += pt.y;
@@ -71,7 +71,7 @@ function linearRegression(points: T.Point[]): T.LinearRegression
 
   for (let i = 0; i < n; i++) 
   {
-    const pt = points[i];
+    const pt = dictPoints[i];
 
     Sxx += Math.pow(pt.x - xBar, 2);
     Syy += Math.pow(pt.y - yOnLine(pt.x, slope, intercept), 2);
@@ -97,10 +97,10 @@ function linearRegression(points: T.Point[]): T.LinearRegression
   return lr;
 }
 
-function characterizeDemographicVoting(points: T.Point[]): T.RPVFactor
+function characterizeDemographicVoting(dictPoints: T.dictPoint[]): T.RPVFactor
 {
-  const lr: T.LinearRegression = linearRegression(points);
-  const lrPrime: T.LinearRegression = linearRegression(points.map(invertX));
+  const lr: T.LinearRegression = linearRegression(dictPoints);
+  const lrPrime: T.LinearRegression = linearRegression(dictPoints.map(invertX));
 
   const result: T.RPVFactor = {
     slope: lr.slope,
@@ -108,14 +108,14 @@ function characterizeDemographicVoting(points: T.Point[]): T.RPVFactor
     r2: lr.r2,
     demPct: lrPrime.intercept,
     sterr: lrPrime.sterrs.intercept,
-    points: points
+    dictPoints: dictPoints
   }
 
   return result;
 }
 
-// For interpolating points on a line
+// For interpolating dictPoints on a line
 const yOnLine = (x: number, m: number, b: number): number => {return (m * x) + b;}
 const xOnLine = (y: number, m: number, b: number): number => {return (y - b) / m;}
 
-const invertX = (pt: T.Point): T.Point => {return {x: 1 - pt.x, y: pt.y}};
+const invertX = (pt: T.dictPoint): T.dictPoint => {return {x: 1 - pt.x, y: pt.y}};

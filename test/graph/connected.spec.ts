@@ -1,7 +1,7 @@
 import * as FU from '../../testutil/fileutils';
 import * as TU from '../../testutil/testfns';
 
-import * as T from '../../lib/graph/types'
+import * as T from '../../lib/types/all';
 
 
 describe('BG tests', () =>

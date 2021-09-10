@@ -55,13 +55,13 @@ export function calcYSymmetry(poly: any): number
 
 function calcSymmetry(poly: any, transformFn: any): number
 {
-  const polyPoints = poly.geometry.coordinates;
+  const polyarrPoints = poly.geometry.coordinates;
 
   let transformedPoly = Poly.polyTransform(poly, transformFn);
   transformedPoly = Poly.polyRewindRings(transformedPoly);
-  const reflectedPoints = Poly.polyUnpack(transformedPoly);
+  const reflectedarrPoints = Poly.polyUnpack(transformedPoly);
 
-  const unionedPoly = Poly.unionPolys([polyPoints, reflectedPoints]);
+  const unionedPoly = Poly.unionPolys([polyarrPoints, reflectedarrPoints]);
 
   const area: number = Poly.polyArea(poly);
   const unionedArea: number = Poly.polyArea(unionedPoly);
@@ -69,7 +69,7 @@ function calcSymmetry(poly: any, transformFn: any): number
   return unionedArea / area;
 }
 
-function meanCentroid(poly: any): T.Point
+function meanCentroid(poly: any): T.arrPoint
 {
   const X = 0, Y = 1;
 
@@ -89,7 +89,7 @@ function meanCentroid(poly: any): T.Point
     {                                                  // do
       if (j > 0) continue;                             // skip the holes
 
-      for (let pt of coords[i][j])                     // for each point
+      for (let pt of coords[i][j])                     // for each arrPoint
       {                                                // do
         n += 1;
         x_tot += pt[X];
@@ -98,14 +98,14 @@ function meanCentroid(poly: any): T.Point
     }
   }
 
-  const centroid: T.Point = [x_tot / n, y_tot / n];
+  const centroid: T.arrPoint = [x_tot / n, y_tot / n];
 
   return centroid;
 }
 
 function reflectOverX(x0: number): any
 {
-  return function (pt: T.Point): T.Point
+  return function (pt: T.arrPoint): T.arrPoint
   {
     const [x, y] = pt;
 
@@ -115,7 +115,7 @@ function reflectOverX(x0: number): any
 
 function reflectOverY(y0: number): any
 {
-  return function (pt: T.Point): T.Point
+  return function (pt: T.arrPoint): T.arrPoint
   {
     const [x, y] = pt;
 
@@ -185,7 +185,7 @@ export function calcPolsbyPopper(area: number, perimeter: number): number
 //
 //    CH = A / A(Convex Hull)
 // 
-// where a convex hull is the minimum perimeter that encloses all points in a shape, basically the shortest
+// where a convex hull is the minimum perimeter that encloses all arrPoints in a shape, basically the shortest
 // unstretched rubber band that fits around the shape.
 
 // Note: This is not THE convex hull, but rather a metric based on it.

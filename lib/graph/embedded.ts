@@ -2,7 +2,7 @@
 // EMBEDDED - Is one district fully embedded w/in another district?
 //
 
-import * as T from './types'
+import * as T from '../types/all';
 import * as U from '../utils/all';
 import * as G from './utils';
 
