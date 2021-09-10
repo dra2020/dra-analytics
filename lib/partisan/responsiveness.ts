@@ -12,6 +12,23 @@ import {estDistrictResponsiveness, estFPTPSeats, findBracketingLowerVf, findBrac
 import {bestSeats} from './bias';
 
 
+/* Metrics:
+
+* R [bigR] = Overall responsiveness or winner’s bonus 
+* r [littleR] = The point responsiveness at V% (the slope of the S(V) curve at <V>)
+* MIR [MIR] = Minimal inverse responsiveness 
+* rD [rD] = the estimated # of responsive districts (using probabilities)
+* rD% [rDf] = the estimated # of responsive districts, as a fraction of N
+
+* C [c] = the number of districts that fall into the range [45–55%]
+* cD [cD] = the estimated # of competitive districts, using probabilities & a narrower [0.25–0.75] range
+* cD% [cDf] = the estimated # of competitive districts, as a fraction of N
+* beg/end [mRange] = the 1–N indices for the first and last district that separate the likely result and the proportional result
+* Md [mD] = the competitiveness of the marginal districts
+* Md% [mDf] = the probability that the marginal seats will flip, so S% => ^S%
+
+*/
+
 // RESPONSIVENESS
 
 // R# - Estimate responsiveness at the statewide vote share

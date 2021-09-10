@@ -17,9 +17,34 @@ import
 } from './method';
 
 
-// ESTIMATE BASIC BIAS
-// - By convention, '+' = R bias; '-' = D bias
+/* Metrics:
 
+* ^S# [bestS] = the Democratic seats closest to proportional
+* ^S% [bestSf] = the corresponding Democratic seat share
+* S! [fptpS] = the estimated number of Democratic seats using first past the post
+* S# [estS] (S_V) = the estimated Democratic seats, using seat probabilities
+* S% [estSf] = the estimated Democratic seat share fraction, calculated as S# / N
+
+* BS_50 [bS50] = Seat bias as a fraction of N
+* BV_50 [bV50] = Votes bias as a fraction
+* decl [decl] = Declination
+* GS [gSym] = Global symmetry
+* ?? [gamma] = 
+
+* EG [EG] = Efficiency gap as a fraction
+* BS_V [bSV] = Seats bias @ <V> (geometric)
+* PR [prop] = Disproportionality
+* MM [mMs] = Mean – median difference using statewide Vf
+* TO [tOf] = Turnout bias
+* MM' [mMd] = Mean – median difference using average district v 
+* LO [LO] = Lopsided outcomes
+
+* B% [bias] = the bias calculated as S% – ^S%
+
+*/
+
+
+// ESTIMATE BASIC BIAS -- By convention, '+' = R bias; '-' = D bias
 
 // ^S# - The # of Democratic seats closest to proportional @ statewide Vf
 // The "expected number of seats" from http://bit.ly/2Fcuf4q
@@ -41,7 +66,7 @@ export function estSeatShare(estS: number, N: number): number
 }
 
 // B% - The deviation from proportionality calculated as ^S% — S%
-export function estDeviation(estSf: number, bestSf: number): number
+export function calcDisproportionalityFromBest(estSf: number, bestSf: number): number
 {
   return bestSf - estSf;
 }

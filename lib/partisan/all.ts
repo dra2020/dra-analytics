@@ -23,7 +23,7 @@ import
 {
   estSeatShare,
   bestSeats, bestSeatShare,
-  estDeviation,
+  calcDisproportionalityFromBest,
   estUnearnedSeats,
   calcTurnoutBias,
   estSeatBias, estVotesBias,
@@ -60,7 +60,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray): T.Partisa
   const estS = estSeats(VfArray);
   const estSf = estSeatShare(estS, N);
 
-  const deviation = estDeviation(estSf, bestSf);  // This is the dis-proportionality
+  const deviation = calcDisproportionalityFromBest(estSf, bestSf);  // This is the dis-proportionality
 
   const unearnedS = estUnearnedSeats(bestS, estS);
 
