@@ -2,5 +2,7 @@
 
 export
 {
-  makePartisanScorecard
+  makePartisanScorecard,
+
+  fptpWin
 } from '../partisan/all';
