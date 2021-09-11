@@ -1,4 +1,4 @@
-import * as T from '../../lib/types/minority'
+import * as T from '../../lib/types/all'
 import * as U from '../../lib/utils/all';
 // import * as C from '../../lib/rate/dra-config';
 

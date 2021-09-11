@@ -2,7 +2,7 @@
 // MINORITY REPRESENTATION
 //
 
-import * as T from '../types/minority'
+import * as T from '../types/all'
 import * as U from '../utils/all';
 import * as C from '../rate/dra-config';
 
