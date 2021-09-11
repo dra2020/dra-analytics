@@ -10,6 +10,9 @@ export
   CompactnessScorecard,
   SplittingScorecard,
 
+  // For legacy KIWYSI compactness calculations
+  PCAModel,
+
   // For minority analyis
   MinorityFilter,
 
