@@ -52,7 +52,7 @@ export type RPVFactor = {
   demPct: number;
   sterr: number;
   // For the scatter plot
-  dictPoints: dictPoint[];
+  points: dictPoint[];
 }
 
 export type RPVAnalysis = {

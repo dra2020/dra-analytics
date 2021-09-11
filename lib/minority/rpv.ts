@@ -108,7 +108,7 @@ function characterizeDemographicVoting(dictPoints: T.dictPoint[]): T.RPVFactor
     r2: lr.r2,
     demPct: lrPrime.intercept,
     sterr: lrPrime.sterrs.intercept,
-    dictPoints: dictPoints
+    points: dictPoints
   }
 
   return result;
