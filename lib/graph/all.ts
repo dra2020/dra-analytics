@@ -1,2 +1,4 @@
-export {isConnected} from './connected';
-export {isEmbedded} from './embedded';
+// Export everything here -- restrict package exports in all/graph.ts
+
+export * from './connected';
+export * from './embedded';

@@ -1,25 +1,4 @@
-//
-// COMPACTNESS
-//
-
-export {makeCompactnessScorecard} from './compactness';
-
-// Legacy compactness calculations
-export
-{
-  calcXSymmetry,
-  calcYSymmetry,
-  calcReock,
-  calcBoundingBox,
-  calcPolsbyPopper,
-  calcConvexHullFeature,
-  calcSchwartzberg
-} from './features';
-
-// For KIWYSI compactness only
-export
-{
-  kiwysiScoreShape,
-  kiwysiScoreShapes
-} from './kiwysi';
-
+// Export everything here -- restrict package exports in all/compactness.ts
+export * from './compactness';
+export * from './features';
+export * from './kiwysi';

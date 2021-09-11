@@ -3,11 +3,11 @@ The dra-analytics library consolidates all the metrics used in DRA in one place.
 
 These libraries are normally included like this:
 
-    import { Compactness, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
+    import { Compactness, Equal, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
 
 Then the various functions of the different sets are available under their appropriate symbol.
 
-These are the libraries:
+These are the main libraries:
 
 - [Compactness](./docs/compactness.md): [TODO: Describe compactness library].
 - [Equal](./docs/equal.md): [TODO: Describe equal population library].
@@ -15,6 +15,8 @@ These are the libraries:
 - [Minority](./docs/minority.md): [TODO: Describe minority library].
 - [Partisan](./docs/partisan.md): [TODO: Describe partisan library].
 - [Splitting](./docs/splitting.md): [TODO: Describe splitting library].
+
+There are also support Types and Utils libraries.
 
 The analytics in DRA include metrics favored by, and build on the work of, [many scholars](./docs/attributions.md).
 
