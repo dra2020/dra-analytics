@@ -4,6 +4,7 @@
 export
 {
   // Scorecards & helpers
+  Scorecard,
   PopulationScorecard,
   PartisanScorecard,
   MinorityScorecard,
