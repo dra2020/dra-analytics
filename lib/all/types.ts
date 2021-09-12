@@ -3,12 +3,13 @@
 // TODO - What other types need to be exported?
 export
 {
-  // Scorecards
+  // Scorecards & helpers
   PopulationScorecard,
   PartisanScorecard,
   MinorityScorecard,
   CompactnessScorecard,
   SplittingScorecard,
+  Dict,
 
   // For legacy KIWYSI compactness calculations
   PCAModel,

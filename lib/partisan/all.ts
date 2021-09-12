@@ -45,7 +45,7 @@ import
 } from '../../lib/partisan/responsiveness'
 
 
-export function makePartisanScorecard(Vf: number, VfArray: T.VfArray): T.PartisanScorecard
+export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: boolean = false): T.PartisanScorecard
 {
   const shift = T.Shift.Proportional;
 

@@ -12,7 +12,7 @@ import {ratePolsby, rateReock} from '../rate/dra-ratings';
 
 
 // Use this to get average Reock, Polsby-Popper, and KIWYSI compactness and by district for a set of shapes
-export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection): T.CompactnessScorecard
+export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): T.CompactnessScorecard
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;

@@ -6,7 +6,7 @@ import * as T from '../types/all';
 import * as U from '../utils/all';
 
 
-export function makeSplittingScorecard(CxD: T.CountyProfile): T.SplittingScorecard
+export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = false): T.SplittingScorecard
 {
   const dT = totalDistricts(CxD);
   const cT = totalCounties(CxD);
