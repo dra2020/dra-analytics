@@ -27,8 +27,12 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     const features: T.CompactnessFeatures = featureizePoly(shapes.features[i], options);
 
     const reock: number = features.reock;
-    const normalizedReock: number = rateReock(reock);
     const polsby: number = features.polsby;
+
+    // Note: In order to compute the by-district compactness that DRA needs,
+    // you have to normalize Reock & Polsby–Popper here (vs. in DRA proper)
+    // like the overall compactness rating.
+    const normalizedReock: number = rateReock(reock);
     const normalizedPolsby: number = ratePolsby(features.polsby);
 
     let kiwysiRank: number = scoreFeatureSet(features, pca);

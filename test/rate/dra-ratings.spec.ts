@@ -10,7 +10,7 @@ import
 import
 {
   extraBonus, adjustDeviation,
-  _rateCompactness, rateReock, ratePolsby,
+  rateCompactness, rateReock, ratePolsby,
   _rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/rate/dra-ratings';
 
@@ -449,7 +449,7 @@ describe('Weight compactness measures', () =>
 {
   test('Weight Reock & Polsby-Popper compactness', () =>
   {
-    expect(_rateCompactness(30, 60)).toBeCloseTo(45);
+    expect(rateCompactness(30, 60)).toBeCloseTo(45);
   });
 })
 

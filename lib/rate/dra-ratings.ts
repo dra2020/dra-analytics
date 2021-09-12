@@ -231,8 +231,7 @@ export function ratePolsby(rawValue: number): number
   return _normalizer.normalizedNum as number;
 }
 
-// Legacy note -- This is what dra-score used. 
-export function _rateCompactness(rS: number, ppS: number): number
+export function rateCompactness(rS: number, ppS: number): number
 {
   const rW = C.reockWeight();
   const ppW = C.polsbyWeight();
@@ -240,11 +239,6 @@ export function _rateCompactness(rS: number, ppS: number): number
   const rating = Math.round(((rS * rW) + (ppS * ppW)) / (rW + ppW));
 
   return rating;
-}
-
-export function rateCompactness(rawReock: number, rawPolsbyPopper: number): number
-{
-  return _rateCompactness(rawReock, rawPolsbyPopper);
 }
 
 
@@ -315,7 +309,7 @@ export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean
   return rating;
 }
 
-// Legacy note -- This is what dra-score used.
+// Legacy note - This is the formula dra-score used. See next.
 export function _rateSplitting(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
@@ -326,10 +320,9 @@ export function _rateSplitting(csS: number, dsS: number): number
   return rating;
 }
 
-export function rateSplitting(rawCountySplitting: number, rawDistrictSplitting: number): number
+export function adjustSplittingRating(rating: number, rawCountySplitting: number, rawDistrictSplitting: number): number
 {
   // 09-07-21 - Preserve max value (100) for only when no districts are split
-  let rating = _rateSplitting(rawCountySplitting, rawDistrictSplitting);
   if ((rating == 100) && ((rawCountySplitting > 1.0) || (rawDistrictSplitting > 1.0))) rating = 100 - 1;
 
   return rating;
