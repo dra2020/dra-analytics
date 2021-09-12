@@ -11,7 +11,7 @@ import
 {
   extraBonus, adjustDeviation,
   rateCompactness, rateReock, ratePolsby,
-  _rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
+  rateSplitting, rateCountySplitting, rateDistrictSplitting, countySplitBest, countySplitWorst
 } from '../../lib/rate/dra-ratings';
 
 import * as C from '../../lib/rate/dra-config';
@@ -526,7 +526,7 @@ describe('Weight splitting measures', () =>
 {
   test('Weight county & district splitting', () =>
   {
-    expect(_rateSplitting(30, 60)).toBeCloseTo(45);
+    expect(rateSplitting(30, 60)).toBeCloseTo(45);
   });
 })
 

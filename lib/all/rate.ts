@@ -7,8 +7,8 @@ export
   rateProportionality,
   rateCompetitiveness,
   rateMinorityRepresentation,
-  rateCompactness,
-  adjustSplittingRating,
+  rateCompactness, rateReock, ratePolsby,
+  rateSplitting, adjustSplittingRating, rateCountySplitting, rateDistrictSplitting,
 
   // For use in DRA client UI
   ratePartisanBias,

@@ -310,7 +310,7 @@ export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean
 }
 
 // Legacy note - This is the formula dra-score used. See next.
-export function _rateSplitting(csS: number, dsS: number): number
+export function rateSplitting(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
   const dsW = C.districtSplittingWeight();
