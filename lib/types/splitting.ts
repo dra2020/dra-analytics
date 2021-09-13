@@ -15,10 +15,3 @@ export type SplittingScorecard = {
   score?: number;
 };
 
-// TODO - DELETE
-// export type SplittingScorecard = {
-//   county: T.Measurement;
-//   district: T.Measurement;
-//   details: T.Dict;
-//   score?: number;
-// };

@@ -2,14 +2,6 @@
 // MISCELLANEOUS TYPES 
 //
 
-// TODO - DELETE
-// export type Measurement = {
-//   raw: number;
-//   normalized?: number;
-//   byDistrict?: any[];
-//   notes: Dict;
-// }
-
 export type Dict = {[key: string]: any};
 
 

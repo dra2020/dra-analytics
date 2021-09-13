@@ -18,9 +18,6 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
   const s: T.SplittingScorecard = {
     county: county,
     district: district,
-    // TODO - DELETE
-    // county: countyM,
-    // district: districtM,
     details: {}          // None
     // score?: 
   }
@@ -41,13 +38,6 @@ export function doCountySplittingReduced(CxD: T.CxD, districtTotals: number[], c
 
   const rawSqEnt_DC = countySplitting(f, w);
 
-  // TODO - DELETE
-  // const m: T.Measurement = {
-  //   raw: rawSqEnt_DC,
-  //   notes: {}  // None as this time
-  // };
-
-  // return m;
   return rawSqEnt_DC;
 }
 
@@ -68,13 +58,6 @@ export function doDistrictSplittingReduced(CxD: T.CxD, districtTotals: number[],
 
   const rawSqEnt_CD = districtSplitting(g, x);
 
-  // TODO - DELETE
-  // const m: T.Measurement = {
-  //   raw: rawSqEnt_CD,
-  //   notes: {}  // None as this time
-  // };
-
-  // return m;
   return rawSqEnt_CD;
 }
 

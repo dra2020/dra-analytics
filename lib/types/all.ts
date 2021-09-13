@@ -27,10 +27,5 @@ export type Scorecard = {
   details: Dict;
 
   // Support legacy integration
-  scratchpad?: {
-    reockScore?: number,
-    polsbyScore?: number,
-    countyScore?: number,
-    districtScore?: number
-  }
+  scratchpad: Dict;
 }
