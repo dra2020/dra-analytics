@@ -102,10 +102,10 @@ export type DemographicPivot = {
 export type MinorityScorecard = {
   pivotByDemographic: DemographicPivot;
   opportunityDistricts: number;
-  proportionalOpportunities: number;
   coalitionDistricts: number;
-  proportionalCoalitions: number;
-  rating?: number;
+  proportionalOpportunities: number;  // Added so ratings can be calculated separately
+  proportionalCoalitions: number;     // Ditto
   details: T.Dict;
+  rating?: number;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "0.5.11",
+  "version": "0.5.12",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/all/all.d.ts",

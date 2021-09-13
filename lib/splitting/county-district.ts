@@ -10,12 +10,17 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
 {
   const dT = totalDistricts(CxD);
   const cT = totalCounties(CxD);
-  const countyM = doCountySplittingReduced(CxD, dT, cT);
-  const districtM = doDistrictSplittingReduced(CxD, dT, cT);
+  const county: number = doCountySplittingReduced(CxD, dT, cT);
+  const district: number = doDistrictSplittingReduced(CxD, dT, cT);
+  // const countyM = doCountySplittingReduced(CxD, dT, cT);
+  // const districtM = doDistrictSplittingReduced(CxD, dT, cT);
 
   const s: T.SplittingScorecard = {
-    county: countyM,
-    district: districtM,
+    county: county,
+    district: district,
+    // TODO - DELETE
+    // county: countyM,
+    // district: districtM,
     details: {}          // None
     // rating?: 
   }
@@ -26,7 +31,7 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
 
 // CALCULATE ENHANCED SQRT ENTROPY METRIC
 
-export function doCountySplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): T.Measurement
+export function doCountySplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
 {
   const rC = reduceCSplits(CxD, districtTotals);
   const f = calcCountyFractions(rC, countyTotals);
@@ -36,12 +41,14 @@ export function doCountySplittingReduced(CxD: T.CxD, districtTotals: number[], c
 
   const rawSqEnt_DC = countySplitting(f, w);
 
-  const m: T.Measurement = {
-    raw: rawSqEnt_DC,
-    notes: {}  // None as this time
-  };
+  // TODO - DELETE
+  // const m: T.Measurement = {
+  //   raw: rawSqEnt_DC,
+  //   notes: {}  // None as this time
+  // };
 
-  return m;
+  // return m;
+  return rawSqEnt_DC;
 }
 
 export function doCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: boolean = false): number
@@ -53,7 +60,7 @@ export function doCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: bool
   return SqEnt_DC;
 }
 
-export function doDistrictSplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): T.Measurement
+export function doDistrictSplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
 {
   const rD = reduceDSplits(CxD, countyTotals)
   const g = calcDistrictFractions(rD, districtTotals);
@@ -61,12 +68,14 @@ export function doDistrictSplittingReduced(CxD: T.CxD, districtTotals: number[],
 
   const rawSqEnt_CD = districtSplitting(g, x);
 
-  const m: T.Measurement = {
-    raw: rawSqEnt_CD,
-    notes: {}  // None as this time
-  };
+  // TODO - DELETE
+  // const m: T.Measurement = {
+  //   raw: rawSqEnt_CD,
+  //   notes: {}  // None as this time
+  // };
 
-  return m;
+  // return m;
+  return rawSqEnt_CD;
 }
 
 export function doDistrictSplitting(CxD: T.CxD, districtTotals: number[], bLog: boolean = false): number
