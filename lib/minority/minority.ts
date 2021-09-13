@@ -112,7 +112,7 @@ export function makeMinorityScorecard(statewideDemos: T.Demographics, demosByDis
     coalitionDistricts: cD,
     proportionalCoalitions: pCd,
     details: {},             // None
-    // rating?: 
+    // score?: 
   }
 
   return s;

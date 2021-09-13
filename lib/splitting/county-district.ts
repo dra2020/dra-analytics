@@ -22,7 +22,7 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
     // county: countyM,
     // district: districtM,
     details: {}          // None
-    // rating?: 
+    // score?: 
   }
 
   return s;

@@ -67,7 +67,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     avgKWIWYSI: avgKWIWYSI,
     byDistrict: byDistrict,
     details: {},             // None
-    // rating?: 
+    // score?: 
   }
 
   return s;

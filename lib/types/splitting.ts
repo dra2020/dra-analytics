@@ -12,7 +12,7 @@ export type SplittingScorecard = {
   county: number;
   district: number;
   details: T.Dict;
-  rating?: number;
+  score?: number;
 };
 
 // TODO - DELETE
@@ -20,5 +20,5 @@ export type SplittingScorecard = {
 //   county: T.Measurement;
 //   district: T.Measurement;
 //   details: T.Dict;
-//   rating?: number;
+//   score?: number;
 // };

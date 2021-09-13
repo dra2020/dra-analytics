@@ -106,6 +106,6 @@ export type MinorityScorecard = {
   proportionalOpportunities: number;  // Added so ratings can be calculated separately
   proportionalCoalitions: number;     // Ditto
   details: T.Dict;
-  rating?: number;
+  score?: number;
 }
 

@@ -37,7 +37,7 @@ export type Bias = {
   estS: number;
   estSf: number;
   deviation: number;
-  rating?: number;
+  score?: number;
 
   tOf: number;
   fptpS: number;
@@ -59,7 +59,7 @@ export type Bias = {
 // IMPACT - Note: This is a legacy of DRA analytics that is not used.
 export type Impact = {
   unearnedS: number;
-  rating?: number;
+  score?: number;
 }
 
 
@@ -75,7 +75,7 @@ export type Responsiveness = {
   cSimple: number;
   cD: number;
   cDf: number;
-  rating?: number;
+  score?: number;
 }
 
 

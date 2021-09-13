@@ -48,7 +48,7 @@ export type CompactnessScorecard = {
   avgKWIWYSI: number;
   byDistrict: CompactnessByDistrict[];
   details: T.Dict;
-  rating?: number;
+  score?: number;
 };
 
 export type CompactnessByDistrict = {

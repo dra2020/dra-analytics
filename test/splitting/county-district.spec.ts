@@ -496,13 +496,13 @@ describe('AZ example', () =>
   test('Do county splitting - reduced C', () =>
   {
     expect(doCountySplitting(rC, cT)).toBeCloseTo(1.3523);
-    const m = doCountySplittingReduced(splits.countyByDistrict, dT, cT);
-    expect(m.raw).toBeCloseTo(1.3523);
+    const raw = doCountySplittingReduced(splits.countyByDistrict, dT, cT);
+    expect(raw).toBeCloseTo(1.3523);
   });
   test('Do district splitting - reduced D', () =>
   {
     expect(doDistrictSplitting(rD, dT)).toBeCloseTo(1.4240);
-    const m = doDistrictSplittingReduced(splits.countyByDistrict, dT, cT);
-    expect(m.raw).toBeCloseTo(1.4240);
+    const raw = doDistrictSplittingReduced(splits.countyByDistrict, dT, cT);
+    expect(raw).toBeCloseTo(1.4240);
   });
 });
