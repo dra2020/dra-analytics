@@ -4,5 +4,6 @@ export
 {
   makePartisanScorecard,
 
+  estSeatProbability,
   fptpWin
 } from '../partisan/all';
