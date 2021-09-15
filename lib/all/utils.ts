@@ -1,11 +1,8 @@
-// Don't export anything from utils
+// Restrict package exports
 
-// export
-// {
-//   ...
-// } from '../utils/all';
+export
+{
+  areRoughlyEqual,
+  deepCopy
+} from '../utils/all';
 
-// A noop so the import so this is considered a module
-type Noop = () => void;
-// tslint:disable-next-line:no-empty
-export const noop: Noop = () => { };
