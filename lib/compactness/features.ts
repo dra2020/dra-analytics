@@ -238,6 +238,10 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.Compact
   const perimeter: number = Poly.polyPerimeter(poly, options);
   const diameter = Poly.polyDiameter(poly, options);
 
+  const areaFlat: number = Poly.polyAreaFlat(poly);
+  const perimeterFlat: number = Poly.polyPerimeterFlat(poly);
+  const diameterFlat: number = Poly.polyDiameterFlat(poly);
+
   const ch = Poly.polyConvexHull(poly);
 
   const hullArea: number = Poly.polyArea(ch);
@@ -249,7 +253,11 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.Compact
     bbox: calcBoundingBox(poly),
     polsby: calcPolsbyPopper(area, perimeter),
     hull: calcConvexHullFeature(area, hullArea),
-    schwartzberg: calcSchwartzberg(area, perimeter)
+    schwartzberg: calcSchwartzberg(area, perimeter),
+
+    // : For the flat-earth versions typically shared
+    reockFlat: calcReock(areaFlat, diameterFlat),
+    polsbyFlat: calcPolsbyPopper(areaFlat, perimeterFlat)
   };
 
   return result;

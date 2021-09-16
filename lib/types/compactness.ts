@@ -16,7 +16,11 @@ export type CompactnessFeatures = {
   bbox: number,
   polsby: number,
   hull: number,
-  schwartzberg: number
+  schwartzberg: number,
+
+  // For the flat-earth versions typically shared
+  reockFlat: number,
+  polsbyFlat: number
 };
 
 // For reading features CSV file

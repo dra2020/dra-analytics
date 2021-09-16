@@ -142,6 +142,8 @@ export function readFeatureSets(file: string): T.FeaturesEntry[]
         polsby: Number(dictRow['polsby']),
         hull: Number(dictRow['hull']),
         schwartzberg: Number(dictRow['schwartzberg']),
+        reockFlat: 0,  // Hack to make samples on file work w/ new 'flat' Reock & Polsby–Popper
+        polsbyFlat: 0  // Ditto
       },
       score: Number(dictRow['score'])
     };

@@ -26,14 +26,14 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   {
     const features: T.CompactnessFeatures = featureizePoly(shapes.features[i], options);
 
-    const reock: number = features.reock;
-    const polsby: number = features.polsby;
+    const reockFlat: number = features.reockFlat;
+    const polsbyFlat: number = features.polsbyFlat;
 
     // Note: In order to compute the by-district compactness that DRA needs,
     // you have to normalize Reock & Polsby–Popper here (vs. in DRA proper)
     // like the overall compactness rating.
-    const normalizedReock: number = rateReock(reock);
-    const normalizedPolsby: number = ratePolsby(features.polsby);
+    const normalizedReock: number = rateReock(reockFlat);
+    const normalizedPolsby: number = ratePolsby(polsbyFlat);
 
     let kiwysiRank: number = scoreFeatureSet(features, pca);
     // Constrain values to the range [1–100]
@@ -42,14 +42,14 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     // Round & invert into scores where bigger is better [0–100]
     const kiwysiScore: number = 100 - Math.round(kiwysiRank) + 1
 
-    totReock += reock;
-    totPolsby += polsby;
+    totReock += reockFlat;
+    totPolsby += polsbyFlat;
     totKIWYSI += kiwysiScore;
 
     const measures: T.CompactnessByDistrict = {
-      rawReock: reock,
+      rawReock: reockFlat,
       normalizedReock: normalizedReock,
-      rawPolsby: polsby,
+      rawPolsby: polsbyFlat,
       normalizedPolsby: normalizedPolsby,
       kiwysiScore: kiwysiScore
     };
