@@ -59,7 +59,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 
   const avgReock: number = totReock / shapes.features.length;
   const avgPolsby: number = totPolsby / shapes.features.length;
-  const avgKWIWYSI: number = totKIWYSI / shapes.features.length;
+  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
 
   const s: T.CompactnessScorecard = {
     avgReock: avgReock,
