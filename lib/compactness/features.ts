@@ -19,7 +19,7 @@ import * as T from '../types/all';
 // 2 - sym_y (Y-SYMMETRY)
 // 3 - reock (REOCK)
 // 4 - bbox (BOUNDING-BOX)
-// 5 - polsby (POPOLSBYPOPPERLSBY)
+// 5 - polsby (POLSBYPOPPER)
 // 6 - hull (Hull(D))
 // 7 - schwartzberg (SCHWARTZBERG)
 
@@ -247,6 +247,7 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.Compact
   const hullArea: number = Poly.polyArea(ch);
 
   const result: T.CompactnessFeatures = {
+    // For the "correct" geodesic calculations that the KIWYSI AI uses
     sym_x: calcXSymmetry(poly),
     sym_y: calcYSymmetry(poly),
     reock: calcReock(area, diameter),
@@ -255,7 +256,7 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.Compact
     hull: calcConvexHullFeature(area, hullArea),
     schwartzberg: calcSchwartzberg(area, perimeter),
 
-    // : For the flat-earth versions typically shared
+    // For the Cartesian (flat earth) calculations that are typically done
     reockFlat: calcReock(areaFlat, diameterFlat),
     polsbyFlat: calcPolsbyPopper(areaFlat, perimeterFlat)
   };

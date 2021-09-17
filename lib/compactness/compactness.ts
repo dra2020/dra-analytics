@@ -17,10 +17,14 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  let byDistrict: T.CompactnessByDistrict[] = [];
+  // For calculating averages of by-district values
   let totReock: number = 0;
   let totPolsby: number = 0;
   let totKIWYSI: number = 0;
+
+  // For returning compactness by district to DRA
+  // Note, these use the Cartesian (flat earth) measurements
+  let byDistrict: T.CompactnessByDistrict[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -65,7 +69,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     avgReock: avgReock,
     avgPolsby: avgPolsby,
     avgKWIWYSI: avgKWIWYSI,
-    byDistrict: byDistrict,
+    byDistrict: byDistrict,  // Legacy format
     details: {},             // None
     // score?: 
   }
