@@ -5,5 +5,6 @@ export
   makePartisanScorecard,
 
   estSeatProbability,
+  estDistrictResponsiveness,
   fptpWin
 } from '../partisan/all';

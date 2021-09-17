@@ -3,6 +3,7 @@
 export
 {
   makeCompactnessScorecard,
+  calcCompactness,
 
   // For legacy compactness calculations
   calcXSymmetry,

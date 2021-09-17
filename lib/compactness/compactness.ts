@@ -12,6 +12,7 @@ import {ratePolsby, rateReock} from '../rate/dra-ratings';
 
 
 // Use this to get average Reock, Polsby-Popper, and KIWYSI compactness and by district for a set of shapes
+// This is used by DRA
 export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): T.CompactnessScorecard
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
@@ -75,4 +76,30 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   }
 
   return s;
+}
+
+// Calculate Reock & Polsby–Popper for a shape using the typical Cartesian (flat earth) calculations.
+// Also calculate the "know it when you see it" rank that models human perceptions of compactness.
+export function calcCompactness(shape: GeoJSON.Feature): T.Compactness
+{
+  const pca: T.PCAModel = T.PCAModel.Revised;
+  const options: Poly.PolyOptions | undefined = undefined;
+
+  const features: T.CompactnessFeatures = featureizePoly(shape, options);
+
+  const reockFlat: number = features.reockFlat;
+  const polsbyFlat: number = features.polsbyFlat;
+
+  // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
+  let kiwysiRank: number = scoreFeatureSet(features, pca);
+  // Constrain values to the range [1–100]
+  kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
+
+  const c: T.Compactness = {
+    rawReock: reockFlat,
+    rawPolsby: polsbyFlat,
+    kiwysiRank: kiwysiRank
+  };
+
+  return c;
 }

@@ -10,10 +10,10 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
 {
   const dT = totalDistricts(CxD);
   const cT = totalCounties(CxD);
-  const county: number = doCountySplittingReduced(CxD, dT, cT);
-  const district: number = doDistrictSplittingReduced(CxD, dT, cT);
-  // const countyM = doCountySplittingReduced(CxD, dT, cT);
-  // const districtM = doDistrictSplittingReduced(CxD, dT, cT);
+  const county: number = calcCountySplitting(CxD, dT, cT);
+  const district: number = calcDistrictSplitting(CxD, dT, cT);
+  // const countyM = calcCountySplitting(CxD, dT, cT);
+  // const districtM = calcDistrictSplitting(CxD, dT, cT);
 
   const s: T.SplittingScorecard = {
     county: county,
@@ -28,13 +28,11 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
 
 // CALCULATE ENHANCED SQRT ENTROPY METRIC
 
-export function doCountySplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
+export function calcCountySplitting(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
 {
   const rC = reduceCSplits(CxD, districtTotals);
   const f = calcCountyFractions(rC, countyTotals);
   const w = calcCountyWeights(countyTotals);
-  // const nD = districtTotals.length;
-  // const nC = countyTotals.length;
 
   const rawSqEnt_DC = countySplitting(f, w);
 
@@ -50,7 +48,7 @@ export function doCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: bool
   return SqEnt_DC;
 }
 
-export function doDistrictSplittingReduced(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
+export function calcDistrictSplitting(CxD: T.CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number
 {
   const rD = reduceDSplits(CxD, countyTotals)
   const g = calcDistrictFractions(rD, districtTotals);

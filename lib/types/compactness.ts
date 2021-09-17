@@ -63,3 +63,9 @@ export type CompactnessByDistrict = {
   kiwysiScore?: number;
 }
 
+export type Compactness = {
+  rawReock: number;
+  rawPolsby: number;
+  kiwysiRank: number;
+}
+
