@@ -1,26 +1,42 @@
 # Compactness
 
-A library of routines to calculate classic measures of compactness -- Reock,
+This is a library of routines to calculate classic measures of compactness -- Reock,
 Polsby–Popper, Convex Hull, and Schwartzberg -- as well as the other SmartFeatures
 in Kaufman, King, and Komisarchik's "know it when you see it" (KIWYSI) compactness
 model that replicates how people assess compactness
 ([paper](https://gking.harvard.edu/files/gking/files/compact.pdf),
 [supplement](https://gking.harvard.edu/files/gking/files/compact_supplement.pdf)).
 
-## Exports
+## High-level Exports
 
-There are 7 features in the simplified KIWYSI PCA model:
+This function takes a GeoJSON collection of features (shapes) and returns the average raw Reock & Polsby–Popper measurements and the average KIWYSI compactness rating -- [0–100] where bigger is better. 
+It also includes some compactness measurements by district which are used in DRA, i.e., that is DRA specific.
+
+``` TypeScript
+export declare function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): CompactnessScorecard;
+```
+
+This function returns the raw Reock & Polsby-Popper measurements for a GeoJSON feature (a shape), 
+along with the KIWYSI rank [1–100] where smaller is better.
+
+``` TypeScript
+export declare function calcCompactness(shape: GeoJSON.Feature): Compactness;
+```
+These values can be normalized -- [0–100] where bigger is better -- using functions in the Rate library.
+
+## Primitives Exports
+
+The simplified KIWYSI compactness model combines 7 measures of compacted called "features" --
+Note: These aren't "features" in the GeoJSON sense. They're "features" in the machine learning (ML) sense. 
+There is a primitive function that calculates each measure:
 
 * The first 4 measures below are computed using geometric properties of a shape that have been extracted previously, and
 * The last 3 take the polygon directly
 
 Extracting the geometric properties of district shapes allows their compactness
 to be computed later when the full shapes themselves are no longer available.
-Use the [poly package](https://www.npmjs.com/package/@dra2020/poly) to extract the geometric properties.
+Use the [poly library](https://www.npmjs.com/package/@dra2020/baseclient) to extract the geometric properties.
 The properties themselves can either use geodesic (curved earth) or cartesian (flat earth) calculations.
-
-The final routine -- kiwysiScoreShapes -- scores each shape in a GeoJSON feature collection
-using the simplified KIWYSI compactness model.
 
 ### calcReock (REOCK)
 
@@ -138,18 +154,34 @@ Here this is defined as the ratio of the area of the
 district to the area of the minimum bounding box of the district. It's not a
 simple bounding box!
 
+## KIWYSI Exports
+
+There are 3 KIWYSI-related exports.
+
+### featureizePoly
+
+The first function takes a GeoJSON feature (shape) and calculates the 7 compactness features noted above.
+
+``` TypeScript
+export declare featureizePoly(poly: any, options?: Poly.PolyOptions): CompactnessFeatures;
+```
+
+### kiwysiScoreShape
+
+This function takes a GeoJSON feature (shape), "feature-izes" it, and then scores it, 
+using the KIWYSI simplified PCA model.
+
+``` TypeScript
+export declare kiwysiScoreShape(poly: any, pca: T.PCAModel, options?: Poly.PolyOptions): number;
+```
+
+It returns a [1–100] *rank* where small is better.
+
 ### kiwysiScoreShapes
+
+This takes a GeoJSON feature collection (shapes) and returns an array of 1–100 KIWYSI compactness scores (ranks).
 
 ``` TypeScript
 export declare function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAModel, options?: Poly.PolyOptions): number[];
 ```
-
-Takes a GeoJSON feature collection of shapes and returns an array of 1–100 KIWYSI compactness scores.
-For each shape, it:
-
-* Calculates the 7 features above
-* Then applies the simplified KIWYSI PCA model, and
-* Produces a 1–100 KIWYSI compactness score
-
-Note: These are *ranks* where small is better.
 

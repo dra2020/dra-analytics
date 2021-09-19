@@ -15,6 +15,7 @@ export
   calcSchwartzberg,
 
   // For KIWYSI compactness scores (only)
+  featureizePoly,
   kiwysiScoreShape,
   kiwysiScoreShapes
 } from '../compactness/all';

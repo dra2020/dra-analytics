@@ -136,7 +136,7 @@ export function scoreImpact(rawUE: number, Vf: number, Sf: number, N: number): n
 
 export function ratePartisanBias(rawSeatsBias: number, rawVotesBias: number): number
 {
-  // NOTE - John Nagle specified this thresholds
+  // NOTE - John Nagle specified these thresholds
   const seatsBiasRating = normalizePartisanBias(rawSeatsBias, 0.06);
   const votesBiasRating = normalizePartisanBias(rawVotesBias, 0.02);
 
