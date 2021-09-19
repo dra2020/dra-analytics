@@ -19,15 +19,16 @@ Then the various functions of the different sets are available under their appro
 
 These are all the libraries:
 
-- [Compactness](./docs/compactness.md): [TODO: Describe Compactness library].
-- [Equal](./docs/equal.md): [TODO: Describe Equal population library].
-- [Graph](./docs/graph.md): [TODO: Describe Graph library].
-- [Minority](./docs/minority.md): [TODO: Describe Minority library].
-- [Partisan](./docs/partisan.md): [TODO: Describe Partisan library].
-- [Rate](./docs/rate.md): [TODO: Describe Rate library].
-- [Splitting](./docs/splitting.md): [TODO: Describe Splitting library].
-- [Types](./docs/Types.md): [TODO: Describe Types library].
-- [Utils](./docs/Utils.md): [TODO: Describe Utils library].
+- [Compactness](./docs/compactness.md): Various measures of compactness.
+- [Equal](./docs/equal.md): Population deviation & 'roughly' equal population.
+- [Graph](./docs/graph.md): Checks for contiguity and embeddedness.
+- [Minority](./docs/minority.md): The opportunity for minorities to elect representatives of their choice and racially polarized voting analysis.
+- [Partisan](./docs/partisan.md): Various measures of partisan bias & responsiveness, as well as support for rank-vote graphs and seats-votes curves.
+- [Rate](./docs/rate.md): Normalization utilities as well as DRA-specific ratings.
+- [Splitting](./docs/splitting.md): County- and district-splitting.
+
+There are also supporting types in the [Types](./docs/Types.md) library and
+supporting utilities in the [Utils](./docs/Utils.md) library.
 
 The analytics in DRA include metrics favored by, and build on the work of, [many scholars](./docs/attributions.md).
 
