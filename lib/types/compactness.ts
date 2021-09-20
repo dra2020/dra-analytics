@@ -28,13 +28,13 @@ export type FeaturesEntry = {
   n: number,
   features: CompactnessFeatures,
   score: number
-};
+}
 
 export const enum PCAModel
 {
   Revised,
   Original
-};
+}
 
 
 // SCORECARD

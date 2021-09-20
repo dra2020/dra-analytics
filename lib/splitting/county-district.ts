@@ -39,7 +39,7 @@ export function calcCountySplitting(CxD: T.CxD, districtTotals: number[], county
   return rawSqEnt_DC;
 }
 
-export function doCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: boolean = false): number
+export function _calcCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: boolean = false): number
 {
   const f = calcCountyFractions(CxD, countyTotals);
   const w = calcCountyWeights(countyTotals);
@@ -59,7 +59,7 @@ export function calcDistrictSplitting(CxD: T.CxD, districtTotals: number[], coun
   return rawSqEnt_CD;
 }
 
-export function doDistrictSplitting(CxD: T.CxD, districtTotals: number[], bLog: boolean = false): number
+export function _calcDistrictSplitting(CxD: T.CxD, districtTotals: number[], bLog: boolean = false): number
 {
   const g = calcDistrictFractions(CxD, districtTotals);
   const x = calcDistrictWeights(districtTotals);

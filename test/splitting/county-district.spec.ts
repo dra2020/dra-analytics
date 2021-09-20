@@ -13,7 +13,7 @@ import
   calcCountyFractions, calcDistrictFractions,
   countySplitScore, districtSplitScore,
   countySplitting, districtSplitting,
-  doCountySplitting, doDistrictSplitting,
+  _calcCountySplitting, _calcDistrictSplitting,
   calcCountySplitting, calcDistrictSplitting,
   totalCounties, totalDistricts
 } from '../../lib/splitting/county-district';
@@ -138,7 +138,7 @@ describe('Lefthand example', () =>
   });
   test('Do county splitting', () =>
   {
-    expect(doCountySplitting(CxD, countyTotals)).toBeCloseTo(1.0737);
+    expect(_calcCountySplitting(CxD, countyTotals)).toBeCloseTo(1.0737);
   });
 
   const districtTotals: number[] = [100, 100, 100, 100];
@@ -175,7 +175,7 @@ describe('Lefthand example', () =>
   });
   test('Do district splitting', () =>
   {
-    expect(doDistrictSplitting(CxD, districtTotals)).toBeCloseTo(1.4200);
+    expect(_calcDistrictSplitting(CxD, districtTotals)).toBeCloseTo(1.4200);
   });
 });
 
@@ -222,7 +222,7 @@ describe('Righthand example', () =>
   });
   test('Do county splitting', () =>
   {
-    expect(doCountySplitting(CxD, countyTotals)).toBeCloseTo(1.5886);
+    expect(_calcCountySplitting(CxD, countyTotals)).toBeCloseTo(1.5886);
   });
 
   const districtTotals: number[] = [100, 100, 100, 100];
@@ -259,7 +259,7 @@ describe('Righthand example', () =>
   });
   test('Do district splitting', () =>
   {
-    expect(doDistrictSplitting(CxD, districtTotals)).toBeCloseTo(1.5136);
+    expect(_calcDistrictSplitting(CxD, districtTotals)).toBeCloseTo(1.5136);
   });
 });
 
@@ -408,11 +408,11 @@ describe('AZ example', () =>
 
   test('Do county splitting', () =>
   {
-    expect(doCountySplitting(splits.countyByDistrict, cT)).toBeCloseTo(2.064);
+    expect(_calcCountySplitting(splits.countyByDistrict, cT)).toBeCloseTo(2.064);
   });
   test('Do district splitting', () =>
   {
-    expect(doDistrictSplitting(splits.countyByDistrict, dT)).toBeCloseTo(1.509);
+    expect(_calcDistrictSplitting(splits.countyByDistrict, dT)).toBeCloseTo(1.509);
   });
 
   const rC = reduceCSplits(splits.countyByDistrict, dT);
@@ -495,13 +495,13 @@ describe('AZ example', () =>
 
   test('Do county splitting - reduced C', () =>
   {
-    expect(doCountySplitting(rC, cT)).toBeCloseTo(1.3523);
+    expect(_calcCountySplitting(rC, cT)).toBeCloseTo(1.3523);
     const raw = calcCountySplitting(splits.countyByDistrict, dT, cT);
     expect(raw).toBeCloseTo(1.3523);
   });
   test('Do district splitting - reduced D', () =>
   {
-    expect(doDistrictSplitting(rD, dT)).toBeCloseTo(1.4240);
+    expect(_calcDistrictSplitting(rD, dT)).toBeCloseTo(1.4240);
     const raw = calcDistrictSplitting(splits.countyByDistrict, dT, cT);
     expect(raw).toBeCloseTo(1.4240);
   });

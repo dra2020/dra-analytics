@@ -1,13 +1,17 @@
 # Utils
 
-This library supports ...
+This library implements general utilities.
 
 ## Exports
 
-TODO
-
-### <function>
+### areRoughlyEqual
 
 ``` TypeScript
-export declare function <function>(args): <return type>;
+export declare function areRoughlyEqual(x: number, y: number, tolerance: number): boolean;
+``` 
+
+### deepCopy
+
+``` TypeScript
+export declare function deepCopy(src: any): any;
 ``` 

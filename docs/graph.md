@@ -5,6 +5,8 @@ using a contiguity graph enhanced to include the border ring around the state.
 
 ## Exports
 
+These are used by DRA to determine whether districts meet the requirements of being contiguous and not embedded within other districts.
+
 ### isConnected
 
 Checks whether a set of feature IDs is connnected in the contiguity graph.

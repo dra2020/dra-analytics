@@ -2,7 +2,7 @@
 // MISCELLANEOUS TYPES 
 //
 
-export type Dict = {[key: string]: any};
+export type Dict = {[key: string]: any}
 
 
 // ENUMS

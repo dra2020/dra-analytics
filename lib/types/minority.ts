@@ -16,7 +16,7 @@ export type MinorityFilter = {
   invertSelection: boolean;  // Compare to 1 – <selected minority> instead of White
 }
 
-export type dictPoint = {x: number, y: number};  // % VAP, % Dem
+export type dictPoint = {x: number, y: number}  // % VAP, % Dem
 
 export type DemographicVotingByFeature = {
   ids: string[];
@@ -100,11 +100,11 @@ export type DemographicPivot = {
 }
 
 export type MinorityScorecard = {
-  pivotByDemographic: DemographicPivot;
+  pivotByDemographic: DemographicPivot;  // DRA uses this in the Minority Representation section of the Advanced tab
   opportunityDistricts: number;
   coalitionDistricts: number;
-  proportionalOpportunities: number;  // Added so ratings can be calculated separately
-  proportionalCoalitions: number;     // Ditto
+  proportionalOpportunities: number;     // Added so ratings can be calculated separately
+  proportionalCoalitions: number;        // Ditto
   details: T.Dict;
   score?: number;
 }

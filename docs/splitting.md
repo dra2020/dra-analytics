@@ -2,9 +2,50 @@
 
 This library supports analysis of splitting of various geographic units by districts.
 
-## Exports
+## County-District Splitting Exports
 
-TODO
+### makeSplittingScorecard
+
+This function a 2D matrix of county populations by districts and returns the raw county- and district-splitting measurements. 
+These measures are described in [Measuring County &amp District Splitting](https://medium.com/dra-2020/measuring-county-district-splitting-48a075bcce39).
+It also includes basic county-splitting information that is used in DRA, i.e., that is DRA specific.
+This is part of an overall DRA scorecard.
+County-district splitting can be later rated (scored).
+
+``` TypeScript
+export declare function makeSplittingScorecard(CxD: CountyProfile, bLog: boolean = false): SplittingScorecard;
+``` 
+
+The next two functions implement the county-district splitting measures used in DRA.
+
+### calcCountySplitting
+
+``` TypeScript
+export declare function calcCountySplitting(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
+```  
+
+### calcDistrictSplitting
+
+``` TypeScript
+export declare function calcDistrictSplitting(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
+``` 
+
+These two functions implement the county-district splitting metrics 
+without the preprocessing that DRA does to "reduce" the county-district matrix.
+
+### _calcCountySplitting
+
+``` TypeScript
+export declare function _calcCountySplitting(CxD: T.CxD, countyTotals: number[], bLog: boolean = false): number;
+```  
+
+### _calcDistrictSplitting
+
+``` TypeScript
+export declare function _calcDistrictSplitting(CxD: T.CxD, districtTotals: number[], bLog: boolean = false): number;
+``` 
+
+## COI Splitting Exports
 
 The next two functions implement Sam Wang et al's metrics for analyzing splitting of COI:
 [Turning Communities Of Interest Into A Rigorous Standard For Fair Districting](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3828800).
