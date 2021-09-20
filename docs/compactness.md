@@ -43,7 +43,7 @@ There is a primitive function that calculates each measure:
 
 Extracting the geometric properties of district shapes allows their compactness
 to be computed later when the full shapes themselves are no longer available.
-Use the [poly library](https://www.npmjs.com/package/@dra2020/baseclient) to extract the geometric properties.
+Use the [Poly](https://www.npmjs.com/package/@dra2020/baseclient) library to extract the geometric properties.
 The properties themselves can either use geodesic (curved earth) or cartesian (flat earth) calculations.
 
 ### calcReock (REOCK)

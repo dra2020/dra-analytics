@@ -6,7 +6,8 @@ This library supports analysis of splitting of various geographic units by distr
 
 ### makeSplittingScorecard
 
-This function a 2D matrix of county populations by districts and returns the raw county- and district-splitting measurements. 
+This function takes a 2D matrix of county populations by districts 
+and returns the raw county- and district-splitting measurements. 
 These measures are described in [Measuring County &amp District Splitting](https://medium.com/dra-2020/measuring-county-district-splitting-48a075bcce39).
 It also includes basic county-splitting information that is used in DRA, i.e., that is DRA specific.
 This is part of an overall DRA scorecard.
@@ -30,7 +31,7 @@ export declare function calcCountySplitting(CxD: CxD, districtTotals: number[], 
 export declare function calcDistrictSplitting(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
 ``` 
 
-These two functions implement the county-district splitting metrics 
+These two functions implement the generic county-district splitting metrics 
 without the preprocessing that DRA does to "reduce" the county-district matrix.
 
 ### _calcCountySplitting
@@ -47,7 +48,7 @@ export declare function _calcDistrictSplitting(CxD: T.CxD, districtTotals: numbe
 
 ## COI Splitting Exports
 
-The next two functions implement Sam Wang et al's metrics for analyzing splitting of COI:
+The next two functions implement Sam Wang *et al's* metrics for analyzing splitting of COI:
 [Turning Communities Of Interest Into A Rigorous Standard For Fair Districting](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3828800).
 Both take arrays of split percentages and return numbers.
 

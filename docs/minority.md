@@ -10,7 +10,7 @@ There are two exported functions.
 ### makeMinorityScorecard
 
 This takes VAP (or CVAP) demographics statewide and by district and estimates the opportunity for minority representation.
-It also "pivots" the demographics into structure that DRA uses in the Minority Representation section of the Advanced tab.
+It also "pivots" the demographic percentages by district into a structure that DRA uses in the Minority Representation section of the Advanced tab.
 This is part of an overall DRA scorecard.
 The opportunity can be later rated (scored).
 

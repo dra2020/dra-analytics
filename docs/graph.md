@@ -1,7 +1,8 @@
 # Graph
 
-This library checks whether a district (a set of feature IDs) is contiguous and (not) embedded within another district,
-using a contiguity graph enhanced to include the border ring around the state.
+This library checks whether a district -- defined as a set of feature IDs -- is contiguous and (not) embedded within another district,
+using a contiguity graph enhanced to include a border ring around the state
+so that features on the edge of the state can be identified.
 
 ## Exports
 
@@ -17,7 +18,7 @@ export declare function isConnected(featureIDs: FeatureGroup, graph: ContiguityG
 
 ### isEmbedded
 
-Checks whether a set of features for one district are fully embedded within another district in a plan.
+Checks whether a set of features for one district are fully embedded within another district in the graph.
 
 ``` TypeScript
 export declare function isEmbedded(districtID: number, featureIDs: FeatureGroup, plan: PlanByGeoID, graph: ContiguityGraph): boolean

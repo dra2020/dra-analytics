@@ -1,4 +1,4 @@
-The analytics in DRA 2020 include metrics favored by and build on the work of many scholars (in alphabetical order):
+The analytics in DRA 2020 include metrics favored by many scholars (in alphabetical order):
 
 - Stephen Ansolabehere (Harvard) -- I worked with him to add racially polarized voting analysis.
 - Moon Duchin (Tufts) -- Our county-district splitting metrics build on her proposal.

@@ -4,7 +4,8 @@ This library contains the functions that DRA uses to rate (or score) various mea
 
 ## Exports
 
-After the raw metrics are calculated, these functions are use to add ratings (scores) to the DRA scorecard.
+After the raw metrics are calculated in the category scorecards, 
+these functions are then used to add ratings (scores) to the DRA scorecard.
 Ratings are integers [0–100] where bigger is always better.
 Except for partisan bias, all the ratings functions use simpler, linear normalization.
 
@@ -73,7 +74,7 @@ export declare function rateSplitting(csS: number, dsS: number): number;
   
 ### adjustSplittingRating
 
-Initially, maps could get a 100 rating even if they split some counties or districts.
+Initially in DRA maps could get a 100 rating even if they split some counties or districts.
 This function can be used to make the maximum rating for maps that split any counties or districts be 99.
 
 ``` TypeScript
@@ -96,11 +97,10 @@ These are some additional helpers that DRA uses in the app.
 
 ### isAntimajoritarian
 
-This function uses the constant avgSVError that DRA sets at 2%.
-
 ``` TypeScript
 export declare function isAntimajoritarian(Vf: number, Sf: number): boolean;
 ``` 
+This function uses the constant avgSVError that DRA sets at 2%.
 
 ### popdevThreshold
 

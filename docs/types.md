@@ -1,6 +1,6 @@
 # Types
 
-This library defines types & enums needed by clients of this package.
+This library defines types & enums needed by users of this package.
 
 ## Exports
 
