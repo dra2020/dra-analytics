@@ -21,16 +21,16 @@ These are all the libraries:
 
 - [Compactness](./docs/compactness.md): Various measures of compactness.
 - [Equal](./docs/equal.md): Population deviation & 'roughly' equal population.
-- [Graph](./docs/graph.md): Checks for contiguity and embeddedness.
+- [Graph](./docs/graph.md): Checks for contiguity & embeddedness.
 - [Minority](./docs/minority.md): The opportunity for minorities to elect representatives of their choice and racially polarized voting analysis.
 - [Partisan](./docs/partisan.md): Various measures of partisan bias & responsiveness, as well as support for rank-vote graphs and seats-votes curves.
 - [Rate](./docs/rate.md): Normalization utilities as well as DRA-specific ratings.
-- [Splitting](./docs/splitting.md): County- and district-splitting.
+- [Splitting](./docs/splitting.md): County- & district-splitting and COI splitting.
 
 There are also supporting types in the [Types](./docs/Types.md) library and
 supporting utilities in the [Utils](./docs/Utils.md) library.
 
-The analytics in DRA include metrics favored by, and build on the work of, [many scholars](./docs/attributions.md).
+The analytics in DRA include metrics favored by [many scholars](./docs/attributions.md).
 
 ## Build status for master branch
 

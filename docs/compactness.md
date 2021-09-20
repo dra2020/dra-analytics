@@ -14,7 +14,7 @@ There are two high-level exports.
 ### makeCompactnessScorecard
 
 This function takes a GeoJSON collection of features (shapes) and returns the average raw Reock & Polsby–Popper measurements and the average KIWYSI compactness rating -- [0–100] where bigger is better. 
-It also includes some compactness measurements by district which are used in DRA, i.e., that is DRA specific.
+It also includes some compactness measurements by district which are used in DRA, i.e., that are DRA specific.
 This is part of an overall DRA scorecard.
 Compactness can be later rated (scored).
 
@@ -30,7 +30,7 @@ along with the KIWYSI rank [1–100] where smaller is better.
 ``` TypeScript
 export declare function calcCompactness(shape: GeoJSON.Feature): Compactness;
 ```
-These values can be normalized -- [0–100] where bigger is better -- using functions in the Rate library.
+These values can be normalized -- [0–100] where bigger is better -- using functions in the [Rate](./rate.md) library.
 
 ## Primitives Exports
 
