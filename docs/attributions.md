@@ -2,7 +2,7 @@ The analytics in DRA 2020 include metrics favored by many scholars (in alphabeti
 
 - Stephen Ansolabehere (Harvard) -- I worked with him to add racially polarized voting analysis.
 - Moon Duchin (Tufts) -- Our county-district splitting metrics build on her proposal.
-- Jon Eguia (Michigan State) -- I worked with him to add his measure of geographic bias.
+- Jon Eguia (Michigan State) -- I worked with him to add his measure of geographic bias. Note: To compute this efficiently, it is embedded with the DRA client and not part of this repo.
 - Gary King (Harvard) -- I worked closely with co-author Aaron Kaufman (now of NYU) to get their "know it when you see it" (KIWYSI) compactness scoring into DRA.
 - Michael D. McDonald (SUNY) -- Mean–median difference
 - John Nagle (CMU) -- His fractional seat probabilities technique is the foundation of our methodology. I also collaborated extremely closely with him on our advanced partisan analytics.
