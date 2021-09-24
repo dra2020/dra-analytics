@@ -21,7 +21,7 @@ export type CompactnessFeatures = {
   // For the flat-earth versions typically shared
   reockFlat: number,
   polsbyFlat: number
-};
+}
 
 // For reading features CSV file
 export type FeaturesEntry = {
@@ -47,25 +47,51 @@ export type GeoProperties = {
 }
 
 export type CompactnessScorecard = {
-  avgReock: number;
-  avgPolsby: number;
-  avgKWIWYSI: number;
-  byDistrict: CompactnessByDistrict[];
-  details: T.Dict;
-  score?: number;
-};
-
-export type CompactnessByDistrict = {
-  rawReock: number;
-  normalizedReock: number;
-  rawPolsby: number;
-  normalizedPolsby: number;
-  kiwysiScore?: number;
+  avgReock: number,
+  avgPolsby: number,
+  avgKWIWYSI: number,
+  byDistrict: Compactness[],
+  details: T.Dict,
+  score?: number
 }
 
+// LEGACY - The compactness measures DRA expects by district
 export type Compactness = {
-  rawReock: number;
-  rawPolsby: number;
-  kiwysiRank: number;
+  rawReock: number,
+  normalizedReock: number,
+  rawPolsby: number,
+  normalizedPolsby: number,
+  kiwysiScore?: number
+}
+
+// CLI
+// Minimal set of compactness measures for a district
+export type CompactnessAlt = {
+  reock: number,
+  polsby: number,
+  kiwysiRank: number
+}
+
+// CLI
+// A minimal type for by-district compactness to be converted to JSON
+export type CompactnessJSON = {
+  byDistrict: CompactnessAlt[]
+}
+
+// CLI
+export type KIWYSIFeatures = {
+  sym_x: number,
+  sym_y: number,
+  reock: number,
+  bbox: number,
+  polsby: number,
+  hull: number,
+  schwartzberg: number,
+  kiwysiRank: number
+}
+
+// A minimal type for by-district KIWISI compactness features to be converted to JSON
+export type KIWYSIJSON = {
+  byDistrict: KIWYSIFeatures[]
 }
 

@@ -25,7 +25,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 
   // For returning compactness by district to DRA
   // Note, these use the Cartesian (flat earth) measurements
-  let byDistrict: T.CompactnessByDistrict[] = [];
+  let byDistrict: T.Compactness[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -51,7 +51,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     totPolsby += polsbyFlat;
     totKIWYSI += kiwysiScore;
 
-    const measures: T.CompactnessByDistrict = {
+    const measures: T.Compactness = {
       rawReock: reockFlat,
       normalizedReock: normalizedReock,
       rawPolsby: polsbyFlat,
@@ -81,12 +81,12 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 // CLI
 // Calculate Reock & Polsby–Popper for a shape using the typical Cartesian (flat earth) calculations.
 // Also calculate the "know it when you see it" rank (smaller is better) that models human perceptions of compactness.
-export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.Compactness[]
+export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.CompactnessJSON
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  let scores: T.Compactness[] = [];
+  let scores: T.CompactnessAlt[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -100,14 +100,18 @@ export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.Compactnes
     // Constrain values to the range [1–100]
     kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
 
-    const c: T.Compactness = {
-      rawReock: reockFlat,
-      rawPolsby: polsbyFlat,
+    const c: T.CompactnessAlt = {
+      reock: reockFlat,
+      polsby: polsbyFlat,
       kiwysiRank: kiwysiRank
     };
 
     scores.push(c);
   }
 
-  return scores;
+  const out: T.CompactnessJSON = {
+    byDistrict: scores
+  }
+
+  return out;
 }

@@ -6,8 +6,8 @@ import * as T from './general';
 
 
 export type PopulationScorecard = {
-  deviation: number;
-  roughlyEqual: boolean;
-  score?: number;
-  notes: T.Dict;
+  deviation: number,
+  roughlyEqual: boolean,
+  score?: number,
+  notes: T.Dict
 }

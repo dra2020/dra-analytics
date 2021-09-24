@@ -9,9 +9,9 @@ export type CountyProfile = CxD;
 export type CxD = number[][];
 
 export type SplittingScorecard = {
-  county: number;
-  district: number;
-  details: T.Dict;
-  score?: number;
-};
+  county: number,
+  district: number,
+  details: T.Dict,
+  score?: number
+}
 
