@@ -78,28 +78,36 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   return s;
 }
 
+// CLI
 // Calculate Reock & Polsby–Popper for a shape using the typical Cartesian (flat earth) calculations.
-// Also calculate the "know it when you see it" rank that models human perceptions of compactness.
-export function calcCompactness(shape: GeoJSON.Feature): T.Compactness
+// Also calculate the "know it when you see it" rank (smaller is better) that models human perceptions of compactness.
+export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.Compactness[]
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  const features: T.CompactnessFeatures = featureizePoly(shape, options);
+  let scores: T.Compactness[] = [];
 
-  const reockFlat: number = features.reockFlat;
-  const polsbyFlat: number = features.polsbyFlat;
+  for (let i = 0; i < shapes.features.length; i++)
+  {
+    const features: T.CompactnessFeatures = featureizePoly(shapes.features[i], options);
 
-  // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
-  let kiwysiRank: number = scoreFeatureSet(features, pca);
-  // Constrain values to the range [1–100]
-  kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
+    const reockFlat: number = features.reockFlat;
+    const polsbyFlat: number = features.polsbyFlat;
 
-  const c: T.Compactness = {
-    rawReock: reockFlat,
-    rawPolsby: polsbyFlat,
-    kiwysiRank: kiwysiRank
-  };
+    // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
+    let kiwysiRank: number = scoreFeatureSet(features, pca);
+    // Constrain values to the range [1–100]
+    kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
 
-  return c;
+    const c: T.Compactness = {
+      rawReock: reockFlat,
+      rawPolsby: polsbyFlat,
+      kiwysiRank: kiwysiRank
+    };
+
+    scores.push(c);
+  }
+
+  return scores;
 }

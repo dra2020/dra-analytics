@@ -46,6 +46,23 @@ export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAM
   return scores;
 }
 
+// CLI - Use this to get KIWYSI compactness scores ("ranks") for a set of shapes
+export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): number[]
+{
+  const pca: T.PCAModel = T.PCAModel.Revised;
+  const options: Poly.PolyOptions | undefined = undefined;
+
+  let scores: number[] = [];
+
+  for (let i = 0; i < shapes.features.length; i++)
+  {
+    const score = kiwysiScoreShape(shapes.features[i], pca, options);
+    scores.push(score);
+  }
+
+  return scores;
+}
+
 
 // KIWYSI SCORE THE FEATURES FROM A FEATURE-IZED SHAPE
 
