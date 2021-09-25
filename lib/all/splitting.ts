@@ -5,7 +5,7 @@ export
   // For a DRA-style scorecard
   makeSplittingScorecard,
   // For the CLI & other users
-  calcSplitting,
+  calcSplitting, calcCOISplitting,
 
   // For COI splitting analysis
   effectiveSplits, uncertaintyOfMembership
