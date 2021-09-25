@@ -49,6 +49,7 @@ export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAM
 // CLI
 
 // Use this to get KIWYSI compactness features and scores ("ranks") for a set of shapes
+// Note - These calculations use the geodesic (curved earth) model
 export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.KiwysiJSONReady
 {
   const pca: T.PCAModel = T.PCAModel.Revised;

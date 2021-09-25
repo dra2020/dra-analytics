@@ -4,7 +4,7 @@ export
 {
   // For a DRA-style scorecard
   makeCompactnessScorecard,
-  // For the CLI
+  // For the CLI & other users
   calcCompactness,
   calcKIWYSICompactness,
 

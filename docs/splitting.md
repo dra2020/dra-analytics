@@ -17,18 +17,20 @@ County-district splitting can be later rated (scored).
 export declare function makeSplittingScorecard(CxD: CountyProfile, bLog: boolean = false): SplittingScorecard;
 ``` 
 
+TODO: Revise this for calcSplitting
+
 The next two functions implement the county-district splitting measures used in DRA.
 
-### calcCountySplitting
+### _calcCountySplittingReduced
 
 ``` TypeScript
-export declare function calcCountySplitting(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
+export declare function _calcCountySplittingReduced(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
 ```  
 
-### calcDistrictSplitting
+### _calcDistrictSplittingReduced
 
 ``` TypeScript
-export declare function calcDistrictSplitting(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
+export declare function _calcDistrictSplittingReduced(CxD: CxD, districtTotals: number[], countyTotals: number[], bLD: boolean = false): number;
 ``` 
 
 These two functions implement the generic county-district splitting metrics 

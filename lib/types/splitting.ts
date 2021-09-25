@@ -15,3 +15,10 @@ export type SplittingScorecard = {
   score?: number
 }
 
+
+// CLI
+
+export type SplittingJSONReady = {
+  county: number,
+  district: number
+}

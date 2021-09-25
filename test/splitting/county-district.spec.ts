@@ -14,7 +14,7 @@ import
   countySplitScore, districtSplitScore,
   countySplitting, districtSplitting,
   _calcCountySplitting, _calcDistrictSplitting,
-  calcCountySplitting, calcDistrictSplitting,
+  _calcCountySplittingReduced, _calcDistrictSplittingReduced,
   totalCounties, totalDistricts
 } from '../../lib/splitting/county-district';
 
@@ -496,13 +496,13 @@ describe('AZ example', () =>
   test('Do county splitting - reduced C', () =>
   {
     expect(_calcCountySplitting(rC, cT)).toBeCloseTo(1.3523);
-    const raw = calcCountySplitting(splits.countyByDistrict, dT, cT);
+    const raw = _calcCountySplittingReduced(splits.countyByDistrict, dT, cT);
     expect(raw).toBeCloseTo(1.3523);
   });
   test('Do district splitting - reduced D', () =>
   {
     expect(_calcDistrictSplitting(rD, dT)).toBeCloseTo(1.4240);
-    const raw = calcDistrictSplitting(splits.countyByDistrict, dT, cT);
+    const raw = _calcDistrictSplittingReduced(splits.countyByDistrict, dT, cT);
     expect(raw).toBeCloseTo(1.4240);
   });
 });

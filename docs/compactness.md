@@ -22,7 +22,7 @@ Compactness can be later rated (scored).
 export declare function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): CompactnessScorecard;
 ```
 
-### calcCompactness
+### calcCompactness <<< TODO: Update
 
 This function returns the raw Reock & Polsby-Popper measurements for a GeoJSON feature (a shape), 
 along with the KIWYSI rank [1–100] where smaller is better.
@@ -31,6 +31,8 @@ along with the KIWYSI rank [1–100] where smaller is better.
 export declare function calcCompactness(shape: GeoJSON.Feature): Compactness;
 ```
 These values can be normalized -- [0–100] where bigger is better -- using functions in the [Rate](./rate.md) library.
+
+### calcKIWYSICompactness <<< TODO: Add
 
 ## Primitives Exports
 
