@@ -79,14 +79,20 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 }
 
 // CLI
+
 // Calculate Reock & Polsby–Popper for a shape using the typical Cartesian (flat earth) calculations.
 // Also calculate the "know it when you see it" rank (smaller is better) that models human perceptions of compactness.
-export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.CompactnessJSON
+export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.CompactnessJSONReady
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  let scores: T.CompactnessAlt[] = [];
+  // For calculating averages of by-district values
+  let totReock: number = 0;
+  let totPolsby: number = 0;
+  let totKIWYSI: number = 0;
+
+  let byDistrict: T.CompactnessAlt[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -100,17 +106,28 @@ export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.Compactnes
     // Constrain values to the range [1–100]
     kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
 
+    totReock += reockFlat;
+    totPolsby += polsbyFlat;
+    totKIWYSI += kiwysiRank;
+
     const c: T.CompactnessAlt = {
       reock: reockFlat,
       polsby: polsbyFlat,
       kiwysiRank: kiwysiRank
     };
 
-    scores.push(c);
+    byDistrict.push(c);
   }
 
-  const out: T.CompactnessJSON = {
-    byDistrict: scores
+  const avgReock: number = totReock / shapes.features.length;
+  const avgPolsby: number = totPolsby / shapes.features.length;
+  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+
+  const out: T.CompactnessJSONReady = {
+    avgReock: avgReock,
+    avgPolsby: avgPolsby,
+    avgKWIWYSI: avgKWIWYSI,
+    byDistrict: byDistrict
   }
 
   return out;

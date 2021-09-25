@@ -46,13 +46,16 @@ export function kiwysiScoreShapes(shapes: GeoJSON.FeatureCollection, pca: T.PCAM
   return scores;
 }
 
-// CLI - Use this to get KIWYSI compactness features and scores ("ranks") for a set of shapes
-export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.KIWYSIJSON
+// CLI
+
+// Use this to get KIWYSI compactness features and scores ("ranks") for a set of shapes
+export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.KiwysiJSONReady
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  let byDistrict: T.KIWYSIFeatures[] = [];
+  let totKIWYSI: number = 0;
+  let byDistrict: T.KiwysiFeatures[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -63,7 +66,9 @@ export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.KIWY
     const rawScore: number = scoreFeatureSet(features, pca);
     const rangedScore = Math.min(Math.max(rawScore, 1), 100);
 
-    const entry: T.KIWYSIFeatures = {
+    totKIWYSI += rangedScore;
+
+    const entry: T.KiwysiFeatures = {
       sym_x: features.sym_x,
       sym_y: features.sym_y,
       reock: features.reock,
@@ -77,7 +82,10 @@ export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.KIWY
     byDistrict.push(entry);
   }
 
-  const out: T.KIWYSIJSON = {
+  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+
+  const out: T.KiwysiJSONReady = {
+    avgKWIWYSI: avgKWIWYSI,
     byDistrict: byDistrict
   }
 

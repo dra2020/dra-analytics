@@ -65,6 +65,7 @@ export type Compactness = {
 }
 
 // CLI
+
 // Minimal set of compactness measures for a district
 export type CompactnessAlt = {
   reock: number,
@@ -72,14 +73,15 @@ export type CompactnessAlt = {
   kiwysiRank: number
 }
 
-// CLI
 // A minimal type for by-district compactness to be converted to JSON
-export type CompactnessJSON = {
+export type CompactnessJSONReady = {
+  avgReock: number,
+  avgPolsby: number,
+  avgKWIWYSI: number,
   byDistrict: CompactnessAlt[]
 }
 
-// CLI
-export type KIWYSIFeatures = {
+export type KiwysiFeatures = {
   sym_x: number,
   sym_y: number,
   reock: number,
@@ -91,7 +93,8 @@ export type KIWYSIFeatures = {
 }
 
 // A minimal type for by-district KIWISI compactness features to be converted to JSON
-export type KIWYSIJSON = {
-  byDistrict: KIWYSIFeatures[]
+export type KiwysiJSONReady = {
+  avgKWIWYSI: number,
+  byDistrict: KiwysiFeatures[]
 }
 
