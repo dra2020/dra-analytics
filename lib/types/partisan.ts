@@ -92,3 +92,14 @@ export type PartisanScorecard = {
   details: T.Dict
 }
 
+
+// CLI & OTHER USERS
+
+export type PartisanJSONReady = {
+  bias: Bias,
+  responsiveness: Responsiveness,
+  dSVpoints: SVpoint[],
+  rSVpoints: SVpoint[],
+  averageDVf: number | undefined,
+  averageRVf: number | undefined,
+}

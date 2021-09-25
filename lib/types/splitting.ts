@@ -16,7 +16,7 @@ export type SplittingScorecard = {
 }
 
 
-// CLI
+// CLI & OTHER USERS
 
 export type SplittingJSONReady = {
   county: number,

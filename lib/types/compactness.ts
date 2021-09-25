@@ -64,7 +64,8 @@ export type Compactness = {
   kiwysiScore?: number
 }
 
-// CLI
+
+// CLI & OTHER USERS
 
 // Minimal set of compactness measures for a district
 export type CompactnessAlt = {
