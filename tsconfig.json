@@ -1,6 +1,7 @@
 {
 	"include": [
 		"lib/**/*",
+		"cli/**/*",
 		"types/**/*"
 	],
 	"exclude": [

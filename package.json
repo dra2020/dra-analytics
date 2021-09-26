@@ -12,6 +12,7 @@
   "files": [
     "dist/",
     "lib/",
+    "cli/",
     "docs/"
   ],
   "repository": {

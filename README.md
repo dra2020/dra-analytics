@@ -27,8 +27,10 @@ These are all the libraries:
 - [Rate](./docs/rate.md): Normalization utilities as well as DRA-specific ratings.
 - [Splitting](./docs/splitting.md): County- & district-splitting and COI splitting.
 
-There are also supporting types in the [Types](./docs/types.md) library and
-supporting utilities in the [Utils](./docs/utils.md) library.
+Supporting types are in the [Types](./docs/types.md) library and
+supporting utilities are in the [Utils](./docs/utils.md) library.
+
+There is also a [command-line interface](./docs/cli.md) (CLI).
 
 The analytics in DRA include metrics favored by [many scholars](./docs/attributions.md).
 

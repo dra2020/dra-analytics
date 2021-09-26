@@ -1,0 +1,1 @@
+var run = require('./testdist/dra-hello.bundle.js');
