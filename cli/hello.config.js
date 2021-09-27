@@ -37,7 +37,7 @@ var configs = [
   {entry: './cli/hello.ts', output: {filename: 'dra-hello.bundle.js'}},
 ]
 
-
+// Put the CLI outputs in testdist/
 configs.forEach((c) =>
 {
   c.target = 'node';
@@ -46,7 +46,7 @@ configs.forEach((c) =>
   c.externals = commonExternals;
   c.resolve = commonResolve;
   c.module = commonModule;
-  c.output.path = __dirname + '/testdist';
+  c.output.path = path.resolve('testdist');
 });
 
 module.exports = configs;
