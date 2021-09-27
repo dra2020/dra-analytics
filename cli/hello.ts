@@ -3,7 +3,7 @@
 //
 /* Examples:
 
-$ TODO
+$ ./hello.js
 
 */
 
@@ -14,11 +14,13 @@ import yargs from 'yargs';
 
 // import * as FU from '../testutil/fileutils';
 
-// TODO
+
+// TODO - SPECIFY THE ARGS
+
 let argv = yargs
   .usage('Usage: $0 command [options]')
   .example('$0 hello', 'Hello!')
-  .demandCommand(1, 'You must specify a command to execute.')
+  // .demandCommand(1, 'You must specify a command to execute.')
   .command('hello', 'Hello!')
   .option('verbose', {
     alias: 'v',
@@ -31,22 +33,14 @@ let argv = yargs
 
 let command = argv._[0]
 
-// parse the args
+// TODO - PARSE THE ARGS
+
 // const xx: string = argv.state;
 
-switch (command)
-{
-  case 'hello': {
-    console.log("Hello!");
-    break;
-  }
-  default: {
-    console.log("Command not recognized.");
+// TODO - COMMAND
 
-    break;
-  }
-}
+console.log("Hello!");
 
 
-// HELPERS
+// TODO - HELPERS
 

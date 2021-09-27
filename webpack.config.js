@@ -38,10 +38,6 @@ var libConfig = {
 
 };
 
-var cliConfigs = [
-  {entry: './cli/hello.ts', output: {filename: 'dra-hello.bundle.js'}},
-]
-
 var testConfig = {
   entry: {
     library: './lib/all/all.ts'
@@ -68,4 +64,4 @@ var testConfig = {
   }
 };
 
-module.exports = [libConfig, testConfig, ...cliConfigs];
+module.exports = [libConfig, testConfig];

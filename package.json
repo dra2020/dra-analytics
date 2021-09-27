@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "webpack": "node_modules/.bin/webpack"
+    "webpack": "node_modules/.bin/webpack",
+    "buildhello": "webpack --config hello.config.js"
   },
   "files": [
     "dist/",
