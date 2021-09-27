@@ -32,7 +32,7 @@ var commonResolve = {extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"
 
 var commonDevtool = "source-map";
 
-// TODO: Customize this for each command
+// TODO - Customize this for each command
 var configs = [
   {entry: './cli/hello.ts', output: {filename: 'dra-hello.bundle.js'}},
 ]
