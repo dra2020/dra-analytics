@@ -3,7 +3,7 @@
 //
 /* Examples:
 
-$ ./hello.js
+$ ./cli/hello.js
 
 */
 
@@ -19,9 +19,9 @@ import yargs from 'yargs';
 
 let argv = yargs
   .usage('Usage: $0 command [options]')
-  .example('$0 hello', 'Hello!')
+  .example('$0 ./cli/hello.js', 'Hello!')
   // .demandCommand(1, 'You must specify a command to execute.')
-  .command('hello', 'Hello!')
+  // .command('hello', 'Hello!')
   .option('verbose', {
     alias: 'v',
     describe: 'Specify whether code should log to STDOUT.',
@@ -37,7 +37,7 @@ let command = argv._[0]
 
 // const xx: string = argv.state;
 
-// TODO - COMMAND
+// TODO - EXECUTE THE COMMAND
 
 console.log("Hello!");
 
