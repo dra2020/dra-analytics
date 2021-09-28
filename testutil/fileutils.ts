@@ -168,7 +168,6 @@ export function readShapefile(file: string): Promise<GeoJSON.FeatureCollection>
   return shp.read(buf).catch((err: any) => console.error(err.stack));
 }
 
-
 // GRAPH-specific helper For exercising GRAPH functionality at the CLI
 
 export function readPlanCSV(file: string): T.PlanByGeoID
