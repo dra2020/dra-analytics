@@ -36,6 +36,7 @@ let argv = yargs
   .help()
   .argv;
 
+// TODO - Explore .geojson option
 // TODO - Add KIWYSI option
 const doit = async () =>
 {
