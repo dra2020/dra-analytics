@@ -48,8 +48,6 @@ const VfArray: T.VfArray = profile.byDistrict;
 
 // EXECUTE THE COMMAND
 
-console.log("TODO - Calculate partisan metrics ...");
-
 const output = calcPartisanMetrics(Vf, VfArray);
 
-console.log(output);
+console.log(JSON.stringify(output));
