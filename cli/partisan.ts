@@ -50,6 +50,6 @@ const VfArray: T.VfArray = profile.byDistrict;
 
 console.log("TODO - Calculate partisan metrics ...");
 
-// const output = calcPartisanMetrics(Vf, VfArray);
+const output = calcPartisanMetrics(Vf, VfArray);
 
-// console.log(output);
+console.log(output);

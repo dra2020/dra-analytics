@@ -64,4 +64,10 @@ var testConfig = {
   }
 };
 
-module.exports = [libConfig, testConfig];
+// TODO - If I activate these configurations below so I can do 'npm run build'
+//   and build everything, the build breaks.
+var cliConfigs = [
+  {entry: './cli/hello.ts', output: {filename: 'dra-hello.bundle.js'}},
+]
+
+module.exports = [libConfig, testConfig /*, ...cliConfigs*/];

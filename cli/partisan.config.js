@@ -23,7 +23,7 @@ fs.readdirSync('node_modules/@dra2020')
 var commonModule = {
   rules: [
     {test: /\.tsx?$/, loader: 'ts-loader'},
-    {test: /\.json$/, loader: 'json-loader'},
+    // {test: /\.json$/, loader: 'json-loader'},
     {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
   ]
 };
@@ -32,7 +32,6 @@ var commonResolve = {extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"
 
 var commonDevtool = "source-map";
 
-// TODO - Customize this for each command
 var configs = [
   {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}},
 ]
