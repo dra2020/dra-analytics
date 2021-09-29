@@ -4,6 +4,7 @@
 /* Examples:
 
 $ ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json
+$ ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json -j > results.json
 
 */
 
@@ -25,6 +26,12 @@ let argv = yargs
     describe: 'A JSON profile of the partisan characteristics of a plan',
     type: 'string'
   })
+  .option('json', {
+    alias: 'j',
+    describe: 'Generate stringified JSON output',
+    type: 'boolean',
+    default: false
+  })
   .option('verbose', {
     alias: 'v',
     describe: 'Specify whether code should log to STDOUT.',
@@ -45,9 +52,17 @@ const profile = FU.readJSON(profilePath);
 const Vf: number = profile.statewide;
 const VfArray: T.VfArray = profile.byDistrict;
 
+const bStringify: boolean = argv.json;
+
 
 // EXECUTE THE COMMAND
 
 const output = calcPartisanMetrics(Vf, VfArray);
 
-console.log(JSON.stringify(output));
+
+// OUTPUT THE RESULTS
+
+if (bStringify)
+  console.log(JSON.stringify(output));
+else
+  console.log(output);

@@ -4,6 +4,7 @@
 /* Examples:
 
 $ ./cli/compactness.js -i testdata/compactness/first20/first20.shp
+$ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -j > results.json
 
 */
 
@@ -25,6 +26,12 @@ let argv = yargs
     describe: 'A shapefile that defines district shapes',
     type: 'string'
   })
+  .option('json', {
+    alias: 'j',
+    describe: 'Generate stringified JSON output',
+    type: 'boolean',
+    default: false
+  })
   .option('verbose', {
     alias: 'v',
     describe: 'Specify whether code should log to STDOUT.',
@@ -45,10 +52,17 @@ const doit = async () =>
   const shpPath: string = argv.input;
   const shapes: GeoJSON.FeatureCollection = await FU.readShapefile(shpPath);
 
+  const bStringify: boolean = argv.json;
+
   // EXECUTE THE COMMAND
 
   const output = calcCompactness(shapes);
 
-  console.log(JSON.stringify(output));
+  // OUTPUT THE RESULTS
+
+  if (bStringify)
+    console.log(JSON.stringify(output));
+  else
+    console.log(output);
 }
 doit();
