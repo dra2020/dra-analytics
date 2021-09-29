@@ -6,6 +6,8 @@
 $ ./cli/compactness.js -i testdata/compactness/first20/first20.shp
 $ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -j > results.json
 
+$ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -k
+
 */
 
 import yargs from 'yargs';
@@ -26,6 +28,12 @@ let argv = yargs
     describe: 'A shapefile that defines district shapes',
     type: 'string'
   })
+  .option('kiwysi', {
+    alias: 'k',
+    describe: 'Calculate KIWYSI compactness',
+    type: 'boolean',
+    default: false
+  })
   .option('json', {
     alias: 'j',
     describe: 'Generate stringified JSON output',
@@ -44,7 +52,6 @@ let argv = yargs
   .argv;
 
 // TODO - Explore .geojson option
-// TODO - Add KIWYSI option
 const doit = async () =>
 {
   // PARSE THE ARGS
@@ -53,10 +60,11 @@ const doit = async () =>
   const shapes: GeoJSON.FeatureCollection = await FU.readShapefile(shpPath);
 
   const bStringify: boolean = argv.json;
+  const bKIWYSI: boolean = argv.kiwysi;
 
   // EXECUTE THE COMMAND
 
-  const output = calcCompactness(shapes);
+  const output = bKIWYSI ? calcKIWYSICompactness(shapes) : calcCompactness(shapes);
 
   // OUTPUT THE RESULTS
 
