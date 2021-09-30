@@ -4,9 +4,12 @@
 /* Examples:
 
 $ ./cli/compactness.js -i testdata/compactness/first20/first20.shp
-$ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -j > results.json
+$ ./cli/compactness.js -i testdata/compactness/first20/first20.shp > temp/compactness.json
 
 $ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -k
+$ ./cli/compactness.js -i testdata/compactness/first20/first20.shp -k > temp/compactness.json
+
+$ ./cli/compactness.js -i ./testdata/compactness/sample.geojson
 
 */
 
@@ -34,12 +37,6 @@ let argv = yargs
     type: 'boolean',
     default: false
   })
-  .option('json', {
-    alias: 'j',
-    describe: 'Generate stringified JSON output',
-    type: 'boolean',
-    default: false
-  })
   .option('verbose', {
     alias: 'v',
     describe: 'Specify whether code should log to STDOUT.',
@@ -51,26 +48,27 @@ let argv = yargs
   .help()
   .argv;
 
-// TODO - Explore .geojson option
-const doit = async () =>
+
+// PARSE THE ARGS
+
+let shpPath: string = argv.input;
+let bShp = true;                   // Default is .shp; .geojson is an alternative
+const ext = shpPath.split('.').pop();
+if (ext && (ext == 'geojson')) bShp = false;
+
+const bKIWYSI: boolean = argv.kiwysi;
+
+
+const doIt = async () =>
 {
-  // PARSE THE ARGS
+  if (!bShp) shpPath = FU.fileToPath(shpPath);  // Canonicalize the input
 
-  const shpPath: string = argv.input;
-  const shapes: GeoJSON.FeatureCollection = await FU.readShapefile(shpPath);
-
-  const bStringify: boolean = argv.json;
-  const bKIWYSI: boolean = argv.kiwysi;
+  const shapes: GeoJSON.FeatureCollection = (bShp) ? await FU.readShapefile(shpPath) : FU.readJSON(shpPath) as GeoJSON.FeatureCollection;
 
   // EXECUTE THE COMMAND
-
   const output = bKIWYSI ? calcKIWYSICompactness(shapes) : calcCompactness(shapes);
 
   // OUTPUT THE RESULTS
-
-  if (bStringify)
-    console.log(JSON.stringify(output));
-  else
-    console.log(output);
+  console.log(JSON.stringify(output));
 }
-doit();
+doIt();  // HACK to enable shapefiles to be read asynchronously

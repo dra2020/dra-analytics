@@ -108,7 +108,7 @@ export function readJSON(file: string): any
 
 // COMPACTNESS-specific helpers
 
-function fileToPath(file: string): string
+export function fileToPath(file: string): string
 {
   let fullPath: string;
   if (path.isAbsolute(file))
