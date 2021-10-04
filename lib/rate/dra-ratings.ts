@@ -242,9 +242,86 @@ export function rateCompactness(rS: number, ppS: number): number
 }
 
 
-// SPLITTING
+// RATE SPLITTING
 
-export function rateCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
+export const maxSplitting: number = 1.26;     // 90–10 splits
+export const minSplitting: number = 1.16;     // 97–03 splits
+export const worstMultiplier: number = 1.33;  // 1/3 bigger
+
+// =LAMBDA(n, m, most, least, (((MIN(n, m) - 1) / MAX(n, m)) * most) + ((1 - ((MIN(n, m) - 1) / MAX(n, m))) * least))
+export function bestTarget(n: number, m: number): number 
+{
+  const more: number = Math.max(n, m);
+  const less: number = Math.min(n, m);
+
+  const w1: number = ((less - 1) / more);
+  const w2: number = 1 - w1;
+
+  const target: number = (w1 * maxSplitting) + (w2 * minSplitting);
+
+  return target;
+}
+
+// Rating county- & district-splitting are inverses of each other.
+// Sometimes counties >> districts; sometimes counties << districts.
+
+export function rateCountySplitting(rawCountySplitting: number, nCounties: number, nDistricts: number): number
+{
+  const _normalizer = new Normalizer(rawCountySplitting);
+
+  // The practical ideal raw measurement depends on the # of counties & districts
+  const best = (nCounties > nDistricts) ? bestTarget(nCounties, nDistricts) : maxSplitting;
+  const worst = best * worstMultiplier;
+
+  _normalizer.clip(best, worst);
+  _normalizer.unitize(best, worst);
+  _normalizer.invert();
+  _normalizer.rescale();
+
+  // 09-07-21 - Preserve max value (100) for only when no counties are split
+  let rating = _normalizer.normalizedNum as number;
+  if ((rating == 100) && (rawCountySplitting > 1.0)) rating = 100 - 1;
+
+  return rating;
+}
+
+export function rateDistrictSplitting(rawDistrictSplitting: number, nCounties: number, nDistricts: number): number
+{
+  const _normalizer = new Normalizer(rawDistrictSplitting);
+
+  // The practical ideal raw measurement depends on the # of counties & districts
+  const best = (nCounties > nDistricts) ? maxSplitting : bestTarget(nCounties, nDistricts);
+  const worst = best * worstMultiplier;
+
+  _normalizer.clip(best, worst);
+  _normalizer.unitize(best, worst);
+  _normalizer.invert();
+  _normalizer.rescale();
+
+  // 09-07-21 - Preserve max value (100) for only when no districts are split
+  let rating = _normalizer.normalizedNum as number;
+  if ((rating == 100) && (rawDistrictSplitting > 1.0)) rating = 100 - 1;
+
+  return rating;
+}
+
+export function rateSplitting(csS: number, dsS: number): number
+{
+  const csW = C.countySplittingWeight();
+  const dsW = C.districtSplittingWeight();
+
+  let rating = Math.round(((csS * csW) + (dsS * dsW)) / (csW + dsW));
+
+  // Preserve max value (100) for only when no districts are split.
+  // The max county- or district-splitting rating is 99 when there are splits.
+  if ((rating == 100) && ((csS < 100) || (dsS < 100))) rating = 100 - 1;
+
+  return rating;
+}
+
+// RATE SPLITTING - Legacy routines for original splitting ratings that didn't handle state legislative maps properly
+
+export function rateCountySplittingLegacy(rawCountySplitting: number, nCounties: number, nDistricts: number, bLD: boolean = false): number
 {
   const _normalizer = new Normalizer(rawCountySplitting);
 
@@ -287,7 +364,7 @@ export function countySplitWorst(avgBest: number, bLD: boolean = false): number
   return avgWorst;
 }
 
-export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean = false): number
+export function rateDistrictSplittingLegacy(rawDistrictSplitting: number, bLD: boolean = false): number
 {
   const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
 
@@ -308,8 +385,7 @@ export function rateDistrictSplitting(rawDistrictSplitting: number, bLD: boolean
   return rating;
 }
 
-// Legacy note - This is the formula dra-score used. See next.
-export function rateSplitting(csS: number, dsS: number): number
+export function rateSplittingLegacy(csS: number, dsS: number): number
 {
   const csW = C.countySplittingWeight();
   const dsW = C.districtSplittingWeight();
@@ -326,3 +402,5 @@ export function adjustSplittingRating(rating: number, rawCountySplitting: number
 
   return rating;
 }
+
+// END
