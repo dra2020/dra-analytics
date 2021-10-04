@@ -278,7 +278,6 @@ export function countySplitWorst(avgBest: number, bLD: boolean = false): number
 {
   const districtType = (bLD) ? T.DistrictType.StateLegislative : T.DistrictType.Congressional;
 
-
   const singleBest = C.countySplittingRange(districtType)[C.BEG];
   const singleWorst = C.countySplittingRange(districtType)[C.END];
 
