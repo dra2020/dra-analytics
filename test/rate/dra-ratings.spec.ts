@@ -541,19 +541,22 @@ describe('Combine splitting ratings', () =>
 });
 
 // XX	C	CD	C_DC'	C_CD'	UD	U_DC'	U_CD'	LD	L_DC'	L_CD'	C_CT	C_DT	C_RC	C_RD	C_R'	U_CT	U_DT	U_RC	U_RD	U_R'	L_CT	L_DT	L_RC	L_RD	L_R'
-// AL	67	7	1.1100	1.4470	35	1.4200	1.4500	105	1.6400	1.2600	1.17	1.26	100	55	78	1.21	1.26	48	55	52	1.26	1.22	10	91	51
-// AZ	15	9	1.3520	1.4240	30	1.7100	1.2000				1.21	1.26	66	61	64	1.26	1.21	0	100	50	 	 	 	 	 
-// CA	58	53	1.7890	1.2530	40	1.7400	1.3400	80	1.7000	1.1900	1.25	1.26	0	100	50	1.23	1.26	0	81	41	1.26	1.23	0	100	50
-// CO	64	7	1.1960	1.5010	35	1.2100	1.0800	65	1.2500	1.0700	1.17	1.26	93	43	68	1.21	1.26	100	100	100	1.26	1.26	100	100	100
-// CT	8	5	1.4800	1.5310	36	2.0800	1.1700	151	1.6800	1.0500	1.21	1.26	33	35	34	1.26	1.18	0	100	50	1.26	1.16	0	100	50
-// GA	159	14	1.2960	1.6400	56	1.5800	1.3900	180	1.7800	1.2700	1.17	1.26	67	10	39	1.19	1.26	3	69	36	1.26	1.25	0	95	48
-// IA	99	4	1.0000	1.0000	50	1.3300	1.2900	100	1.2600	1.2000	1.16	1.26	100	100	100	1.21	1.26	70	93	82	1.26	1.26	100	100	100
-// KY	120	6	1.0360	1.2230	38	1.2100	1.0800	100	1.4300	1.2000	1.16	1.26	100	100	100	1.19	1.26	95	100	98	1.24	1.26	55	100	78
-// PA	67	18	1.1780	1.4080	50	1.5200	1.3000	203	1.6500	1.1300	1.19	1.26	100	65	83	1.23	1.26	30	90	60	1.26	1.19	7	100	54
-// TN	95	9	1.0710	1.2670	33	1.1400	1.1000	99	1.1000	1.1400	1.17	1.26	100	98	99	1.19	1.26	100	100	100	1.26	1.25	100	100	100
-// TX	254	36	1.5790	1.4280	31	1.4600	1.3300	150	1.0800	1.0400	1.17	1.26	0	60	30	1.17	1.26	26	83	55	1.22	1.26	100	100	100
-// VA	133	11	1.2140	1.6900	40	1.6400	1.7000	100	1.8400	1.4200	1.17	1.26	88	0	44	1.19	1.26	0	0	0	1.23	1.26	0	62	31
+// AL	67	7	1.1100	1.4470	35	1.4200	1.4500	105	1.6400	1.2600	1.02	1.20	73	38	56	1.10	1.20	13	38	26	1.20	1.13	0	64	32
+// AZ	15	9	1.3520	1.4240	30	1.7100	1.2000				1.11	1.20	33	44	39	1.20	1.09	0	71	36	 	 	 	 	 
+// CA	58	53	1.7890	1.2530	40	1.7400	1.3400	80	1.7000	1.1900	1.18	1.20	0	87	44	1.13	1.20	0	65	33	1.20	1.14	0	88	44
+// CO	64	7	1.1960	1.5010	35	1.2100	1.0800	65	1.2500	1.0700	1.02	1.20	48	25	37	1.11	1.20	72	100	86	1.20	1.19	88	100	94
+// CT	8	5	1.4800	1.5310	36	2.0800	1.1700	151	1.6800	1.0500	1.10	1.20	0	17	9	1.20	1.04	0	62	31	1.20	1.01	0	88	44
+// GA	159	14	1.2960	1.6400	56	1.5800	1.3900	180	1.7800	1.2700	1.02	1.20	17	0	9	1.07	1.20	0	53	27	1.20	1.18	0	76	38
+// IA	99	4	1.0000	1.0000	50	1.3300	1.2900	100	1.2600	1.2000	1.01	1.20	100	100	100	1.10	1.20	37	78	58	1.20	1.20	85	99	92
+// KY	120	6	1.0360	1.2230	38	1.2100	1.0800	100	1.4300	1.2000	1.01	1.20	92	94	93	1.06	1.20	58	100	79	1.17	1.20	32	100	66
+// PA	67	18	1.1780	1.4080	50	1.5200	1.3000	203	1.6500	1.1300	1.05	1.20	64	48	56	1.15	1.20	2	75	39	1.20	1.07	0	82	41
+// TN	95	9	1.0710	1.2670	33	1.1400	1.1000	99	1.1000	1.1400	1.02	1.20	84	83	84	1.07	1.20	80	100	90	1.20	1.19	100	100	100
+// TX	254	36	1.5790	1.4280	31	1.4600	1.3300	150	1.0800	1.0400	1.03	1.20	0	43	22	1.02	1.20	0	68	34	1.12	1.20	100	100	100
+// VA	133	11	1.2140	1.6900	40	1.6400	1.7000	100	1.8400	1.4200	1.02	1.20	41	0	21	1.06	1.20	0	0	0	1.15	1.20	0	45	23
 
+// With 2 minor exceptions, the test cases below are the subset above from the Excel spreadsheet I used to develop the ratings:
+// - There are some minor rounding differences between Excel & Typescript; and
+// - The full Typescript implementation limits the max rating to 99 if there's any splitting. Only no splitting can get 100.
 describe('Rate states', () =>
 {
   test('AL splitting', () =>
@@ -563,21 +566,21 @@ describe('Rate states', () =>
     const nUD = 35;
     const nLD = 105;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.21);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.22);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.10);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.13);
 
-    expect(rateCountySplitting(1.1100, nC, nCD)).toBe(99);
-    expect(rateDistrictSplitting(1.4470, nC, nCD)).toBe(55);
-    expect(rateSplitting(99, 55)).toBe(77);
+    expect(rateCountySplitting(1.1100, nC, nCD)).toBe(73);
+    expect(rateDistrictSplitting(1.4470, nC, nCD)).toBe(38);
+    expect(rateSplitting(73, 38)).toBe(56);
 
-    expect(rateCountySplitting(1.4200, nC, nUD)).toBe(48);
-    expect(rateDistrictSplitting(1.4500, nC, nUD)).toBe(54);
-    expect(rateSplitting(48, 54)).toBe(51);
+    expect(rateCountySplitting(1.4200, nC, nUD)).toBe(12);
+    expect(rateDistrictSplitting(1.4500, nC, nUD)).toBe(37);
+    expect(rateSplitting(12, 37)).toBe(25);
 
-    expect(rateCountySplitting(1.6400, nC, nLD)).toBe(9);
-    expect(rateDistrictSplitting(1.2600, nC, nLD)).toBe(91);
-    expect(rateSplitting(9, 91)).toBe(50);
+    expect(rateCountySplitting(1.6400, nC, nLD)).toBe(0);
+    expect(rateDistrictSplitting(1.2600, nC, nLD)).toBe(64);
+    expect(rateSplitting(0, 64)).toBe(32);
   });
   test('AZ splitting', () =>
   {
@@ -585,16 +588,16 @@ describe('Rate states', () =>
     const nCD = 9;
     const nUD = 30;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.21);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.21);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.11);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.09);
 
-    expect(rateCountySplitting(1.3520, nC, nCD)).toBe(65);
-    expect(rateDistrictSplitting(1.4240, nC, nCD)).toBe(61);
-    expect(rateSplitting(65, 61)).toBe(63);
+    expect(rateCountySplitting(1.3520, nC, nCD)).toBe(33);
+    expect(rateDistrictSplitting(1.4240, nC, nCD)).toBe(43);
+    expect(rateSplitting(33, 43)).toBe(38);
 
     expect(rateCountySplitting(1.7100, nC, nUD)).toBe(0);
-    expect(rateDistrictSplitting(1.2000, nC, nUD)).toBe(99);
-    expect(rateSplitting(0, 99)).toBe(50);
+    expect(rateDistrictSplitting(1.2000, nC, nUD)).toBe(70);
+    expect(rateSplitting(0, 70)).toBe(35);
   });
   test('CA splitting', () =>
   {
@@ -603,21 +606,21 @@ describe('Rate states', () =>
     const nUD = 40;
     const nLD = 80;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.25);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.23);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.23);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.18);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.13);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.14);
 
     expect(rateCountySplitting(1.7890, nC, nCD)).toBe(0);
-    expect(rateDistrictSplitting(1.2530, nC, nCD)).toBe(99);
-    expect(rateSplitting(0, 99)).toBe(50);
+    expect(rateDistrictSplitting(1.2530, nC, nCD)).toBe(87);
+    expect(rateSplitting(0, 65)).toBe(33);
 
     expect(rateCountySplitting(1.7400, nC, nUD)).toBe(0);
-    expect(rateDistrictSplitting(1.3400, nC, nUD)).toBe(81);
+    expect(rateDistrictSplitting(1.3400, nC, nUD)).toBe(65);
     expect(rateSplitting(0, 81)).toBe(41);
 
     expect(rateCountySplitting(1.7000, nC, nLD)).toBe(0);
-    expect(rateDistrictSplitting(1.1900, nC, nLD)).toBe(99);
-    expect(rateSplitting(0, 99)).toBe(50);
+    expect(rateDistrictSplitting(1.1900, nC, nLD)).toBe(87);
+    expect(rateSplitting(0, 87)).toBe(44);
   });
   test('CO splitting', () =>
   {
@@ -626,21 +629,21 @@ describe('Rate states', () =>
     const nUD = 35;
     const nLD = 65;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.21);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.26);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.11);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.19);
 
-    expect(rateCountySplitting(1.1960, nC, nCD)).toBe(93);
-    expect(rateDistrictSplitting(1.5010, nC, nCD)).toBe(42);
-    expect(rateSplitting(93, 42)).toBe(68);
+    expect(rateCountySplitting(1.1960, nC, nCD)).toBe(47);
+    expect(rateDistrictSplitting(1.5010, nC, nCD)).toBe(24);
+    expect(rateSplitting(47, 24)).toBe(36);
 
-    expect(rateCountySplitting(1.2100, nC, nUD)).toBe(99);
+    expect(rateCountySplitting(1.2100, nC, nUD)).toBe(72);
     expect(rateDistrictSplitting(1.0800, nC, nUD)).toBe(99);
-    expect(rateSplitting(99, 99)).toBe(99);
+    expect(rateSplitting(72, 99)).toBe(86);
 
-    expect(rateCountySplitting(1.2500, nC, nLD)).toBe(99);
+    expect(rateCountySplitting(1.2500, nC, nLD)).toBe(87);
     expect(rateDistrictSplitting(1.0700, nC, nLD)).toBe(99);
-    expect(rateSplitting(99, 99)).toBe(99);
+    expect(rateSplitting(87, 99)).toBe(93);
   });
   test('CT splitting', () =>
   {
@@ -649,21 +652,21 @@ describe('Rate states', () =>
     const nUD = 36;
     const nLD = 151;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.21);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.18);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.16);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.10);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.04);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.01);
 
-    expect(rateCountySplitting(1.4800, nC, nCD)).toBe(32);
-    expect(rateDistrictSplitting(1.5310, nC, nCD)).toBe(35);
-    expect(rateSplitting(33, 35)).toBe(34);
+    expect(rateCountySplitting(1.4800, nC, nCD)).toBe(0);
+    expect(rateDistrictSplitting(1.5310, nC, nCD)).toBe(16);
+    expect(rateSplitting(0, 16)).toBe(8);
 
     expect(rateCountySplitting(2.0800, nC, nUD)).toBe(0);
-    expect(rateDistrictSplitting(1.1700, nC, nUD)).toBe(99);
-    expect(rateSplitting(0, 99)).toBe(50);
+    expect(rateDistrictSplitting(1.1700, nC, nUD)).toBe(62);
+    expect(rateSplitting(0, 62)).toBe(31);
 
     expect(rateCountySplitting(1.6800, nC, nLD)).toBe(0);
-    expect(rateDistrictSplitting(1.0500, nC, nLD)).toBe(99);
-    expect(rateSplitting(0, 99)).toBe(50);
+    expect(rateDistrictSplitting(1.0500, nC, nLD)).toBe(88);
+    expect(rateSplitting(0, 88)).toBe(44);
   });
   test('GA splitting', () =>
   {
@@ -672,9 +675,21 @@ describe('Rate states', () =>
     const nUD = 56;
     const nLD = 180;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.19);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.25);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.07);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.18);
+
+    expect(rateCountySplitting(1.2960, nC, nCD)).toBe(17);
+    expect(rateDistrictSplitting(1.6400, nC, nCD)).toBe(0);
+    expect(rateSplitting(0, 17)).toBe(9);
+
+    expect(rateCountySplitting(1.5800, nC, nUD)).toBe(0);
+    expect(rateDistrictSplitting(1.3900, nC, nUD)).toBe(52);
+    expect(rateSplitting(0, 52)).toBe(26);
+
+    expect(rateCountySplitting(1.7800, nC, nLD)).toBe(0);
+    expect(rateDistrictSplitting(1.2700, nC, nLD)).toBe(76);
+    expect(rateSplitting(0, 76)).toBe(38);
   });
   test('IA splitting', () =>
   {
@@ -683,9 +698,21 @@ describe('Rate states', () =>
     const nUD = 50;
     const nLD = 100;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.16);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.21);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.26);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.01);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.10);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.20);
+
+    expect(rateCountySplitting(1.0000, nC, nCD)).toBe(100);
+    expect(rateDistrictSplitting(1.0000, nC, nCD)).toBe(100);
+    expect(rateSplitting(100, 100)).toBe(100);
+
+    expect(rateCountySplitting(1.3300, nC, nUD)).toBe(36);
+    expect(rateDistrictSplitting(1.2900, nC, nUD)).toBe(77);
+    expect(rateSplitting(36, 77)).toBe(57);
+
+    expect(rateCountySplitting(1.2600, nC, nLD)).toBe(85);
+    expect(rateDistrictSplitting(1.2000, nC, nLD)).toBe(99);
+    expect(rateSplitting(85, 99)).toBe(92);
   });
   test('KY splitting', () =>
   {
@@ -694,9 +721,21 @@ describe('Rate states', () =>
     const nUD = 38;
     const nLD = 100;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.16);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.19);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.24);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.01);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.06);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.17);
+
+    expect(rateCountySplitting(1.0360, nC, nCD)).toBe(92);
+    expect(rateDistrictSplitting(1.2230, nC, nCD)).toBe(94);
+    expect(rateSplitting(92, 94)).toBe(93);
+
+    expect(rateCountySplitting(1.2100, nC, nUD)).toBe(58);
+    expect(rateDistrictSplitting(1.0800, nC, nUD)).toBe(99);
+    expect(rateSplitting(58, 99)).toBe(79);
+
+    expect(rateCountySplitting(1.4300, nC, nLD)).toBe(31);
+    expect(rateDistrictSplitting(1.2000, nC, nLD)).toBe(99);
+    expect(rateSplitting(31, 99)).toBe(65);
   });
   test('PA splitting', () =>
   {
@@ -705,9 +744,28 @@ describe('Rate states', () =>
     const nUD = 50;
     const nLD = 203;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.19);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.23);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.19);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.05);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.15);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.07);
+
+    expect(rateCountySplitting(1.1780, nC, nCD)).toBe(63);
+    expect(rateDistrictSplitting(1.4080, nC, nCD)).toBe(47);
+    expect(rateSplitting(63, 47)).toBe(55);
+
+    expect(rateCountySplitting(1.5200, nC, nUD)).toBe(1);
+    expect(rateDistrictSplitting(1.3000, nC, nUD)).toBe(75);
+    expect(rateSplitting(1, 75)).toBe(38);
+
+    expect(rateCountySplitting(1.6500, nC, nLD)).toBe(0);
+    expect(rateDistrictSplitting(1.1300, nC, nLD)).toBe(82);
+    expect(rateSplitting(0, 82)).toBe(41);
+
+    // The is the user Ruth's PA Lower State House map.
+    // The initial intended ratings "tanked" (85 => 53).
+    // With these revised ratings, the drop is only half that much (85 => 70).
+    expect(rateCountySplitting(1.3100, nC, nLD)).toBe(72);
+    expect(rateDistrictSplitting(1.1800, nC, nLD)).toBe(67);
+    expect(rateSplitting(72, 67)).toBe(70);
   });
   test('TN splitting', () =>
   {
@@ -716,9 +774,21 @@ describe('Rate states', () =>
     const nUD = 33;
     const nLD = 99;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.19);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.25);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.07);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.19);
+
+    expect(rateCountySplitting(1.0710, nC, nCD)).toBe(84);
+    expect(rateDistrictSplitting(1.2670, nC, nCD)).toBe(83);
+    expect(rateSplitting(84, 83)).toBe(84);
+
+    expect(rateCountySplitting(1.1400, nC, nUD)).toBe(79);
+    expect(rateDistrictSplitting(1.1000, nC, nUD)).toBe(99);
+    expect(rateSplitting(79, 99)).toBe(89);
+
+    expect(rateCountySplitting(1.1000, nC, nLD)).toBe(99);
+    expect(rateDistrictSplitting(1.1400, nC, nLD)).toBe(99);
+    expect(rateSplitting(99, 99)).toBe(99);
   });
   test('TX splitting', () =>
   {
@@ -727,9 +797,21 @@ describe('Rate states', () =>
     const nUD = 31;
     const nLD = 150;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.22);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.03);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.12);
+
+    expect(rateCountySplitting(1.5790, nC, nCD)).toBe(0);
+    expect(rateDistrictSplitting(1.4280, nC, nCD)).toBe(42);
+    expect(rateSplitting(0, 42)).toBe(21);
+
+    expect(rateCountySplitting(1.4600, nC, nUD)).toBe(0);
+    expect(rateDistrictSplitting(1.3300, nC, nUD)).toBe(67);
+    expect(rateSplitting(0, 67)).toBe(34);
+
+    expect(rateCountySplitting(1.0800, nC, nLD)).toBe(99);
+    expect(rateDistrictSplitting(1.0400, nC, nLD)).toBe(99);
+    expect(rateSplitting(99, 99)).toBe(99);
   });
   test('VA splitting', () =>
   {
@@ -738,12 +820,26 @@ describe('Rate states', () =>
     const nUD = 40;
     const nLD = 100;
 
-    expect(bestTarget(nC, nCD)).toBeCloseTo(1.17);
-    expect(bestTarget(nC, nUD)).toBeCloseTo(1.19);
-    expect(bestTarget(nC, nLD)).toBeCloseTo(1.23);
+    expect(bestTarget(nC, nCD)).toBeCloseTo(1.02);
+    expect(bestTarget(nC, nUD)).toBeCloseTo(1.06);
+    expect(bestTarget(nC, nLD)).toBeCloseTo(1.15);
+
+    expect(rateCountySplitting(1.2140, nC, nCD)).toBe(41);
+    expect(rateDistrictSplitting(1.6900, nC, nCD)).toBe(0);
+    expect(rateSplitting(41, 0)).toBe(21);
+
+    expect(rateCountySplitting(1.6400, nC, nUD)).toBe(0);
+    expect(rateDistrictSplitting(1.7000, nC, nUD)).toBe(0);
+    expect(rateSplitting(0, 0)).toBe(0);
+
+    expect(rateCountySplitting(1.8400, nC, nLD)).toBe(0);
+    expect(rateDistrictSplitting(1.4200, nC, nLD)).toBe(44);
+    expect(rateSplitting(0, 44)).toBe(22);
   });
 });
 
+
+// SPLITTING SCORING - Legacy
 /*
 describe('County-district splitting scorer', () =>
 {
@@ -829,9 +925,6 @@ describe('District-county splitting scorer', () =>
     expect(rateDistrictSplittingLegacy(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + U.EPSILON)).toBe(0);
   });
 });
-*/
-
-// SPLITTING SCORING - Legacy
 
 describe('Weight splitting measures', () =>
 {
@@ -925,3 +1018,5 @@ describe('District-county splitting scorer', () =>
     expect(rateDistrictSplittingLegacy(C.districtSplittingRange(T.DistrictType.Congressional)[C.END] + U.EPSILON)).toBe(0);
   });
 });
+
+*/

@@ -244,8 +244,8 @@ export function rateCompactness(rS: number, ppS: number): number
 
 // RATE SPLITTING
 
-export const maxSplitting: number = 1.26;     // 90–10 splits
-export const minSplitting: number = 1.16;     // 97–03 splits
+export const maxSplitting: number = 1.20;     // 90–10 => 95–5 splits
+export const minSplitting: number = 1.00;     // No splits still vs. 97–03 splits
 export const worstMultiplier: number = 1.33;  // 1/3 bigger
 
 // =LAMBDA(n, m, most, least, (((MIN(n, m) - 1) / MAX(n, m)) * most) + ((1 - ((MIN(n, m) - 1) / MAX(n, m))) * least))
