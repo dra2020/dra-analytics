@@ -1,1 +1,1 @@
-+ @dra2020/dra-analytics@2.0.1
++ @dra2020/dra-analytics@2.1.2
