@@ -68,7 +68,8 @@ var testConfig = {
 //   and build everything, the build breaks.
 var cliConfigs = [
   {entry: './cli/compactness.ts', output: {filename: 'dra-compactness.bundle.js'}},
-  {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}}
+  {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}},
+  {entry: './cli/splitting.ts', output: {filename: 'dra-splitting.bundle.js'}}
 ]
 
 module.exports = [libConfig, testConfig /*, ...cliConfigs*/];
