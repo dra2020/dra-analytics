@@ -72,4 +72,4 @@ var cliConfigs = [
   {entry: './cli/splitting.ts', output: {filename: 'dra-splitting.bundle.js'}}
 ]
 
-module.exports = [libConfig, testConfig /*, ...cliConfigs*/];
+module.exports = [libConfig, testConfig /*, ...cliConfigs */];

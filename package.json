@@ -9,7 +9,8 @@
     "build": "webpack",
     "webpack": "node_modules/.bin/webpack",
     "buildpartisan": "webpack --config cli/partisan.config.js",
-    "buildcompactness": "webpack --config cli/compactness.config.js"
+    "buildcompactness": "webpack --config cli/compactness.config.js",
+    "buildsplitting": "webpack --config cli/splitting.config.js"
   },
   "files": [
     "dist/",
