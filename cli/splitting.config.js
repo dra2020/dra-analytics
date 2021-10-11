@@ -23,7 +23,7 @@ fs.readdirSync('node_modules/@dra2020')
 var commonModule = {
   rules: [
     {test: /\.tsx?$/, loader: 'ts-loader'},
-    // {test: /\.json$/, loader: 'json-loader'},
+    {test: /\.json$/, loader: 'json-loader'},  // TODO: But *this* command builds with this enabled!?!
     {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
   ]
 };

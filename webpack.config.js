@@ -27,7 +27,7 @@ var libConfig = {
   module: {
     rules: [
       {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
-      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},
+      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},  // TODO: If I enable this, the command build breaks.
       {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
     ]
   },
