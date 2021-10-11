@@ -1,12 +1,12 @@
 # Command-Line Interface (CLI)
 
-This library adds a command-line interface (CLI) to the main analytics functionality.
+The command-line interface (CLI) exposes the main analytics functionality for scripting.
 
 ## Commands
 
 ### partisan
 
-This command calculates all the bias & responsiveness metrics for a partisan "profile."
+The partisan command calculates all the bias & responsiveness metrics for a partisan "profile."
 
 ``` shell
 ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json
@@ -17,7 +17,7 @@ analyze-2012-profiles.sh and analyze-hypothetical-profiles.sh in the scripts dir
 
 ### compactness
 
-This command takes a shapfile or a geojson and calculates the compactness measures for the shapes.
+The compactness command calculates the compactness measures for the shapes in a shapfile or a geojson.
 
 ``` shell
 ./cli/compactness.js -i testdata/compactness/first20/first20.shp
@@ -31,8 +31,10 @@ Add the -k flag to get the KIWYSI compactness measurements.
 
 ### splitting
 
-This command calculates county- & district-splitting for a counties-by-districts matrix.
+The splitting command calculates county- & district-splitting for a counties-by-districts matrix.
 
 ``` shell
 ./cli/splitting.js -i testdata/splitting/CxD.json
 ``` 
+
+You can direct the output to a file or pipe it into another command for further processing.
