@@ -17,7 +17,13 @@ County-district splitting can be later rated (scored).
 export declare function makeSplittingScorecard(CxD: CountyProfile, bLog: boolean = false): SplittingScorecard;
 ``` 
 
-TODO: Revise this for calcSplitting
+### calcSplitting
+
+This function just gives you the reduced county- & district-splitting measurements as JSON.
+
+``` TypeScript
+export declare function calcSplitting(CxD: T.CxD): SplittingJSONReady;
+``` 
 
 The next two functions implement the county-district splitting measures used in DRA.
 

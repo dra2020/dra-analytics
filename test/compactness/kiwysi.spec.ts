@@ -22,7 +22,6 @@ describe('Score the first 20 reference shapes', () =>
 
       const prediction: number = kiwysiScoreShapeRAW(shapes.features[i], T.PCAModel.Original);
 
-      // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 1);
     }
   });
@@ -42,7 +41,6 @@ describe('Score the evenly spaced 20 reference shapes', () =>
 
       const prediction: number = kiwysiScoreShapeRAW(shapes.features[i], T.PCAModel.Revised);
 
-      // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 0);
     }
   });

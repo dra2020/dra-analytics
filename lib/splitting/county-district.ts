@@ -12,8 +12,6 @@ export function makeSplittingScorecard(CxD: T.CountyProfile, bLog: boolean = fal
   const cT = totalCounties(CxD);
   const county: number = _calcCountySplittingReduced(CxD, dT, cT);
   const district: number = _calcDistrictSplittingReduced(CxD, dT, cT);
-  // const countyM = _calcCountySplittingReduced(CxD, dT, cT);
-  // const districtM = _calcDistrictSplittingReduced(CxD, dT, cT);
 
   const s: T.SplittingScorecard = {
     county: county,

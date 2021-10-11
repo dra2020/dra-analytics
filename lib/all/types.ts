@@ -1,6 +1,5 @@
 // Restrict package exports
 
-// TODO - What other types need to be exported?
 export
 {
   // Scorecards & helpers
