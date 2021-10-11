@@ -27,8 +27,10 @@ These are all the libraries:
 - [Rate](./docs/rate.md): Normalization utilities as well as DRA-specific ratings.
 - [Splitting](./docs/splitting.md): County- & district-splitting and COI splitting.
 
-There are also supporting types in the [Types](./docs/types.md) library and
-supporting utilities in the [Utils](./docs/utils.md) library.
+Supporting types are in the [Types](./docs/types.md) library and
+supporting utilities are in the [Utils](./docs/utils.md) library.
+
+There is also a [command-line interface](./docs/cli.md) (CLI).
 
 The analytics in DRA include metrics favored by [many scholars](./docs/attributions.md).
 
@@ -41,13 +43,19 @@ The analytics in DRA include metrics favored by [many scholars](./docs/attributi
 There are three packages that are part of this repo:
 
 1. lib: building dra-analytics.js, the production code
-2. cli: building cli.cs, a command line utility <<< TODO
+2. cli: building cli.cs, a command line utility         <<< TODO: How should this read?
 3. test: automated test code run by jest
 
 ## Developing in this repo
 
 ```npm install``` install all dependencies
 
-```npm run build``` build all bundles
+```npm run build``` build all bundles  <<< TODO: Does not include CLI commands yet
+
+```npm run buildpartisan``` build the partisan command
+
+```npm run buildcompactness``` build the compactness command
+
+```npm run buildsplitting``` build the splitting command
 
 ```npm run test``` run automated jest tests

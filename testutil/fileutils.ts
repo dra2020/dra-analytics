@@ -108,7 +108,7 @@ export function readJSON(file: string): any
 
 // COMPACTNESS-specific helpers
 
-function fileToPath(file: string): string
+export function fileToPath(file: string): string
 {
   let fullPath: string;
   if (path.isAbsolute(file))
@@ -167,7 +167,6 @@ export function readShapefile(file: string): Promise<GeoJSON.FeatureCollection>
 
   return shp.read(buf).catch((err: any) => console.error(err.stack));
 }
-
 
 // GRAPH-specific helper For exercising GRAPH functionality at the CLI
 

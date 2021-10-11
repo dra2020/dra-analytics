@@ -98,7 +98,7 @@ describe('CA 116th CD', () =>
 
     expect(result).toBe(false);
   });
-  // TODO: This modified block graph for CA does NOT have enough connectivity!
+  // This modified block graph for CA does NOT have enough connectivity!
   // test('modified graph', () =>
   // {
   //   const graph: T.ContiguityGraph = FU.readJSON("testdata/graph/examples/CA/block_contiguity.json");
@@ -139,7 +139,7 @@ describe('HI 116th CD', () =>
 
     expect(result).toBe(false);
   });
-  // TODO: This modified block graph for HI does NOT have enough connectivity!
+  // This modified block graph for HI does NOT have enough connectivity!
   // test('modified graph', () =>
   // {
   //   const graph: T.ContiguityGraph = FU.readJSON("testdata/graph/examples/HI/block_contiguity.json");

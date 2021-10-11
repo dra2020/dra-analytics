@@ -1,17 +1,21 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/all/all.d.ts",
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "webpack": "node_modules/.bin/webpack"
+    "webpack": "node_modules/.bin/webpack",
+    "buildpartisan": "webpack --config cli/partisan.config.js",
+    "buildcompactness": "webpack --config cli/compactness.config.js",
+    "buildsplitting": "webpack --config cli/splitting.config.js"
   },
   "files": [
     "dist/",
     "lib/",
+    "cli/",
     "docs/"
   ],
   "repository": {

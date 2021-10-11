@@ -66,11 +66,9 @@ describe('Feature-ize the first 20 reference shapes', () =>
       expect(features.reock).toBeCloseTo(correct.reock);
       expect(features.polsby).toBeCloseTo(correct.polsby);
       expect(features.hull).toBeCloseTo(correct.hull);
-      // TODO - Why is only one digit matching?
       expect(features.schwartzberg).toBeCloseTo(correct.schwartzberg, 1);
 
       expect(features.sym_x).toBeCloseTo(correct.sym_x);
-      // TODO - Why is only one digit matching?
       expect(features.sym_y).toBeCloseTo(correct.sym_y, 1);
 
       expect(features.bbox).toBeCloseTo(correct.bbox);
@@ -96,11 +94,9 @@ describe('Feature-ize the evenly-spaced 20 reference shapes', () =>
       expect(features.reock).toBeCloseTo(correct.reock);
       expect(features.polsby).toBeCloseTo(correct.polsby);
       expect(features.hull).toBeCloseTo(correct.hull);
-      // TODO - Why is only one digit matching?
       expect(features.schwartzberg).toBeCloseTo(correct.schwartzberg, 1);
 
       expect(features.sym_x).toBeCloseTo(correct.sym_x);
-      // TODO - Why is only one digit matching?
       expect(features.sym_y).toBeCloseTo(correct.sym_y, 1);
 
       expect(features.bbox).toBeCloseTo(correct.bbox);
@@ -127,7 +123,6 @@ describe('Score the first 20 reference shapes', () =>
 
       const prediction: number = scoreFeatureSet(features, T.PCAModel.Original);
 
-      // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 1);
     }
   });
@@ -149,7 +144,6 @@ describe('Score the evenly spaced 20 reference shapes', () =>
 
       const prediction: number = scoreFeatureSet(features, T.PCAModel.Revised);
 
-      // TODO - Why is only one digit matching?
       expect(prediction).toBeCloseTo(score, 0);
     }
   });

@@ -28,9 +28,19 @@ This function returns the raw Reock & Polsby-Popper measurements for a GeoJSON f
 along with the KIWYSI rank [1–100] where smaller is better.
 
 ``` TypeScript
-export declare function calcCompactness(shape: GeoJSON.Feature): Compactness;
+export declare function calcCompactness(shapes: GeoJSON.FeatureCollection): CompactnessJSONReady;
 ```
+
 These values can be normalized -- [0–100] where bigger is better -- using functions in the [Rate](./rate.md) library.
+
+### calcKIWYSICompactness
+
+Use this to get KIWYSI compactness features and scores ("ranks") for a set of shapes.
+Note - These calculations use the geodesic (curved earth) model.
+
+``` TypeScript
+export declare function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): KiwysiJSONReady;
+```
 
 ## Primitives Exports
 

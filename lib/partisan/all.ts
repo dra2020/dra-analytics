@@ -43,6 +43,7 @@ import
   estCompetitiveDistricts,
   estCompetitiveDistrictsShare
 } from '../../lib/partisan/responsiveness'
+import {Utils} from '../all/all';
 
 
 export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: boolean = false): T.PartisanScorecard
@@ -155,4 +156,16 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   };
 
   return s;
+}
+
+export function calcPartisanMetrics(Vf: number, VfArray: T.VfArray): T.PartisanJSONReady
+{
+  const s: T.PartisanScorecard = makePartisanScorecard(Vf, VfArray);
+
+  let out: any = Utils.deepCopy(s);
+
+  delete out.impact;
+  delete out.details;
+
+  return out as T.PartisanJSONReady;
 }

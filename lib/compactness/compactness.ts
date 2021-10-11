@@ -25,7 +25,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 
   // For returning compactness by district to DRA
   // Note, these use the Cartesian (flat earth) measurements
-  let byDistrict: T.CompactnessByDistrict[] = [];
+  let byDistrict: T.Compactness[] = [];
 
   for (let i = 0; i < shapes.features.length; i++)
   {
@@ -51,7 +51,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     totPolsby += polsbyFlat;
     totKIWYSI += kiwysiScore;
 
-    const measures: T.CompactnessByDistrict = {
+    const measures: T.Compactness = {
       rawReock: reockFlat,
       normalizedReock: normalizedReock,
       rawPolsby: polsbyFlat,
@@ -78,28 +78,57 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   return s;
 }
 
+// CLI
+
 // Calculate Reock & Polsby–Popper for a shape using the typical Cartesian (flat earth) calculations.
-// Also calculate the "know it when you see it" rank that models human perceptions of compactness.
-export function calcCompactness(shape: GeoJSON.Feature): T.Compactness
+// Also calculate the "know it when you see it" rank (smaller is better) that models human perceptions of compactness.
+export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.CompactnessJSONReady
 {
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
-  const features: T.CompactnessFeatures = featureizePoly(shape, options);
+  // For calculating averages of by-district values
+  let totReock: number = 0;
+  let totPolsby: number = 0;
+  let totKIWYSI: number = 0;
 
-  const reockFlat: number = features.reockFlat;
-  const polsbyFlat: number = features.polsbyFlat;
+  let byDistrict: T.CompactnessAlt[] = [];
 
-  // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
-  let kiwysiRank: number = scoreFeatureSet(features, pca);
-  // Constrain values to the range [1–100]
-  kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
+  for (let i = 0; i < shapes.features.length; i++)
+  {
+    const features: T.CompactnessFeatures = featureizePoly(shapes.features[i], options);
 
-  const c: T.Compactness = {
-    rawReock: reockFlat,
-    rawPolsby: polsbyFlat,
-    kiwysiRank: kiwysiRank
-  };
+    const reockFlat: number = features.reockFlat;
+    const polsbyFlat: number = features.polsbyFlat;
 
-  return c;
+    // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
+    let kiwysiRank: number = scoreFeatureSet(features, pca);
+    // Constrain values to the range [1–100]
+    kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
+
+    totReock += reockFlat;
+    totPolsby += polsbyFlat;
+    totKIWYSI += kiwysiRank;
+
+    const c: T.CompactnessAlt = {
+      reock: reockFlat,
+      polsby: polsbyFlat,
+      kiwysiRank: kiwysiRank
+    };
+
+    byDistrict.push(c);
+  }
+
+  const avgReock: number = totReock / shapes.features.length;
+  const avgPolsby: number = totPolsby / shapes.features.length;
+  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+
+  const out: T.CompactnessJSONReady = {
+    avgReock: avgReock,
+    avgPolsby: avgPolsby,
+    avgKWIWYSI: avgKWIWYSI,
+    byDistrict: byDistrict
+  }
+
+  return out;
 }

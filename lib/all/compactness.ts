@@ -2,8 +2,11 @@
 
 export
 {
+  // For a DRA-style scorecard
   makeCompactnessScorecard,
+  // For the CLI & other users
   calcCompactness,
+  calcKIWYSICompactness,
 
   // For legacy compactness calculations
   calcXSymmetry,

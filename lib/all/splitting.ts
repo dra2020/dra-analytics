@@ -2,10 +2,10 @@
 
 export
 {
+  // For a DRA-style scorecard
   makeSplittingScorecard,
-
-  calcCountySplitting, calcDistrictSplitting,
-  _calcCountySplitting, _calcDistrictSplitting,
+  // For the CLI & other users
+  calcSplitting, calcCOISplitting,
 
   // For COI splitting analysis
   effectiveSplits, uncertaintyOfMembership

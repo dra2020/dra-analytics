@@ -27,7 +27,7 @@ var libConfig = {
   module: {
     rules: [
       {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
-      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},
+      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},  // TODO: If I enable this, the command build breaks.
       {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
     ]
   },
@@ -37,8 +37,6 @@ var libConfig = {
   }
 
 };
-
-// var cliConfig = {  <<< TODO: add a CLI
 
 var testConfig = {
   entry: {
@@ -56,7 +54,8 @@ var testConfig = {
 
   module: {
     rules: [
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: '/node_modules/'},
+      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
+      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},
       {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
     ]
   },
@@ -66,4 +65,12 @@ var testConfig = {
   }
 };
 
-module.exports = [libConfig, testConfig];
+// TODO - If I activate these configurations below so I can do 'npm run build'
+//   and build everything, the build breaks.
+var cliConfigs = [
+  {entry: './cli/compactness.ts', output: {filename: 'dra-compactness.bundle.js'}},
+  {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}},
+  {entry: './cli/splitting.ts', output: {filename: 'dra-splitting.bundle.js'}}
+]
+
+module.exports = [libConfig, testConfig /* , ...cliConfigs */];

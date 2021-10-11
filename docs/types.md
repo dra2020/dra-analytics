@@ -59,7 +59,7 @@ export type CompactnessScorecard = {
   avgReock: number;
   avgPolsby: number;
   avgKWIWYSI: number;
-  byDistrict: CompactnessByDistrict[];
+  byDistrict: Compactness[];
   details: Dict;
   score?: number;
 }

@@ -22,6 +22,14 @@ While this is called a "scorecard," it simply calculates all the metrics.
 Some of them depend on (effectively) inferring a seats-votes curve or a rank-votes graph,
 so it's easier (and more efficient) to bundle these calculations together as opposed to exposing them individually.
 
+### calcPartisanMetrics
+
+This gives you a JSON version of the scorecard.
+
+``` TypeScript
+export declare function calcPartisanMetrics(Vf: number, VfArray: T.VfArray): PartisanJSONReady;
+``` 
+
 The next two functions implement the core of John Nagle's method using fractional seat probabilities.
 The details are in [this white paper](https://lipid.phys.cmu.edu/nagle/Technical/FractionalSeats2.pdf).
 
