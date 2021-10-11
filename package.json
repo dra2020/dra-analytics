@@ -8,7 +8,6 @@
     "test": "jest",
     "build": "webpack",
     "webpack": "node_modules/.bin/webpack",
-    "buildhello": "webpack --config cli/hello.config.js",
     "buildpartisan": "webpack --config cli/partisan.config.js",
     "buildcompactness": "webpack --config cli/compactness.config.js"
   },
