@@ -4,7 +4,7 @@
 /* Examples:
 
 $ ./cli/splitting.js -i testdata/splitting/CxD.json
-$ ./cli/splitting.js -i testdata/splitting/samples/splitting-AZ-benchmark.json
+$ ./cli/splitting.js -i testdata/splitting/CxD.json > temp/partisan.json
 
 */
 
