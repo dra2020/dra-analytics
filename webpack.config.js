@@ -54,7 +54,8 @@ var testConfig = {
 
   module: {
     rules: [
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: '/node_modules/'},
+      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
+      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},
       {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
     ]
   },
@@ -72,4 +73,4 @@ var cliConfigs = [
   {entry: './cli/splitting.ts', output: {filename: 'dra-splitting.bundle.js'}}
 ]
 
-module.exports = [libConfig, testConfig /*, ...cliConfigs */];
+module.exports = [libConfig, testConfig /* , ...cliConfigs */];
