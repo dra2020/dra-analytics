@@ -79,6 +79,9 @@ export type Responsiveness = {
 }
 
 
+// TODO - EXPERIMENTAL
+
+
 // COMBINED SCORECARD
 
 export type PartisanScorecard = {

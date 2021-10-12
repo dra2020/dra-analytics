@@ -395,7 +395,37 @@ export function calcLopsidedOutcomes(VfArray: T.VfArray): number | undefined
   return LO;
 }
 
+
+// SYMMETRY over a range of V
+export function calcSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number, range: number[] = [0.0, 1.0]): number
+{
+  const minVf: number = range[0];
+  const maxVf: number = range[1];
+
+  const base: number = (maxVf - minVf) * 100;
+  let sym: number = 0.0;
+
+  for (let i in dSVpoints)
+  {
+    if ((dSVpoints[i].v >= minVf) && (dSVpoints[i].v <= maxVf))
+    {
+      sym += Math.abs(dSVpoints[i].s - rSVpoints[i].s) / 2;
+    }
+  }
+
+  const sign = (S50V < 0) ? -1 : 1;
+  sym *= sign;
+
+  return sym / base;
+}
+
 // GLOBAL SYMMETRY - Fig. 17 in Section 5.1
+export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
+{
+  return calcSymmetry(dSVpoints, rSVpoints, S50V);
+}
+
+/* OBSOLETE
 export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
 {
   let gSym: number = 0.0;
@@ -410,6 +440,8 @@ export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[
 
   return gSym / 100;
 }
+*/
+
 
 // RAW DISPROPORTIONALITY
 //
