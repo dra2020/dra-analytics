@@ -12,11 +12,11 @@ It started as v2, because v1 was delivered by a combination repos & packages:
 The goals of this consolidation were to make the analytics code:
 
 1. More transparent -- easier to show/explain
-2. More maintainable -- easier to supportable
-3. More general -- easier to re-use, because the DRA-specific parts are clearly isolated, plus a CLI
+2. More maintainable -- easier to support
+3. More general -- easier to re-use, because the DRA-specific parts are clearly isolated & there is a CLI
 
-Because the analytics can now be calculated at a command line, independent of any tool, you can compute
-the partisan analytics for several elections, one at a time, and then generate statistics for them.
+Because the partisan analytics can now be calculated at a command line, independent of any tool, you can compute
+them for several elections, one at a time, and then generate statistics for them.
 
 ## Details
 
@@ -53,7 +53,7 @@ A [command-line interface](./docs/cli.md) (CLI) was added in v3.
 There are three packages that are part of this repo:
 
 1. lib: building dra-analytics.js, the production code
-2. cli: building dra-<command>.bundle.js, a set of command line utilities
+2. cli: building dra-&lt;command&gt;.bundle.js, a set of command line utilities
 3. test: automated test code run by jest
 
 ## Developing in this repo
