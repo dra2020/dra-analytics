@@ -63,7 +63,7 @@
     "yargs": "^17.1.1"
   },
   "dependencies": {
-    "@dra2020/baseclient": "^1.0.39",
+    "@dra2020/baseclient": "^1.0.40",
     "geojson": "^0.5.0"
   }
 }
