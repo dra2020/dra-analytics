@@ -1,7 +1,7 @@
 # dra-analytics
 
 This repo & package consolidates all the metrics used in DRA analytics into one place.
-It starts as v2, because v1 was delivered by a combination repos & packages:
+It started as v2, because v1 was delivered by a combination repos & packages:
 
 - district-analytics
 - dra-score
@@ -9,8 +9,18 @@ It starts as v2, because v1 was delivered by a combination repos & packages:
 - compactness, and
 - racial voting
 
-This repo & package can be integrated into other tools. A CLI is forthcoming.
+The goals of this consolidation were to make the analytics code:
 
+1. More transparent -- easier to show/explain
+2. More maintainable -- easier to supportable
+3. More general -- easier to re-use, because the DRA-specific parts are clearly isolated, plus a CLI
+
+Because the analytics can now be calculated at a command line, independent of any tool, you can compute
+the partisan analytics for several elections, one at a time, and then generate statistics for them.
+
+## Details
+
+This repo & package can be integrated into other tools.
 The libraries here are normally included like this:
 
     import { Compactness, Equal, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
@@ -30,9 +40,9 @@ These are all the libraries:
 Supporting types are in the [Types](./docs/types.md) library and
 supporting utilities are in the [Utils](./docs/utils.md) library.
 
-There is also a [command-line interface](./docs/cli.md) (CLI).
-
 The analytics in DRA include metrics favored by [many scholars](./docs/attributions.md).
+
+A [command-line interface](./docs/cli.md) (CLI) was added in v3.
 
 ## Build status for master branch
 
@@ -43,14 +53,14 @@ The analytics in DRA include metrics favored by [many scholars](./docs/attributi
 There are three packages that are part of this repo:
 
 1. lib: building dra-analytics.js, the production code
-2. cli: building cli.cs, a command line utility         <<< TODO: How should this read?
+2. cli: building dra-<command>.bundle.js, a set of command line utilities
 3. test: automated test code run by jest
 
 ## Developing in this repo
 
 ```npm install``` install all dependencies
 
-```npm run build``` build all bundles  <<< TODO: Does not include CLI commands yet
+```npm run build``` build all bundles
 
 ```npm run buildpartisan``` build the partisan command
 

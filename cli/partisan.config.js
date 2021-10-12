@@ -23,7 +23,7 @@ fs.readdirSync('node_modules/@dra2020')
 var commonModule = {
   rules: [
     {test: /\.tsx?$/, loader: 'ts-loader'},
-    // {test: /\.json$/, loader: 'json-loader'},  // TODO: If I enable this, the command build breaks.
+    // {test: /\.json$/, loader: 'json-loader'},
     {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
   ]
 };
@@ -36,7 +36,6 @@ var configs = [
   {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}},
 ]
 
-// Put the CLI outputs in testdist/
 configs.forEach((c) =>
 {
   c.target = 'node';

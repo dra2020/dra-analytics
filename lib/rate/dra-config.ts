@@ -7,8 +7,6 @@
 
 import * as T from '../types/all'
 const config = require('./dra-config.json');
-// TODO - The above substitutes for this:
-// import config from './dra-config.json';  // TODO: I think this is causing the build break when the json-loader is enabled in webpack.config.js.
 
 export const BEG = 0;
 export const END = 1;
