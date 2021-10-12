@@ -2,9 +2,24 @@ var path = require('path');
 var fs = require('fs');
 
 // Don't package up these - let ultimate client do so
-var externals = {};
-fs.readdirSync('node_modules').filter(s => s !== '.bin').forEach(s => {externals[s] = `commonjs ${s}`});
-fs.readdirSync('node_modules/@dra2020').forEach(s => {s = `@dra2020/${s}`; externals[s] = `commonjs ${s}`});
+var commonExternals = {};
+fs.readdirSync('node_modules').filter(s => s !== '.bin').forEach(s => {commonExternals[s] = `commonjs ${s}`});
+fs.readdirSync('node_modules/@dra2020').forEach(s => {s = `@dra2020/${s}`; commonExternals[s] = `commonjs ${s}`});
+
+var commonModule = {
+  rules: [
+    {test: /\.tsx?$/, loader: 'ts-loader'},
+    // {test: /\.json$/, loader: 'json-loader'},
+    {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
+  ]
+};
+
+var commonResolve = {extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]};
+
+var commonDevtool = "source-map";
+
+
+// LIB
 
 var libConfig = {
   entry: {
@@ -20,23 +35,17 @@ var libConfig = {
   },
 
   // Enable source maps
-  devtool: "source-map",
+  devtool: commonDevtool,
 
-  externals: externals,
+  externals: commonExternals,
 
-  module: {
-    rules: [
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
-      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},  // TODO: If I enable this, the command build breaks.
-      {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
-    ]
-  },
+  module: commonModule,
 
-  resolve: {
-    extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-  }
-
+  resolve: commonResolve
 };
+
+
+// JEST
 
 var testConfig = {
   entry: {
@@ -48,29 +57,31 @@ var testConfig = {
     path: __dirname + '/testdist'
   },
 
-  externals: {
-    "yargs": "commonjs yargs"
-  },
+  externals: commonExternals,
 
-  module: {
-    rules: [
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
-      // {test: /\.json$/, loader: 'json-loader', exclude: /node_modules/},
-      {test: /\.js$/, enforce: "pre", loader: "source-map-loader"}
-    ]
-  },
+  module: commonModule,
 
-  resolve: {
-    extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-  }
+  resolve: commonResolve
 };
 
-// TODO - If I activate these configurations below so I can do 'npm run build'
-//   and build everything, the build breaks.
+
+// CLI
+
 var cliConfigs = [
   {entry: './cli/compactness.ts', output: {filename: 'dra-compactness.bundle.js'}},
   {entry: './cli/partisan.ts', output: {filename: 'dra-partisan.bundle.js'}},
   {entry: './cli/splitting.ts', output: {filename: 'dra-splitting.bundle.js'}}
 ]
 
-module.exports = [libConfig, testConfig /* , ...cliConfigs */];
+cliConfigs.forEach((c) =>
+{
+  c.target = 'node';
+  c.mode = 'development';
+  c.devtool = commonDevtool;
+  c.externals = commonExternals;
+  c.resolve = commonResolve;
+  c.module = commonModule;
+  c.output.path = path.resolve('testdist');
+});
+
+module.exports = [libConfig, testConfig, ...cliConfigs];
