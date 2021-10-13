@@ -185,7 +185,7 @@ export function estGeometricSeatsBias(Vf: number, dSVpoints: T.SVpoint[], rSVpoi
 }
 
 // The actual formula
-function geometricSeatsBias(ptD: T.SVpoint, ptR: T.SVpoint): number
+function calcGeometricSeatsBias(ptD: T.SVpoint, ptR: T.SVpoint): number
 {
   const Vf = ptD.v;
   const sD = ptD.s;
@@ -205,35 +205,13 @@ export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints:
   for (let i = 0; i < nPoints; i++)
   {
     const Vf = dSVpoints[i].v;
-    const BsGf = geometricSeatsBias(dSVpoints[i], rSVpoints[i]);
+    const BsGf = calcGeometricSeatsBias(dSVpoints[i], rSVpoints[i]);
 
     bgsSVpoints.push({v: Vf, s: BsGf});
   }
 
   return bgsSVpoints;
 }
-
-/* OBSOLETE - Re-worked above
-export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): T.SVpoint[]
-{
-  const nPoints = dSVpoints.length;
-
-  let bgsSVpoints: T.SVpoint[] = [];
-
-  for (let i = 0; i < nPoints; i++)
-  {
-    const Vf = dSVpoints[i].v;
-
-    const sD = dSVpoints[i].s;
-    const sR = rSVpoints[i].s;
-    const BsGf = 0.5 * (sR - sD);
-
-    bgsSVpoints.push({v: Vf, s: BsGf});
-  }
-
-  return bgsSVpoints;
-}
-*/
 
 export function invertSVPoints(inferredSVpoints: T.SVpoint[]): T.SVpoint[]
 {
@@ -303,7 +281,7 @@ export function calcEfficiencyGap(Vf: number, Sf: number, shareType = T.Party.De
 // So:
 // * With D VPI, '+' = R bias; '-' = D bias <<< We're using this convention.
 // * With R VPI, '-' = R bias; '+' = D bias.
-export function estMeanMedianDifference(VfArray: T.VfArray, Vf?: number): number
+export function calcMeanMedianDifference(VfArray: T.VfArray, Vf?: number): number
 {
   const meanVf = Vf ? Vf : U.avgArray(VfArray);
   const medianVf: number = U.medianArray(VfArray);
@@ -454,29 +432,19 @@ export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[
 // PR = Sf – Vf     : Eq.C.1.1 on P. 42
 export function calcDisproportionality(Vf: number, Sf: number): number
 {
-  const disProp = prop(Vf, Sf);
+  const disProp = calcProp(Vf, Sf);
 
   return disProp;
 }
 
 // The actual formula
-function prop(Vf: number, Sf: number): number
+function calcProp(Vf: number, Sf: number): number
 {
   const prop = Vf - Sf;
 
   return prop;
 }
 
-
-/* OBSOLETE - Re-worked above
-export function calcDisproportionality(Vf: number, Sf: number): number
-{
-  const prop = Vf - Sf;
-  // const prop = Sf - Vf;
-
-  return prop;
-}
-*/
 
 // BIG 'R': Defined in Footnote 22 on P. 10
 export function calcBigR(Vf: number, Sf: number): number | undefined

@@ -31,7 +31,7 @@ import
   estPartisanBias,
   calcEfficiencyGap,
   invertSVPoints, keyRVpoints, calcDeclination,
-  calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, estMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
+  calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, calcMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
   calcMinimalInverseResponsiveness
 } from '../../lib/partisan/bias'
 
@@ -80,8 +80,8 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const EG = calcEfficiencyGap(Vf, estSf);
   const BsGf = estGeometricSeatsBias(Vf, dSVpoints, rSVpoints);
   const prop = calcDisproportionality(Vf, estSf);
-  const mMs = estMeanMedianDifference(VfArray, Vf);
-  const mMd = estMeanMedianDifference(VfArray);
+  const mMs = calcMeanMedianDifference(VfArray, Vf);
+  const mMd = calcMeanMedianDifference(VfArray);
   const LO = calcLopsidedOutcomes(VfArray);
 
   // Calculate alternate responsiveness metrics for reference
