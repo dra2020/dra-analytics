@@ -184,6 +184,36 @@ export function estGeometricSeatsBias(Vf: number, dSVpoints: T.SVpoint[], rSVpoi
   return BsGf;
 }
 
+// The actual formula
+function geometricSeatsBias(ptD: T.SVpoint, ptR: T.SVpoint): number
+{
+  const Vf = ptD.v;
+  const sD = ptD.s;
+  const sR = ptR.s;
+
+  const BsGf = 0.5 * (sR - sD);
+
+  return BsGf;
+}
+
+export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): T.SVpoint[]
+{
+  const nPoints = dSVpoints.length;
+
+  let bgsSVpoints: T.SVpoint[] = [];
+
+  for (let i = 0; i < nPoints; i++)
+  {
+    const Vf = dSVpoints[i].v;
+    const BsGf = geometricSeatsBias(dSVpoints[i], rSVpoints[i]);
+
+    bgsSVpoints.push({v: Vf, s: BsGf});
+  }
+
+  return bgsSVpoints;
+}
+
+/* OBSOLETE - Re-worked above
 export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): T.SVpoint[]
 {
   const nPoints = dSVpoints.length;
@@ -203,6 +233,7 @@ export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints:
 
   return bgsSVpoints;
 }
+*/
 
 export function invertSVPoints(inferredSVpoints: T.SVpoint[]): T.SVpoint[]
 {
@@ -396,36 +427,12 @@ export function calcLopsidedOutcomes(VfArray: T.VfArray): number | undefined
 }
 
 
-// SYMMETRY over a range of V
-export function calcSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number, range: number[] = [0.0, 1.0]): number
-{
-  const minVf: number = range[0];
-  const maxVf: number = range[1];
-
-  const base: number = (maxVf - minVf) * 100;
-  let sym: number = 0.0;
-
-  for (let i in dSVpoints)
-  {
-    if ((dSVpoints[i].v >= minVf) && (dSVpoints[i].v <= maxVf))
-    {
-      sym += Math.abs(dSVpoints[i].s - rSVpoints[i].s) / 2;
-    }
-  }
-
-  const sign = (S50V < 0) ? -1 : 1;
-  sym *= sign;
-
-  return sym / base;
-}
-
 // GLOBAL SYMMETRY - Fig. 17 in Section 5.1
-export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
-{
-  return calcSymmetry(dSVpoints, rSVpoints, S50V);
-}
-
-/* OBSOLETE
+//
+// * gSym is the area of asymmetry between the two curves.
+// * The choice of what base to normalize it by is somewhat arbitrary.
+// * We actually only infer the S–V curver over the range [0.25–0.75] <<< 101 points (not 100!)
+// * But dividing by 100 normalizes the area of asymmetry to the area of the SxV unit square.
 export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
 {
   let gSym: number = 0.0;
@@ -440,7 +447,6 @@ export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[
 
   return gSym / 100;
 }
-*/
 
 
 // RAW DISPROPORTIONALITY
@@ -448,11 +454,29 @@ export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[
 // PR = Sf – Vf     : Eq.C.1.1 on P. 42
 export function calcDisproportionality(Vf: number, Sf: number): number
 {
+  const disProp = prop(Vf, Sf);
+
+  return disProp;
+}
+
+// The actual formula
+function prop(Vf: number, Sf: number): number
+{
+  const prop = Vf - Sf;
+
+  return prop;
+}
+
+
+/* OBSOLETE - Re-worked above
+export function calcDisproportionality(Vf: number, Sf: number): number
+{
   const prop = Vf - Sf;
   // const prop = Sf - Vf;
 
   return prop;
 }
+*/
 
 // BIG 'R': Defined in Footnote 22 on P. 10
 export function calcBigR(Vf: number, Sf: number): number | undefined
