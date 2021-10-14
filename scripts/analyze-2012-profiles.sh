@@ -1,6 +1,10 @@
 #!/bin/bash
 #
 # Score Nagle's 2012 sample states
+#
+# Example:
+#
+# ./scripts/analyze-2012-profiles.sh
 
 ./cli/partisan.js -x CA -n CA-2012 -i testdata/partisan/nagle/partisan-CA-2012.json -c -h
 ./cli/partisan.js -x MA -n MA-2012 -i testdata/partisan/nagle/partisan-MA-2012.json -c

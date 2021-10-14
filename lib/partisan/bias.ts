@@ -41,6 +41,9 @@ import {Utils} from '../all/all';
 
 * B% [bias] = the bias calculated as S% – ^S%
 
+* LS [lSym] = average local asymmetry
+* LPR [lProp] = average local disproportionality
+
 */
 
 
@@ -500,7 +503,7 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 }
 
 
-// EXPERIMENTAL METRICS
+// EXPERIMENTAL
 
 // Average local asymmetry
 export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined

@@ -32,7 +32,9 @@ import
   calcEfficiencyGap,
   invertSVPoints, keyRVpoints, calcDeclination,
   calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, calcMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
-  calcMinimalInverseResponsiveness
+  calcMinimalInverseResponsiveness,
+  // EXPERIMENTAL
+  estLocalAsymmetry, estLocalDisproportionality
 } from '../../lib/partisan/bias'
 
 import
@@ -99,6 +101,11 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const cD = estCompetitiveDistricts(VfArray);
   const cDf = estCompetitiveDistrictsShare(cD, N);
 
+  // EXPERIMENTAL
+
+  const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
+  const lProp = estLocalDisproportionality(Vf, dSVpoints);
+
   const biasMeasurements: T.Bias = {
     bestS: bestS,
     bestSf: bestSf,
@@ -144,6 +151,11 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const averageDVf = (DWins.length > 0) ? U.avgArray(DWins) : undefined;
   const averageRVf = (RWins.length > 0) ? U.avgArray(RWins) : undefined;
 
+  const experimentalMetrics: T.Experimental = {
+    lSym: lSym,
+    lProp: lProp
+  };
+
   const s: T.PartisanScorecard = {
     bias: biasMeasurements,
     impact: impactMeasurements,
@@ -152,6 +164,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
     rSVpoints: rSVpoints,
     averageDVf: averageDVf,
     averageRVf: averageRVf,
+    experimental: experimentalMetrics,
     details: {}
   };
 

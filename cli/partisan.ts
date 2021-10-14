@@ -123,12 +123,12 @@ function trim(fullFraction: number, digits: number | undefined = undefined): num
 // Generate partisan details (Table 1)
 export function printPartisanDetailsHeader(): void
 {
-  console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf');
+  console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR');
 }
 
 export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf: number, s: T.PartisanScorecard): void
 {
-  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
+  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
     xx,
 
     trim(Vf),
@@ -153,37 +153,10 @@ export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf:
     (s.responsiveness.mIR) ? trim(s.responsiveness.mIR) : s.responsiveness.mIR,              // Zeta
 
     trim(s.responsiveness.cD),
-    trim(s.responsiveness.cDf)
+    trim(s.responsiveness.cDf),
+
+    // EXPERIMENTAL
+    (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
+    (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp
   );
 }
-
-// export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf: number, s: T.PartisanScorecard): void
-// {
-//   console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
-//     xx,
-
-//     Vf,
-//     s.bias.estSf,
-//     s.bias.deviation,                // Simple deviation from proportionality
-
-//     s.bias.bS50,
-//     s.bias.bV50,
-//     s.bias.decl,
-//     s.bias.gSym,
-//     s.bias.eG,
-//     s.bias.bSV,                      // Beta
-//     s.bias.prop,                     // PR
-//     s.bias.mMs,
-//     s.bias.tOf,
-//     s.bias.mMd,
-//     s.bias.lO,
-
-//     s.responsiveness.rD,
-//     s.responsiveness.bigR,
-//     s.responsiveness.littleR,
-//     s.responsiveness.mIR,           // Zeta
-
-//     s.responsiveness.cD,            // COMPETITIVENESS - Temporary to confirm new calc
-//     s.responsiveness.cDf
-//   );
-// }
