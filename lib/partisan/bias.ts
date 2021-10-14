@@ -542,7 +542,7 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
   // Divide each by 2, because each point represents 1/2 a percent (not a whole one)
   for (let i in dSVpoints)
   {
-    lProp += calcProp(dSVpoints[i].s, dSVpoints[i].v) / 2;
+    lProp += calcProp(dSVpoints[i].v, dSVpoints[i].s) / 2;
   }
 
   return lProp / nPts;
@@ -552,11 +552,11 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
 // Make sure that range is w/in the full range.
 function filterSVpoints(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
 {
-  // let subsetPts: T.SVpoint[] = Utils.deepCopy(svPoints);
-
-  const svRange: number[] = [0.25, 0.75];
-  const localWindow: number = 5;           // # of percentage points wide, i.e., Vf +/– half that
-  const delta: number = localWindow / 2;
+  const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
+  const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
+  const localWindow: number = 5 / 100;               // # of % points wide as a fraction
+  const plusMinus: number = localWindow / 2;         // +/– % as a fraction
+  const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
 
   if ((Vf < svRange[0]) || (Vf > svRange[1])) return undefined;
 
