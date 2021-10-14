@@ -519,9 +519,9 @@ export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints:
 
   // Sum the geometric seats bias for each point
   // Divide each difference by 2, because each point represents 1/2 a percent (not a whole one)
-  for (let i in dSVpoints)
+  for (let i in dPts)
   {
-    lSym += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s) / 2;
+    lSym += calcGeometricSeatsBias(dPts[i].s, rPts[i].s) / 2;
   }
 
   return lSym / nPts;
@@ -540,9 +540,9 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
 
   // Sum the disproportionality for each point
   // Divide each by 2, because each point represents 1/2 a percent (not a whole one)
-  for (let i in dSVpoints)
+  for (let i in dPts)
   {
-    lProp += calcProp(dSVpoints[i].v, dSVpoints[i].s) / 2;
+    lProp += calcProp(dPts[i].v, dPts[i].s) / 2;
   }
 
   return lProp / nPts;
