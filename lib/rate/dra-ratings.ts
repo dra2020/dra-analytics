@@ -4,6 +4,7 @@
 
 import * as C from './dra-config';
 import {Normalizer} from '../rate/normalize';
+import {avgSVError} from '../partisan/method';
 import * as T from '../types/all'
 
 
@@ -87,7 +88,6 @@ export function adjustDeviation(Vf: number, disproportionality: number, extra: n
   return adjusted;
 }
 
-export const avgSVError = 0.02;
 export function isAntimajoritarian(Vf: number, Sf: number): boolean
 {
   const bDem = ((Vf < (0.5 - avgSVError)) && (Sf > 0.5)) ? true : false;

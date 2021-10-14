@@ -15,7 +15,6 @@ export
   // For use in DRA client UI
   ratePartisanBias,
   isAntimajoritarian,
-  avgSVError,
 
   popdevThreshold
 } from '../rate/all';
