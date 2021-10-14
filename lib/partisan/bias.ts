@@ -14,6 +14,7 @@ import
   findBracketingLowerSf, findBracketingUpperSf,
   estFPTPSeats
 } from './method';
+import {Utils} from '../all/all';
 
 
 /* Metrics:
@@ -185,12 +186,8 @@ export function estGeometricSeatsBias(Vf: number, dSVpoints: T.SVpoint[], rSVpoi
 }
 
 // The actual formula
-function calcGeometricSeatsBias(ptD: T.SVpoint, ptR: T.SVpoint): number
+function calcGeometricSeatsBias(sD: number, sR: number): number
 {
-  const Vf = ptD.v;
-  const sD = ptD.s;
-  const sR = ptR.s;
-
   const BsGf = 0.5 * (sR - sD);
 
   return BsGf;
@@ -205,7 +202,7 @@ export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints:
   for (let i = 0; i < nPoints; i++)
   {
     const Vf = dSVpoints[i].v;
-    const BsGf = calcGeometricSeatsBias(dSVpoints[i], rSVpoints[i]);
+    const BsGf = calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
 
     bgsSVpoints.push({v: Vf, s: BsGf});
   }
@@ -500,4 +497,62 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
   const g = 0.5 + (r * (Vf - 0.5)) - Sf;
 
   return g;
+}
+
+
+// EXPERIMENTAL METRICS
+
+// Average local asymmetry
+export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = filterSVpoints(dSVpoints);  // TODO - args
+  const rPts = filterSVpoints(rSVpoints);  // TODO - args
+
+  if (!dPts || !rPts) return undefined;
+
+  const nPts: number = dPts.length;
+
+  let lSym: number = 0.0;
+
+  // Sum the geometric seats bias for each point
+  // Divide each difference by 2, because each point represents 1/2 a percent (not a whole one)
+  for (let i in dSVpoints)
+  {
+    lSym += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s) / 2;
+  }
+
+  return lSym / nPts;
+}
+
+// Average local disproportionality
+export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = filterSVpoints(dSVpoints);  // TODO - args
+
+  if (!dPts) return undefined;
+
+  const nPts: number = dPts.length;
+
+  let lProp: number = 0.0;
+
+  // Sum the disproportionality for each point
+  // Divide each by 2, because each point represents 1/2 a percent (not a whole one)
+  for (let i in dSVpoints)
+  {
+    lProp += calcProp(dSVpoints[i].s, dSVpoints[i].v) / 2;
+  }
+
+  return lProp / nPts;
+}
+
+function filterSVpoints(svPoints: T.SVpoint[]): T.SVpoint[] | undefined
+{
+  let subsetPts: T.SVpoint[] = Utils.deepCopy(svPoints);
+
+  // TODO - subset the points
+  // * Window
+  // * Range
+  // * Undefined
+
+  return subsetPts;
 }
