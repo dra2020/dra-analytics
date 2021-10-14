@@ -521,7 +521,7 @@ export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints:
   // Divide each difference by 2, because each point represents 1/2 a percent (not a whole one)
   for (let i in dPts)
   {
-    lSym += calcGeometricSeatsBias(dPts[i].s, rPts[i].s) / 2;
+    lSym += calcGeometricSeatsBias(dPts[i].s, rPts[i].s);
   }
 
   return lSym / nPts;
@@ -542,7 +542,7 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
   // Divide each by 2, because each point represents 1/2 a percent (not a whole one)
   for (let i in dPts)
   {
-    lProp += calcProp(dPts[i].v, dPts[i].s) / 2;
+    lProp += calcProp(dPts[i].v, dPts[i].s);
   }
 
   return lProp / nPts;
@@ -554,7 +554,7 @@ function filterSVpoints(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefi
 {
   const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
   const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
-  const localWindow: number = 5 / 100;               // # of % points wide as a fraction
+  const localWindow: number = 5 / 100;               // # of % points wide as a fraction - more than 2x avgSVError
   const plusMinus: number = localWindow / 2;         // +/– % as a fraction
   const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
 
