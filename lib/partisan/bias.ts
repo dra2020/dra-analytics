@@ -508,8 +508,8 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 // Average local asymmetry
 export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = filterSVpoints(dSVpoints);  // TODO - args
-  const rPts = filterSVpoints(rSVpoints);  // TODO - args
+  const dPts = filterSVpoints(Vf, dSVpoints);
+  const rPts = filterSVpoints(Vf, rSVpoints);
 
   if (!dPts || !rPts) return undefined;
 
@@ -530,7 +530,7 @@ export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints:
 // Average local disproportionality
 export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = filterSVpoints(dSVpoints);  // TODO - args
+  const dPts = filterSVpoints(Vf, dSVpoints);
 
   if (!dPts) return undefined;
 
@@ -548,14 +548,28 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
   return lProp / nPts;
 }
 
-function filterSVpoints(svPoints: T.SVpoint[]): T.SVpoint[] | undefined
+// Filter the full [0.25–0.75] range of S–V points down to the 'local' range.
+// Make sure that range is w/in the full range.
+function filterSVpoints(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
 {
-  let subsetPts: T.SVpoint[] = Utils.deepCopy(svPoints);
+  // let subsetPts: T.SVpoint[] = Utils.deepCopy(svPoints);
 
-  // TODO - subset the points
-  // * Window
-  // * Range
-  // * Undefined
+  const svRange: number[] = [0.25, 0.75];
+  const localWindow: number = 5;           // # of percentage points wide, i.e., Vf +/– half that
+  const delta: number = localWindow / 2;
+
+  if ((Vf < svRange[0]) || (Vf > svRange[1])) return undefined;
+
+  const bracketingVs: number[] = [
+    findBracketingLowerVf(Vf, svPoints).v,
+    findBracketingUpperVf(Vf, svPoints).v
+  ];
+
+  const localRange: number[] = [bracketingVs[0] - delta, bracketingVs[1] + delta];
+
+  const subsetPts: T.SVpoint[] = svPoints.filter(x => inRange(x, localRange));
 
   return subsetPts;
 }
+
+const inRange = (pt: T.SVpoint, range: number[]): boolean => {return (pt.v >= range[0]) && (pt.v <= range[1]);}
