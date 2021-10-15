@@ -57,6 +57,9 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const bestS = bestSeats(N, Vf);
   const bestSf = bestSeatShare(bestS, N);
 
+  // EXPERIMENTAL
+  if (bLog) console.log("Best # seats = ", bestS);
+
   const fptpS = estFPTPSeats(VfArray);
 
   const estS = estSeats(VfArray);
@@ -105,7 +108,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
 
   const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
   const lProp = estLocalDisproportionality(Vf, dSVpoints);
-  const lPropAlt = estLocalDisproportionalityAlt(Vf, bestSf, dSVpoints);
+  const lPropAlt = estLocalDisproportionalityAlt(Vf, N, dSVpoints);
 
   const biasMeasurements: T.Bias = {
     bestS: bestS,

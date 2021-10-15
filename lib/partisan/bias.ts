@@ -513,7 +513,6 @@ export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints:
 
   if (!dPts || !rPts) return undefined;
 
-  const nPts: number = dPts.length;
   const lSym: number = rangeAsymmetry(dPts, rPts);
 
   return lSym;
@@ -543,7 +542,6 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
 
   if (!dPts) return undefined;
 
-  const nPts: number = dPts.length;
   const lProp: number = rangeDisproportionality(dPts);
 
   return lProp;
@@ -564,27 +562,39 @@ export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
 }
 
 // Average local disproportionality from the best # of seats (closest to proportional)
-export function estLocalDisproportionalityAlt(Vf: number, bestSf: number, dSVpoints: T.SVpoint[]): number | undefined
+export function estLocalDisproportionalityAlt(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
 {
   const dPts = svPointRange(Vf, dSVpoints);
 
   if (!dPts) return undefined;
 
-  const nPts: number = dPts.length;
-  const lPropAlt: number = rangeDisproportionalityAlt(bestSf, dPts);
+  const lPropAlt: number = rangeDisproportionalityAlt(N, dPts);
 
   return lPropAlt;
 }
 
-export function rangeDisproportionalityAlt(bestSf: number, dSVpoints: T.SVpoint[]): number
+// Dynamically calculate the best # seats, so this is a step function
+export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): number
 {
   const ndPts: number = dSVpoints.length;
 
   let tot: number = 0.0;
+  let lastBestS: number | undefined;
 
   for (let i in dSVpoints)
   {
+    const bestS = bestSeats(N, dSVpoints[i].v);
+    const bestSf = bestSeatShare(bestS, N);
+
     tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
+
+    // DEBUG
+    {
+      if (lastBestS && (bestS != lastBestS)) console.log("Best # seats changes to ", bestS, " at ", dSVpoints[i].v, " vote share. ");
+
+      const j: number = +i;
+      if (j > 0) lastBestS = bestS;
+    }
   }
 
   return tot / ndPts;
