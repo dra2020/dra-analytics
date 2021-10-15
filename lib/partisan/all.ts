@@ -34,7 +34,7 @@ import
   calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, calcMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
   calcMinimalInverseResponsiveness,
   // EXPERIMENTAL
-  estLocalAsymmetry, estLocalDisproportionality
+  estLocalAsymmetry, estLocalDisproportionality, estLocalDisproportionalityAlt
 } from '../../lib/partisan/bias'
 
 import
@@ -105,6 +105,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
 
   const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
   const lProp = estLocalDisproportionality(Vf, dSVpoints);
+  const lPropAlt = estLocalDisproportionalityAlt(Vf, bestSf, dSVpoints);
 
   const biasMeasurements: T.Bias = {
     bestS: bestS,
@@ -153,7 +154,8 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
 
   const experimentalMetrics: T.Experimental = {
     lSym: lSym,
-    lProp: lProp
+    lProp: lProp,
+    lPropAlt: lPropAlt
   };
 
   const s: T.PartisanScorecard = {

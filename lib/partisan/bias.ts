@@ -508,49 +508,91 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 // Average local asymmetry
 export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = filterSVpoints(Vf, dSVpoints);
-  const rPts = filterSVpoints(Vf, rSVpoints);
+  const dPts = svPointRange(Vf, dSVpoints);
+  const rPts = svPointRange(Vf, rSVpoints);
 
   if (!dPts || !rPts) return undefined;
 
   const nPts: number = dPts.length;
+  const tot: number = rangeAsymmetry(dSVpoints, rSVpoints);
 
-  let lSym: number = 0.0;
+  return tot / nPts;
+}
 
-  // Sum the geometric seats bias for each point
-  // Divide each difference by 2, because each point represents 1/2 a percent (not a whole one)
-  for (let i in dPts)
+export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+  const nrPts: number = rSVpoints.length;
+
+  console.assert(ndPts == nrPts, "# of D & R points don't match: ", ndPts, nrPts);
+
+  let tot: number = 0.0;
+
+  for (let i in dSVpoints)
   {
-    lSym += calcGeometricSeatsBias(dPts[i].s, rPts[i].s);
+    tot += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
   }
 
-  return lSym / nPts;
+  return tot / ndPts;
 }
 
 // Average local disproportionality
 export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = filterSVpoints(Vf, dSVpoints);
+  const dPts = svPointRange(Vf, dSVpoints);
 
   if (!dPts) return undefined;
 
   const nPts: number = dPts.length;
+  const tot: number = rangeDisproportionality(dSVpoints);
 
-  let lProp: number = 0.0;
+  return tot / nPts;
+}
 
-  // Sum the disproportionality for each point
-  // Divide each by 2, because each point represents 1/2 a percent (not a whole one)
-  for (let i in dPts)
+export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+
+  let tot: number = 0.0;
+
+  for (let i in dSVpoints)
   {
-    lProp += calcProp(dPts[i].v, dPts[i].s);
+    tot += calcProp(dSVpoints[i].v, dSVpoints[i].s);
   }
 
-  return lProp / nPts;
+  return tot / ndPts;
+}
+
+// Average local disproportionality from the best # of seats (closest to proportional)
+export function estLocalDisproportionalityAlt(Vf: number, bestSf: number, dSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = svPointRange(Vf, dSVpoints);
+
+  if (!dPts) return undefined;
+
+  const nPts: number = dPts.length;
+  const tot: number = rangeDisproportionalityAlt(bestSf, dSVpoints);
+
+  return tot / nPts;
+}
+
+export function rangeDisproportionalityAlt(bestSf: number, dSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+
+  let tot: number = 0.0;
+
+  for (let i in dSVpoints)
+  {
+    tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
+  }
+
+  return tot / ndPts;
 }
 
 // Filter the full [0.25–0.75] range of S–V points down to the 'local' range.
 // Make sure that range is w/in the full range.
-function filterSVpoints(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
+function svPointRange(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
 {
   const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
   const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent

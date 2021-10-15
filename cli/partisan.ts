@@ -123,12 +123,12 @@ function trim(fullFraction: number, digits: number | undefined = undefined): num
 // Generate partisan details (Table 1)
 export function printPartisanDetailsHeader(): void
 {
-  console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR');
+  console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR, LPR\'');
 }
 
 export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf: number, s: T.PartisanScorecard): void
 {
-  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
+  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
     xx,
 
     trim(Vf),
@@ -157,6 +157,7 @@ export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf:
 
     // EXPERIMENTAL
     (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
-    (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp
+    (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp,
+    (s.experimental.lPropAlt) ? trim(s.experimental.lPropAlt) : s.experimental.lPropAlt
   );
 }

@@ -83,7 +83,8 @@ export type Responsiveness = {
 
 export type Experimental = {
   lSym?: number,
-  lProp?: number
+  lProp?: number,
+  lPropAlt?: number
 }
 
 
