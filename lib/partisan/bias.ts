@@ -514,9 +514,9 @@ export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints:
   if (!dPts || !rPts) return undefined;
 
   const nPts: number = dPts.length;
-  const tot: number = rangeAsymmetry(dPts, rPts);
+  const lSym: number = rangeAsymmetry(dPts, rPts);
 
-  return tot / nPts;
+  return lSym;
 }
 
 export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
@@ -544,9 +544,9 @@ export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): 
   if (!dPts) return undefined;
 
   const nPts: number = dPts.length;
-  const tot: number = rangeDisproportionality(dPts);
+  const lProp: number = rangeDisproportionality(dPts);
 
-  return tot / nPts;
+  return lProp;
 }
 
 export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
@@ -571,9 +571,9 @@ export function estLocalDisproportionalityAlt(Vf: number, bestSf: number, dSVpoi
   if (!dPts) return undefined;
 
   const nPts: number = dPts.length;
-  const tot: number = rangeDisproportionalityAlt(bestSf, dPts);
+  const lPropAlt: number = rangeDisproportionalityAlt(bestSf, dPts);
 
-  return tot / nPts;
+  return lPropAlt;
 }
 
 export function rangeDisproportionalityAlt(bestSf: number, dSVpoints: T.SVpoint[]): number
