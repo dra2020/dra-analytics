@@ -123,37 +123,42 @@ function trim(fullFraction: number, digits: number | undefined = undefined): num
 // Generate partisan details (Table 1)
 export function printPartisanDetailsHeader(): void
 {
-  console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR, LPR\'');
+  console.log('XX, <V>, S(<V>), Rd, R, r, MIR, Cd, Cdf, BS_50, BV_50, Decl, GS, 𝛾, β, LO, EG, PR, MM, TO, MM\', B%, LS, LPR, LPR\'');
+  // console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR, LPR\'');
 }
 
 export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf: number, s: T.PartisanScorecard): void
 {
-  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
+  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
     xx,
 
     trim(Vf),
     trim(s.bias.estSf),
-    trim(s.bias.deviation),                                                                  // Simple deviation from proportionality
+
+    trim(s.responsiveness.rD),
+    (s.responsiveness.bigR) ? trim(s.responsiveness.bigR) : s.responsiveness.bigR,           // Not shown in Table 1
+    (s.responsiveness.littleR) ? trim(s.responsiveness.littleR) : s.responsiveness.littleR,  // Not shown in Table 1
+    (s.responsiveness.mIR) ? trim(s.responsiveness.mIR) : s.responsiveness.mIR,              // Not shown in Table 1 <<< Zeta
+
+    trim(s.responsiveness.cD),                                                               // Not shown in Table 1
+    trim(s.responsiveness.cDf),                                                              // Not shown in Table 1
 
     trim(s.bias.bS50),
     (s.bias.bV50) ? trim(s.bias.bV50) : s.bias.bV50,
     (s.bias.decl) ? trim(s.bias.decl) : s.bias.decl,
     trim(s.bias.gSym),
-    trim(s.bias.eG),
+    (s.bias.gamma) ? trim(s.bias.gamma) : s.bias.gamma,
+
     (s.bias.bSV) ? trim(s.bias.bSV) : s.bias.bSV,                                            // Beta
-    trim(s.bias.prop),                                                                       // PR
-    trim(s.bias.mMs),
-    trim(s.bias.tOf),
-    trim(s.bias.mMd),
     (s.bias.lO) ? trim(s.bias.lO) : s.bias.lO,
+    trim(s.bias.prop),                                                                       // PR
+    trim(s.bias.eG),
 
-    trim(s.responsiveness.rD),
-    (s.responsiveness.bigR) ? trim(s.responsiveness.bigR) : s.responsiveness.bigR,
-    (s.responsiveness.littleR) ? trim(s.responsiveness.littleR) : s.responsiveness.littleR,
-    (s.responsiveness.mIR) ? trim(s.responsiveness.mIR) : s.responsiveness.mIR,              // Zeta
+    trim(s.bias.mMs),                                                                        // Not shown in Table 1
+    trim(s.bias.tOf),                                                                        // Not shown in Table 1
+    trim(s.bias.mMd),                                                                        // Not shown in Table 1
 
-    trim(s.responsiveness.cD),
-    trim(s.responsiveness.cDf),
+    trim(s.bias.deviation),                                                                  // Simple deviation from best # of seats
 
     // EXPERIMENTAL
     (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
