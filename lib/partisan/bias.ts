@@ -505,6 +505,8 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 
 // EXPERIMENTAL
 
+const pctWidth = 5;  // The size in % points of the 'local' window to bracket <V>
+
 // Average local asymmetry
 export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
 {
@@ -611,7 +613,7 @@ function svPointRange(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefine
 {
   const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
   const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
-  const localWindow: number = 5 / 100;               // # of % points wide as a fraction - more than 2x avgSVError
+  const localWindow: number = pctWidth / 100;        // # of % points wide as a fraction
   const plusMinus: number = localWindow / 2;         // +/– % as a fraction
   const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
 
