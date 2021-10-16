@@ -79,6 +79,15 @@ export type Responsiveness = {
 }
 
 
+// EXPERIMENTAL
+
+export type Experimental = {
+  lSym?: number,
+  lProp?: number,
+  lPropAlt?: number
+}
+
+
 // COMBINED SCORECARD
 
 export type PartisanScorecard = {
@@ -89,6 +98,7 @@ export type PartisanScorecard = {
   rSVpoints: SVpoint[],
   averageDVf: number | undefined,
   averageRVf: number | undefined,
+  experimental: Experimental,
   details: T.Dict
 }
 

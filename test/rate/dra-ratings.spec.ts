@@ -16,6 +16,8 @@ import
   rateSplittingLegacy, rateCountySplittingLegacy, rateDistrictSplittingLegacy, countySplitBest, countySplitWorst
 } from '../../lib/rate/dra-ratings';
 
+import {avgSVError} from '../../lib/partisan/method';
+
 import * as C from '../../lib/rate/dra-config';
 import * as U from '../../lib/utils/all';
 import * as T from '../../lib/types/all'
@@ -159,7 +161,6 @@ describe('Adjust disproportionality for statewide vote share', () =>
 
 describe('Detect antimajoritarian results', () =>
 {
-  const avgSVError = 0.02;
   test('Dem antimajoritarian', () =>
   {
     expect(isAntimajoritarian(0.5 - avgSVError - U.EPSILON, 0.50 + U.EPSILON)).toBe(true);

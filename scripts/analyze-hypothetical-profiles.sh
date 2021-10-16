@@ -1,6 +1,10 @@
 #!/bin/bash
 #
 # Score Warrington's hypothetical partisan profiles
+#
+# Example:
+#
+# ./scripts/analyze-hypothetical-profiles.sh
 
 ./cli/partisan.js -x A -n 1-iroportionality -i testdata/partisan/warrington/partisan-Hypothetical-A.json -c -h
 ./cli/partisan.js -x B -n 2-iroportionality -i testdata/partisan/warrington/partisan-Hypothetical-B.json -c

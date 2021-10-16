@@ -14,6 +14,7 @@ import
   findBracketingLowerSf, findBracketingUpperSf,
   estFPTPSeats
 } from './method';
+import {Utils} from '../all/all';
 
 
 /* Metrics:
@@ -39,6 +40,9 @@ import
 * LO [LO] = Lopsided outcomes
 
 * B% [bias] = the bias calculated as S% – ^S%
+
+* LS [lSym] = average local asymmetry
+* LPR [lProp] = average local disproportionality
 
 */
 
@@ -184,6 +188,14 @@ export function estGeometricSeatsBias(Vf: number, dSVpoints: T.SVpoint[], rSVpoi
   return BsGf;
 }
 
+// The actual formula
+function calcGeometricSeatsBias(sD: number, sR: number): number
+{
+  const BsGf = 0.5 * (sR - sD);
+
+  return BsGf;
+}
+
 export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): T.SVpoint[]
 {
   const nPoints = dSVpoints.length;
@@ -193,10 +205,7 @@ export function inferGeometricSeatsBiasPoints(dSVpoints: T.SVpoint[], rSVpoints:
   for (let i = 0; i < nPoints; i++)
   {
     const Vf = dSVpoints[i].v;
-
-    const sD = dSVpoints[i].s;
-    const sR = rSVpoints[i].s;
-    const BsGf = 0.5 * (sR - sD);
+    const BsGf = calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
 
     bgsSVpoints.push({v: Vf, s: BsGf});
   }
@@ -272,7 +281,7 @@ export function calcEfficiencyGap(Vf: number, Sf: number, shareType = T.Party.De
 // So:
 // * With D VPI, '+' = R bias; '-' = D bias <<< We're using this convention.
 // * With R VPI, '-' = R bias; '+' = D bias.
-export function estMeanMedianDifference(VfArray: T.VfArray, Vf?: number): number
+export function calcMeanMedianDifference(VfArray: T.VfArray, Vf?: number): number
 {
   const meanVf = Vf ? Vf : U.avgArray(VfArray);
   const medianVf: number = U.medianArray(VfArray);
@@ -395,7 +404,13 @@ export function calcLopsidedOutcomes(VfArray: T.VfArray): number | undefined
   return LO;
 }
 
+
 // GLOBAL SYMMETRY - Fig. 17 in Section 5.1
+//
+// * gSym is the area of asymmetry between the two curves.
+// * The choice of what base to normalize it by is somewhat arbitrary.
+// * We actually only infer the S–V curver over the range [0.25–0.75] <<< 101 points (not 100!)
+// * But dividing by 100 normalizes the area of asymmetry to the area of the SxV unit square.
 export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
 {
   let gSym: number = 0.0;
@@ -411,16 +426,25 @@ export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[
   return gSym / 100;
 }
 
+
 // RAW DISPROPORTIONALITY
 //
 // PR = Sf – Vf     : Eq.C.1.1 on P. 42
 export function calcDisproportionality(Vf: number, Sf: number): number
 {
+  const disProp = calcProp(Vf, Sf);
+
+  return disProp;
+}
+
+// The actual formula
+function calcProp(Vf: number, Sf: number): number
+{
   const prop = Vf - Sf;
-  // const prop = Sf - Vf;
 
   return prop;
 }
+
 
 // BIG 'R': Defined in Footnote 22 on P. 10
 export function calcBigR(Vf: number, Sf: number): number | undefined
@@ -477,3 +501,132 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 
   return g;
 }
+
+
+// EXPERIMENTAL
+
+// Average local asymmetry
+export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = svPointRange(Vf, dSVpoints);
+  const rPts = svPointRange(Vf, rSVpoints);
+
+  if (!dPts || !rPts) return undefined;
+
+  const lSym: number = rangeAsymmetry(dPts, rPts);
+
+  return lSym;
+}
+
+export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+  const nrPts: number = rSVpoints.length;
+
+  console.assert(ndPts == nrPts, "# of D & R points don't match: ", ndPts, nrPts);
+
+  let tot: number = 0.0;
+
+  for (let i in dSVpoints)
+  {
+    tot += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
+  }
+
+  return tot / ndPts;
+}
+
+// Average local disproportionality
+export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = svPointRange(Vf, dSVpoints);
+
+  if (!dPts) return undefined;
+
+  const lProp: number = rangeDisproportionality(dPts);
+
+  return lProp;
+}
+
+export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+
+  let tot: number = 0.0;
+
+  for (let i in dSVpoints)
+  {
+    tot += calcProp(dSVpoints[i].v, dSVpoints[i].s);
+  }
+
+  return tot / ndPts;
+}
+
+// Average local disproportionality from the best # of seats (closest to proportional)
+export function estLocalDisproportionalityAlt(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
+{
+  const dPts = svPointRange(Vf, dSVpoints);
+
+  if (!dPts) return undefined;
+
+  const lPropAlt: number = rangeDisproportionalityAlt(N, dPts);
+
+  return lPropAlt;
+}
+
+// Dynamically calculate the best # seats, so this is a step function
+export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): number
+{
+  const ndPts: number = dSVpoints.length;
+
+  let tot: number = 0.0;
+  let lastBestS: number | undefined;
+
+  for (let i in dSVpoints)
+  {
+    const bestS = bestSeats(N, dSVpoints[i].v);
+    const bestSf = bestSeatShare(bestS, N);
+
+    tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
+
+    /* DEBUG
+    {
+      if (lastBestS && (bestS != lastBestS)) console.log("Best # seats changes to ", bestS, bestSf, " at ", dSVpoints[i].v, " vote share. ");
+
+      const j: number = +i;
+      if (j == 0)
+      {
+        console.log("Best # seats starts @ ", bestS, bestSf, " at ", dSVpoints[i].v, " vote share. ");
+      }
+      else lastBestS = bestS;
+    }
+    */
+  }
+
+  return tot / ndPts;
+}
+
+// Filter the full [0.25–0.75] range of S–V points down to the 'local' range.
+// Make sure that range is w/in the full range.
+function svPointRange(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
+{
+  const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
+  const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
+  const localWindow: number = 5 / 100;               // # of % points wide as a fraction - more than 2x avgSVError
+  const plusMinus: number = localWindow / 2;         // +/– % as a fraction
+  const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
+
+  if ((Vf < svRange[0]) || (Vf > svRange[1])) return undefined;
+
+  const bracketingVs: number[] = [
+    findBracketingLowerVf(Vf, svPoints).v,
+    findBracketingUpperVf(Vf, svPoints).v
+  ];
+
+  const localRange: number[] = [bracketingVs[0] - delta, bracketingVs[1] + delta];
+
+  const subsetPts: T.SVpoint[] = svPoints.filter(x => inRange(x, localRange));
+
+  return subsetPts;
+}
+
+const inRange = (pt: T.SVpoint, range: number[]): boolean => {return (pt.v >= range[0]) && (pt.v <= range[1]);}

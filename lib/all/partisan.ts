@@ -9,5 +9,7 @@ export
 
   estSeatProbability,
   estDistrictResponsiveness,
-  fptpWin
+  fptpWin,
+
+  avgSVError
 } from '../partisan/all';

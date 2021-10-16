@@ -63,6 +63,7 @@ export function estDistrictResponsiveness(Vf: number): number
   return 1.0 - 4.0 * (estSeatProbability(Vf) - 0.5) ** 2;
 }
 
+export const avgSVError = 0.02;
 export function inferSVpoints(Vf: number, VfArray: T.VfArray, shift: T.Shift, range?: number[]): T.SVpoint[]
 {
   const nDistricts = VfArray.length;
