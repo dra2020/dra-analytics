@@ -6,9 +6,9 @@
 #
 # ./scripts/analyze-hypothetical-profiles.sh
 
-./cli/partisan.js -x A -n 1-iroportionality -i testdata/partisan/warrington/partisan-Hypothetical-A.json -c -h
-./cli/partisan.js -x B -n 2-iroportionality -i testdata/partisan/warrington/partisan-Hypothetical-B.json -c
-./cli/partisan.js -x C -n 3-iroportionality -i testdata/partisan/warrington/partisan-Hypothetical-C.json -c
+./cli/partisan.js -x A -n 1-Proportionality -i testdata/partisan/warrington/partisan-Hypothetical-A.json -c -h
+./cli/partisan.js -x B -n 2-Proportionality -i testdata/partisan/warrington/partisan-Hypothetical-B.json -c
+./cli/partisan.js -x C -n 3-Proportionality -i testdata/partisan/warrington/partisan-Hypothetical-C.json -c
 ./cli/partisan.js -x D -n Sweep -i testdata/partisan/warrington/partisan-Hypothetical-D.json -c
 ./cli/partisan.js -x E -n Competitive -i testdata/partisan/warrington/partisan-Hypothetical-E.json -c
 ./cli/partisan.js -x F -n Competitive\ even -i testdata/partisan/warrington/partisan-Hypothetical-F.json -c
