@@ -57,8 +57,8 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const bestS = bestSeats(N, Vf);
   const bestSf = bestSeatShare(bestS, N);
 
-  // EXPERIMENTAL
-  if (bLog) console.log("Best # seats = ", bestS);
+  // DEBUG
+  // console.log("Best # seats = ", bestS, bestSf);
 
   const fptpS = estFPTPSeats(VfArray);
 

@@ -588,13 +588,18 @@ export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): n
 
     tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
 
-    // DEBUG
+    /* DEBUG
     {
-      if (lastBestS && (bestS != lastBestS)) console.log("Best # seats changes to ", bestS, " at ", dSVpoints[i].v, " vote share. ");
+      if (lastBestS && (bestS != lastBestS)) console.log("Best # seats changes to ", bestS, bestSf, " at ", dSVpoints[i].v, " vote share. ");
 
       const j: number = +i;
-      if (j > 0) lastBestS = bestS;
+      if (j == 0)
+      {
+        console.log("Best # seats starts @ ", bestS, bestSf, " at ", dSVpoints[i].v, " vote share. ");
+      }
+      else lastBestS = bestS;
     }
+    */
   }
 
   return tot / ndPts;
