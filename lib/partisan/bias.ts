@@ -510,14 +510,22 @@ const pctWidth = 5;  // The size in % points of the 'local' window to bracket <V
 // Average local asymmetry
 export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = svPointRange(Vf, dSVpoints);
-  const rPts = svPointRange(Vf, rSVpoints);
+  try
+  {
+    const dPts = svPointRange(Vf, dSVpoints);
+    const rPts = svPointRange(Vf, rSVpoints);
 
-  if (!dPts || !rPts) return undefined;
+    if (!dPts || !rPts) return undefined;
 
-  const lSym: number = rangeAsymmetry(dPts, rPts);
+    const lSym: number = rangeAsymmetry(dPts, rPts);
 
-  return lSym;
+    return lSym;
+  }
+  catch (err)
+  {
+    console.log("Exception in estLocalAsymmetry ...");
+    return undefined;
+  }
 }
 
 export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
@@ -540,13 +548,21 @@ export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): 
 // Average local disproportionality
 export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
 {
-  const dPts = svPointRange(Vf, dSVpoints);
+  try
+  {
+    const dPts = svPointRange(Vf, dSVpoints);
 
-  if (!dPts) return undefined;
+    if (!dPts) return undefined;
 
-  const lProp: number = rangeDisproportionality(dPts);
+    const lProp: number = rangeDisproportionality(dPts);
 
-  return lProp;
+    return lProp;
+  }
+  catch (err)
+  {
+    console.log("Exception in estLocalDisproportionality ...");
+    return undefined;
+  }
 }
 
 export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
