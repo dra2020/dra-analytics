@@ -123,13 +123,13 @@ function trim(fullFraction: number, digits: number | undefined = undefined): num
 // Generate partisan details (Table 1)
 export function printPartisanDetailsHeader(): void
 {
-  console.log('XX, <V>, S(<V>), Rd, R, r, MIR, Cd, Cdf, BS_50, BV_50, Decl, GS, 𝛾, β, LO, EG, PR, MM, TO, MM\', B%, LS, LPR, LPR\'');
+  console.log('XX, <V>, S(<V>), Rd, R, r, MIR, Cd, Cdf, BS_50, BV_50, Decl, GS, 𝛾, β, LO, EG, PR, MM, TO, MM\', B%, UE, LS, LPR, LPR\', LUE');
   // console.log('XX, <V>, S(<V>), B%, BS_50, BV_50, Decl, GS, EG, Beta, PR, MM, TO, MM\', LO, Rd, R, r, MIR, Cd, Cdf, LS, LPR, LPR\'');
 }
 
 export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf: number, s: T.PartisanScorecard): void
 {
-  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
+  console.log('%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f',
     xx,
 
     trim(Vf),
@@ -159,10 +159,12 @@ export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf:
     trim(s.bias.mMd),                                                                        // Not shown in Table 1
 
     trim(s.bias.deviation),                                                                  // Simple deviation from best # of seats
+    trim(s.impact.unearnedS),
 
     // EXPERIMENTAL
     (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
     (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp,
-    (s.experimental.lPropAlt) ? trim(s.experimental.lPropAlt) : s.experimental.lPropAlt
+    (s.experimental.lPropAlt) ? trim(s.experimental.lPropAlt) : s.experimental.lPropAlt,
+    (s.experimental.lUE) ? trim(s.experimental.lUE) : s.experimental.lUE
   );
 }
