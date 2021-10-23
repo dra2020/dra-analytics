@@ -610,20 +610,18 @@ export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): n
 }
 
 // Average local unearned seats from the best # of seats (closest to proportional)
-export function estLocalUnearnedSeats(Vf: number, N: number, VfArray: number[], dSVpoints: T.SVpoint[]): number | undefined
+export function estLocalUnearnedSeats(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
 {
   const dPts = svPointRange(Vf, dSVpoints);
 
   if (!dPts) return undefined;
 
-  const estS = estSeats(VfArray);
-
-  const lUE: number = rangeUnearnedSeats(N, estS, dPts);
+  const lUE: number = rangeUnearnedSeats(N, dPts);
 
   return lUE;
 }
 
-export function rangeUnearnedSeats(N: number, estS: number, dSVpoints: T.SVpoint[]): number
+export function rangeUnearnedSeats(N: number, dSVpoints: T.SVpoint[]): number
 {
   const ndPts: number = dSVpoints.length;
 
@@ -631,6 +629,7 @@ export function rangeUnearnedSeats(N: number, estS: number, dSVpoints: T.SVpoint
 
   for (let i in dSVpoints)
   {
+    const estS: number = dSVpoints[i].s * N;
     const bestS = bestSeats(N, dSVpoints[i].v);
 
     tot += estUnearnedSeats(bestS, estS);

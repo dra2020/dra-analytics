@@ -109,7 +109,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
   const lProp = estLocalDisproportionality(Vf, dSVpoints);
   const lPropAlt = estLocalDisproportionalityAlt(Vf, N, dSVpoints);
-  const lUE = estLocalUnearnedSeats(Vf, N, VfArray, dSVpoints);
+  const lUE = estLocalUnearnedSeats(Vf, N, dSVpoints);
 
   const biasMeasurements: T.Bias = {
     bestS: bestS,
