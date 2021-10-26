@@ -9,6 +9,8 @@ $ ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json -j > te
 $ ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json -x PA -n SCOPA -c -h
 $ ./cli/partisan.js -i testdata/warrington/partisan-Hypothetical-A.json -x A -n 1-proportionality -c -h
 
+$ ./cli/partisan.js -i testdata/partisan/nagle/partisan-PA-SCOPA-7S.json -x PA -n SCOPA -p
+
 */
 
 import yargs from 'yargs';
@@ -53,6 +55,12 @@ let argv = yargs
     type: 'boolean',
     default: false
   })
+  .option('plot', {
+    alias: 'p',
+    describe: 'Plot the S–V curve',
+    type: 'boolean',
+    default: false
+  })
   .option('verbose', {
     alias: 'v',
     describe: 'Log to STDOUT.',
@@ -77,19 +85,27 @@ const xx: string = argv.state;
 const name: string = argv.name;
 const bCSV = argv.csv as boolean;
 const bHeader = argv.header as boolean;
+const bPlot = argv.plot as boolean;
 
 
 // EXECUTE THE COMMAND
 // OUTPUT THE RESULTS
 
-if (bCSV) 
+if (bCSV || bPlot)
 {
   const N: number = profile.byDistrict.length;
   const s: T.PartisanScorecard = makePartisanScorecard(Vf, VfArray);
 
-  if (bHeader) printPartisanDetailsHeader();
+  if (bPlot) 
+  {
+    console.log("Plot the S–V curve ...");
+  }
+  else
+  {
+    if (bHeader) printPartisanDetailsHeader();
+    printPartisanDetailsRow(xx, name, N, Vf, s);
+  }
 
-  printPartisanDetailsRow(xx, name, N, Vf, s);
 }
 else
 {
