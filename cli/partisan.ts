@@ -20,32 +20,6 @@ import * as FU from '../testutil/fileutils';
 
 import {calcPartisanMetrics, makePartisanScorecard} from '../lib/partisan/all';
 
-// TODO - SETUP MATERIAL-UI FOR PLOTS
-// - https://stackoverflow.com/questions/43202694/react-typescript-hello-world
-
-import * as React from 'react';
-// declare var Plotly: any;
-
-/* plotly.js configuration: <<< Dave???
-
-  dra/index.html includes script "https://cdn.plot.ly/plotly-1.54.1.min.js"
-
-*/
-
-import * as Material from '@material-ui/core';
-import * as Lab from '@material-ui/lab';
-import * as Icons from '@material-ui/icons';
-import {withStyles} from '@material-ui/core/styles';
-
-// "react-dom": "^16.8.6",
-// "react-event-listener": "^0.6.6",
-// "react-swipeable-views": "^0.13.9",
-// "react-virtualized": "^9.21.1",
-
-// "@types/react": "^16.8.23",
-// "@types/react-dom": "^16.8.4",
-// "@types/react-virtualized": "^9.21.2",
-
 
 // SPECIFY THE ARGS
 
