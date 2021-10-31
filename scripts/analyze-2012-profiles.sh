@@ -5,6 +5,7 @@
 # Example:
 #
 # ./scripts/analyze-2012-profiles.sh
+# ./scripts/analyze-2012-profiles.sh > temp/2012-profiles.csv
 
 ./cli/partisan.js -x CA -n CA-2012 -i testdata/partisan/nagle/partisan-CA-2012.json -c -h
 ./cli/partisan.js -x IL -n IL-2012 -i testdata/partisan/nagle/partisan-IL-2012.json -c

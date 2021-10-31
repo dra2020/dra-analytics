@@ -5,6 +5,7 @@
 # Example:
 #
 # ./scripts/analyze-hypothetical-profiles.sh
+# ./scripts/analyze-hypothetical-profiles.sh > temp/hypothetical-profiles.csv
 
 ./cli/partisan.js -x A -n 1-Proportionality -i testdata/partisan/warrington/partisan-Hypothetical-A.json -c -h
 ./cli/partisan.js -x B -n 2-Proportionality -i testdata/partisan/warrington/partisan-Hypothetical-B.json -c
