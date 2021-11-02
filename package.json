@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/lib/all/all.d.ts",
@@ -63,7 +63,7 @@
     "yargs": "^17.1.1"
   },
   "dependencies": {
-    "@dra2020/baseclient": "^1.0.40",
+    "@dra2020/baseclient": "^1.0.54",
     "geojson": "^0.5.0"
   }
 }
