@@ -2,7 +2,7 @@
 
 export
 {
-  // Scorecards & helpers
+  // Scorecards
   Scorecard,
   PopulationScorecard,
   PartisanScorecard,
@@ -10,6 +10,9 @@ export
   CompactnessScorecard,
   SplittingScorecard,
   Dict,
+
+  // Subordinate types 
+  VfArray, SVpoint, rVpoints,
 
   // For legacy KIWYSI compactness calculations
   PCAModel,
