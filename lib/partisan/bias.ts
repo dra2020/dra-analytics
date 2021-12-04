@@ -409,7 +409,7 @@ export function calcLopsidedOutcomes(VfArray: T.VfArray): number | undefined
 //
 // * gSym is the area of asymmetry between the two curves.
 // * The choice of what base to normalize it by is somewhat arbitrary.
-// * We actually only infer the S–V curver over the range [0.25–0.75] <<< 101 points (not 100!)
+// * We actually only infer the S–V curve over the range [0.25–0.75] <<< 101 points (not 100!)
 // * But dividing by 100 normalizes the area of asymmetry to the area of the SxV unit square.
 export function calcGlobalSymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[], S50V: number): number
 {
