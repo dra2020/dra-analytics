@@ -262,6 +262,21 @@ export function calcEfficiencyGap(Vf: number, Sf: number, shareType = T.Party.De
   return efficiencyGap;
 }
 
+// For illustration purposes only
+// Assumes Democratic vote shares
+// Alternate specification with winner's bonus (R) heuristic built in:
+// - By convention, '+' = R bias; '-' = D bias
+// - If 1 <= R <= 2, EG is undefined (no/acceptable bias). 
+export function calcEfficiencyGapPrime(Vf: number, Sf: number, R: number | undefined): number | undefined
+{
+  let EG = undefined;
+
+  if (R && ((R > 2) || (R < 1)))
+    EG = (2.0 * (Vf - 0.5)) - (Sf - 0.5);
+
+  return EG;
+}
+
 // MEAN–MEDIAN DIFFERENCE
 // 
 // From PlanScore.org: "The mean-median difference is a party’s median vote share
