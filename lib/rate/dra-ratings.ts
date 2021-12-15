@@ -146,7 +146,7 @@ export function ratePartisanBias(rawSeatsBias: number, rawVotesBias: number): nu
 }
 
 // NOTE - John Nagle specified this function vs. simple linear normalization
-function normalizePartisanBias(biasPct: number, pctAt50: number): number 
+export function normalizePartisanBias(biasPct: number, pctAt50: number): number 
 {
   const b: number = pctAt50 / Math.log(1 / 2);
   const rating: number = 100 * Math.exp(-Math.abs(biasPct / b));

@@ -13,7 +13,7 @@ export
   // rateSplittingLegacy, adjustSplittingRating, rateCountySplittingLegacy, rateDistrictSplittingLegacy,
 
   // For use in DRA client UI
-  ratePartisanBias,
+  ratePartisanBias, normalizePartisanBias,
   isAntimajoritarian,
 
   popdevThreshold
