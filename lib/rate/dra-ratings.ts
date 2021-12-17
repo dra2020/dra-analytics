@@ -8,6 +8,7 @@ import {avgSVError} from '../partisan/method';
 import * as T from '../types/all'
 
 
+// MMD - Generalize this
 // RATE POPULATION DEVIATION
 
 export function ratePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
