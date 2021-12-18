@@ -44,6 +44,10 @@ The analytics in DRA include metrics favored by [many scholars](./docs/attributi
 
 A [command-line interface](./docs/cli.md) (CLI) was added in v3.
 
+## Updates
+
+- 12/18/21 -- Added multi-member district (MMD) support to makePopulationScorecard().
+
 ## Build status for master branch
 
 [![CircleCI](https://circleci.com/gh/dra2020/dra-graph.svg?style=svg&circle-token=5c5fdd1ea8b6aa5fc80ec7657b805b3953c58e00)](https://circleci.com/gh/dra2020/dra-analytics)
