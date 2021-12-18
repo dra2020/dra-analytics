@@ -23,7 +23,7 @@ export function isRoughlyEqual(devation: number, bLegislative: boolean): boolean
 }
 
 // MMD - Add optional # of reps per district
-export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard
+export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, repsByDistrict?: number[], bLog: boolean = false): PopulationScorecard
 {
   const nonEmptyDistricts = totPopByDistrict.filter(x => x > 0);
 
