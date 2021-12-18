@@ -8,7 +8,7 @@ import {avgSVError} from '../partisan/method';
 import * as T from '../types/all'
 
 
-// MMD - Generalize this
+// MMD - This is already generalized, if deviations have been calculated based on # of reps instead of districts.
 // RATE POPULATION DEVIATION
 
 export function ratePopulationDeviation(rawDeviation: number, bLegislative: boolean): number
