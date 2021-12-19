@@ -61,3 +61,54 @@ describe('Population Deviation calculation', () =>
     expect(scorecard.deviation).toBeCloseTo(2.3006);
   });
 });
+
+describe('MMD Population Deviations', () =>
+{
+  const bLegislative = true;
+
+  test('SMD no deviation', () =>
+  {
+    const popByDistrict = [100, 100, 100, 100, 100];
+    const repsByDistrict = [1, 1, 1, 1, 1];
+    const targetSize = 100;
+    const scorecard = makePopulationScorecard(popByDistrict, targetSize, bLegislative, repsByDistrict);
+    expect(scorecard.deviation).toBeCloseTo(0.00);
+    expect(scorecard.roughlyEqual).toBe(true);
+  });
+  test('SMD no deviation', () =>
+  {
+    const popByDistrict = [110, 90, 100, 100, 100];
+    const repsByDistrict = [1, 1, 1, 1, 1];
+    const targetSize = 100;
+    const scorecard = makePopulationScorecard(popByDistrict, targetSize, bLegislative, repsByDistrict);
+    expect(scorecard.deviation).toBeCloseTo(0.20);
+    expect(scorecard.roughlyEqual).toBe(false);
+  });
+  test('MMD deviation - all non-empty', () =>
+  {
+    const popByDistrict = [210, 90, 300, 300, 100];
+    const repsByDistrict = [2, 1, 3, 3, 1];
+    const targetSize = 100;
+    const scorecard = makePopulationScorecard(popByDistrict, targetSize, bLegislative, repsByDistrict);
+    expect(scorecard.deviation).toBeCloseTo(0.15);
+    expect(scorecard.roughlyEqual).toBe(false);
+  });
+  test('MMD deviation - only one non-empty', () =>
+  {
+    const popByDistrict = [0, 105, 0, 0, 0];
+    const repsByDistrict = [2, 1, 3, 3, 1];
+    const targetSize = 100;
+    const scorecard = makePopulationScorecard(popByDistrict, targetSize, bLegislative, repsByDistrict);
+    expect(scorecard.deviation).toBeCloseTo(0.0);
+    expect(scorecard.roughlyEqual).toBe(false);
+  });
+  test('MMD deviation - multiple non-empty', () =>
+  {
+    const popByDistrict = [0, 0, 315, 300, 0];
+    const repsByDistrict = [2, 1, 3, 3, 1];
+    const targetSize = 100;
+    const scorecard = makePopulationScorecard(popByDistrict, targetSize, bLegislative, repsByDistrict);
+    expect(scorecard.deviation).toBeCloseTo(0.05);
+    expect(scorecard.roughlyEqual).toBe(true);
+  });
+});

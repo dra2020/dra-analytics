@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "3.3.5",
+  "version": "4.0.0",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/lib/all/all.d.ts",
@@ -29,16 +29,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dra2020/dra-analytics/issues"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "shared"
-    ]
   },
   "homepage": "https://github.com/dra2020/dra-analytics#readme",
   "devDependencies": {

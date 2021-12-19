@@ -9,6 +9,7 @@ import * as T from '../types/all';
 import * as U from '../utils/all';
 
 
+// MMD - This is the same for SMD & MMD. It's the calculation of min, max, and target size that differs.
 export function calcPopulationDeviation(max: number, min: number, targetSize: number): number
 {
   return (max - min) / targetSize;  // Don't trim the result here!
@@ -21,13 +22,42 @@ export function isRoughlyEqual(devation: number, bLegislative: boolean): boolean
   return (devation <= threshold) ? true : false;
 }
 
-export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, bLog: boolean = false): PopulationScorecard
+// MMD
+// - Add optional # of reps per district. 
+// - Assume targetSize has been calculated correctly per # of reps not districts.
+// - If it exists, handle the MMD-specific calculations.
+export function makePopulationScorecard(totPopByDistrict: number[], targetSize: number, bLegislative: boolean, repsByDistrict?: number[], bLog: boolean = false): PopulationScorecard
 {
-  const nonEmptyDistricts = totPopByDistrict.filter(x => x > 0);
+  const nDistricts = totPopByDistrict.length;
+
+  // MMD - Validate reps per district input
+  if (repsByDistrict) 
+  {
+    if (repsByDistrict.length != nDistricts) throw new Error("Mismatched #'s of districts passed to makePopulationScorecard()!");
+    if (repsByDistrict.includes(0)) throw new Error("Zero reps for a district passed to makePopulationScorecard()!");
+    // Assume a positive integer # of reps per district
+  }
+
+  // MMD - Figure out the type of districts, SMD or MMD.
+  const nReps = (repsByDistrict) ? repsByDistrict.reduce((a, b) => a + b, 0) : nDistricts;
+  const bSMD = (!repsByDistrict || (nReps == nDistricts)) ? true : false;
+
+  // MMD - Generalize populations for non-empty districts to be per rep.
+  // const nonEmptyDistricts = totPopByDistrict.filter(x => x > 0);
+  let popPerRep: number[] = U.deepCopy(totPopByDistrict);
+  if (!bSMD && repsByDistrict)
+  {
+    for (let i = 0; i < nDistricts; i += 1)
+    {
+      popPerRep[i] = totPopByDistrict[i] / repsByDistrict[i];
+    }
+  }
+  const nonEmptyDistricts = popPerRep.filter(x => x > 0);
 
   let min = 0;
   let max = 0;
 
+  // MMD - This is already generalized, because nonEmptyDistricts is generalized.
   if (nonEmptyDistricts.length > 1)
   {
     min = U.minArray(nonEmptyDistricts);
