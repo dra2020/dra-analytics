@@ -53,9 +53,9 @@ npm uninstall @types/jest
 npm uninstall jest
 npm uninstall ts-jest
 
-npm install @types/jest@26
-npm install jest@26
-npm install ts-jest@26
+npm install @types/jest@26 --save-dev
+npm install jest@26 --save-dev
+npm install ts-jest@26 --save-dev
 
 # This yielded:
 
