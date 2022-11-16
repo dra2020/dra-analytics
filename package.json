@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/lib/all/all.d.ts",
@@ -41,7 +41,7 @@
     "json-loader": "^0.5.7",
     "prettier": "^2.7.1",
     "shapefile": "^0.6.6",
-    "source-map-loader": "^4.0.1",
+    "source-map-loader": "^3.0.2",
     "ts-jest": "^26.5.6",
     "ts-loader": "^9.4.1",
     "tsify": "^5.0.4",
