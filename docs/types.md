@@ -58,7 +58,7 @@ export type MinorityScorecard = {
 export type CompactnessScorecard = {
   avgReock: number;
   avgPolsby: number;
-  avgKWIWYSI: number;
+  avgKIWYSI: number;
   byDistrict: Compactness[];
   details: Dict;
   score?: number;

@@ -83,10 +83,10 @@ export function calcKIWYSICompactness(shapes: GeoJSON.FeatureCollection): T.Kiwy
     byDistrict.push(entry);
   }
 
-  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+  const avgKIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
 
   const out: T.KiwysiJSONReady = {
-    avgKWIWYSI: avgKWIWYSI,
+    avgKIWYSI: avgKIWYSI,
     byDistrict: byDistrict
   }
 

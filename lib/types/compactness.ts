@@ -49,7 +49,7 @@ export type GeoProperties = {
 export type CompactnessScorecard = {
   avgReock: number,
   avgPolsby: number,
-  avgKWIWYSI: number,
+  avgKIWYSI: number,
   byDistrict: Compactness[],
   details: T.Dict,
   score?: number
@@ -78,7 +78,7 @@ export type CompactnessAlt = {
 export type CompactnessJSONReady = {
   avgReock: number,
   avgPolsby: number,
-  avgKWIWYSI: number,
+  avgKIWYSI: number,
   byDistrict: CompactnessAlt[]
 }
 
@@ -95,7 +95,7 @@ export type KiwysiFeatures = {
 
 // A minimal type for by-district KIWISI compactness features to be converted to JSON
 export type KiwysiJSONReady = {
-  avgKWIWYSI: number,
+  avgKIWYSI: number,
   byDistrict: KiwysiFeatures[]
 }
 

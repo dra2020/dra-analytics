@@ -64,12 +64,12 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 
   const avgReock: number = totReock / shapes.features.length;
   const avgPolsby: number = totPolsby / shapes.features.length;
-  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+  const avgKIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
 
   const s: T.CompactnessScorecard = {
     avgReock: avgReock,
     avgPolsby: avgPolsby,
-    avgKWIWYSI: avgKWIWYSI,
+    avgKIWYSI: avgKIWYSI,
     byDistrict: byDistrict,  // Legacy format
     details: {},             // None
     // score?: 
@@ -121,12 +121,12 @@ export function calcCompactness(shapes: GeoJSON.FeatureCollection): T.Compactnes
 
   const avgReock: number = totReock / shapes.features.length;
   const avgPolsby: number = totPolsby / shapes.features.length;
-  const avgKWIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
+  const avgKIWYSI: number = Math.round(totKIWYSI / shapes.features.length);
 
   const out: T.CompactnessJSONReady = {
     avgReock: avgReock,
     avgPolsby: avgPolsby,
-    avgKWIWYSI: avgKWIWYSI,
+    avgKIWYSI: avgKIWYSI,
     byDistrict: byDistrict
   }
 
