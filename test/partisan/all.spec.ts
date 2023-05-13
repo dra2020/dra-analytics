@@ -173,14 +173,14 @@ describe('PA SCOPA-7S plan', () =>
   test('Calculate the efficiency gap (FPTP)', () =>
   {
     const fptpSf: number = estFPTPSeats(rV) / N;
-    expect(calcEfficiencyGap(Vf, fptpSf, N)).toBeCloseTo(0.0418);
+    expect(calcEfficiencyGap(Vf, fptpSf, N)).toBeCloseTo(0.0418); // TODO - N is wrong here!
   });
   test('Calculate the efficiency gap (w/ seat probabilities)', () =>
   {
     const range = undefined;
     const estS = estSeats(rV, range);
     const estSf = estSeatShare(estS, N);
-    expect(calcEfficiencyGap(Vf, estSf, N)).toBeCloseTo(0.033);
+    expect(calcEfficiencyGap(Vf, estSf, N)).toBeCloseTo(0.033); // TODO - N is wrong here!
   });
 })
 
