@@ -71,4 +71,28 @@ npm install ts-jest@26 --save-dev
 # - builds
 # - tests run & pass
 
-# 
+### 05/20/2023 - CircleCi build failed ###
+
+# To try to fix the problems and the code to build and tests to run & pass again,
+# I did the following by hand, sometimes reversing changes made above.
+
+# Match what Dave & Terry have
+nvm install 18.16.0
+npm install -g npm@latest
+
+npm uninstall @types/node
+npm install @types/node@18.11.17 --save-dev
+
+npm uninstall typescript
+npm install typescript@4.9.4 --save-dev
+
+# Then to get things to build:
+
+# Match dra-cli
+npm uninstall yargs
+npm install yargs@12
+
+npm uninstall @types/yargs
+npm install @types/yargs@11 --save-dev
+
+# TODO - Still a work in progress ...
