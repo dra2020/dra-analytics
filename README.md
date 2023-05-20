@@ -73,3 +73,5 @@ There are three packages that are part of this repo:
 ```npm run buildsplitting``` build the splitting command
 
 ```npm run test``` run automated jest tests
+
+Email questions to [feedback](mailto:feedback@davesredistricting.org?subject=dra-analytics).
