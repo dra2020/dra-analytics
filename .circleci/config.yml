@@ -21,7 +21,7 @@ jobs:
     docker:
       # specify the version you desire here
       # - image: circle/node:10.17.0
-      - image: cimg/node
+      - image: cimg/node:18.16.0
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
