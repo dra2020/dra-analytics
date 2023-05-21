@@ -57,7 +57,9 @@ npm install @types/jest@26 --save-dev
 npm install jest@26 --save-dev
 npm install ts-jest@26 --save-dev
 
-# This yielded:
+# This yielded
+# NOTE - The first 3 lines below contradict the last 3 above.
+# What builds & tests locally are the v29 versions.
 
 #  @types/jest    ^26.0.24  →   ^29.2.3     
 #  jest            ^26.6.3  →   ^29.3.1     
@@ -80,6 +82,8 @@ npm install ts-jest@26 --save-dev
 nvm install 18.16.0
 npm install -g npm@latest
 
+# Now I have node 18 and npm 9:
+
 npm uninstall @types/node
 npm install @types/node@18.11.17 --save-dev
 
@@ -95,4 +99,4 @@ npm install yargs@12
 npm uninstall @types/yargs
 npm install @types/yargs@11 --save-dev
 
-# TODO - Still a work in progress ...
+# This builds & tests pass locally.
