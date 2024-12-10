@@ -15,9 +15,6 @@ import {ratePolsby, rateReock} from '../rate/dra-ratings';
 // This is used by DRA
 export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): T.CompactnessScorecard
 {
-
-  console.log("makeCompactnessScorecard");
-
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
@@ -32,7 +29,20 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
 
   for (let i = 0; i < shapes.features.length; i++)
   {
-    const features: T.CompactnessFeatures = featureizePoly(shapes.features[i], options);
+    const f: any = shapes.features[i];
+
+    // 12-10-24: Skip featurization for KIWYSI compactness, when MultiPolygons are too fragmented
+    let bKIWYSIFeatures: boolean = true
+    if (f.geometry.type == 'MultiPolygon')
+    {
+      const fragments: number = f.geometry.coordinates.length;
+      if (fragments > 20) 
+      {
+        console.log(`Skipping KIWYSI compactness for fragmented District ${i + 1} with ${fragments} fragments`);
+        bKIWYSIFeatures = false
+      };
+    }
+    const features: T.CompactnessFeatures = featureizePoly(f, options, {bKIWYSIFeatures: bKIWYSIFeatures});
 
     const reockFlat: number = features.reockFlat;
     const polsbyFlat: number = features.polsbyFlat;
@@ -43,7 +53,7 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
     const normalizedReock: number = rateReock(reockFlat);
     const normalizedPolsby: number = ratePolsby(polsbyFlat);
 
-    let kiwysiRank: number = scoreFeatureSet(features, pca);
+    let kiwysiRank: number = bKIWYSIFeatures ? scoreFeatureSet(features, pca) : 100;
     // Constrain values to the range [1–100]
     kiwysiRank = Math.min(Math.max(kiwysiRank, 1), 100);
     // Raw KIWYSI scores ("ranks") are 1–100 where smaller is better
