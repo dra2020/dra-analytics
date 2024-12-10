@@ -15,6 +15,9 @@ import {ratePolsby, rateReock} from '../rate/dra-ratings';
 // This is used by DRA
 export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog: boolean = false): T.CompactnessScorecard
 {
+
+  console.log("makeCompactnessScorecard");
+
   const pca: T.PCAModel = T.PCAModel.Revised;
   const options: Poly.PolyOptions | undefined = undefined;
 
