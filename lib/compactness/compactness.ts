@@ -10,6 +10,28 @@ import {scoreFeatureSet} from './kiwysi';
 import * as T from '../types/all';
 import {ratePolsby, rateReock} from '../rate/dra-ratings';
 
+export function excessivelyFragmented(shapes: GeoJSON.FeatureCollection): boolean
+{
+  const threshold: number = 20;
+  let fragments: number = 0;
+  for (let i = 0; i < shapes.features.length; i++)
+  {
+    const f: any = shapes.features[i];
+    if (f.geometry.type == 'MultiPolygon')
+    {
+      fragments += f.geometry.coordinates.length;
+    }
+  }
+  const avgFragmentation: number = fragments / shapes.features.length;
+
+  if (avgFragmentation > threshold)
+  {
+    console.log(`Average fragmentation (${avgFragmentation}) exceeds threshold (${threshold}).`);
+    return true;
+  }
+
+  return false;
+}
 
 // Use this to get average Reock, Polsby-Popper, and KIWYSI compactness and by district for a set of shapes
 // This is used by DRA
@@ -23,6 +45,9 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   let totPolsby: number = 0;
   let totKIWYSI: number = 0;
 
+  // 12-11-24: Skip featurization for KIWYSI compactness, when the districts in a map are too fragmented on average
+  const bKIWYSIFeatures: boolean = excessivelyFragmented(shapes) ? false : true;
+
   // For returning compactness by district to DRA
   // Note, these use the Cartesian (flat earth) measurements
   let byDistrict: T.Compactness[] = [];
@@ -30,18 +55,6 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   for (let i = 0; i < shapes.features.length; i++)
   {
     const f: any = shapes.features[i];
-
-    // 12-10-24: Skip featurization for KIWYSI compactness, when MultiPolygons are too fragmented
-    let bKIWYSIFeatures: boolean = true
-    if (f.geometry.type == 'MultiPolygon')
-    {
-      const fragments: number = f.geometry.coordinates.length;
-      if (fragments > 20) 
-      {
-        console.log(`Skipping KIWYSI compactness for fragmented District ${i + 1} with ${fragments} fragments`);
-        bKIWYSIFeatures = false
-      };
-    }
     const features: T.CompactnessFeatures = featureizePoly(f, options, {bKIWYSIFeatures: bKIWYSIFeatures});
 
     const reockFlat: number = features.reockFlat;
