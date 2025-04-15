@@ -13,7 +13,7 @@ export function isConnected(featureIDs: T.FeatureGroup, graph: T.ContiguityGraph
 
   // Start processing with the first feature in the set
   let iter = featureIDs.values();
-  toProcess.push(iter.next().value);
+  toProcess.push(iter.next().value as string);
 
   // While there are features in the set that haven't been processed,
   // i.e., stop when you've visited all the features in the set
