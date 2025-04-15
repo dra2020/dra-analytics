@@ -230,7 +230,7 @@ export function calcSchwartzberg(area: number, perimeter: number): number
 
 // CALCULATE THE 7 COMPACTNESS "FEATURES" FOR A POLYGON FOR THE KIWYSI COMPACTNESS MODEL
 
-export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.CompactnessFeatures
+export function featureizePoly(poly: any, options?: Poly.PolyOptions, {bKIWYSIFeatures = true}: {bKIWYSIFeatures?: boolean} = {}): T.CompactnessFeatures
 {
   if (options === undefined) options = Poly.DefaultOptions;
 
@@ -247,15 +247,17 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions): T.Compact
   const hullArea: number = Poly.polyArea(ch);
 
   const result: T.CompactnessFeatures = {
+    // 12-10-24: Skip featurization for KIWYSI compactness, when MultiPolygons are too fragmented
     // For the "correct" geodesic calculations that the KIWYSI AI uses
-    sym_x: calcXSymmetry(poly),
-    sym_y: calcYSymmetry(poly),
-    reock: calcReock(area, diameter),
-    bbox: calcBoundingBox(poly),
-    polsby: calcPolsbyPopper(area, perimeter),
-    hull: calcConvexHullFeature(area, hullArea),
-    schwartzberg: calcSchwartzberg(area, perimeter),
+    sym_x: bKIWYSIFeatures ? calcXSymmetry(poly) : 0.0,
+    sym_y: bKIWYSIFeatures ? calcYSymmetry(poly) : 0.0,
+    reock: bKIWYSIFeatures ? calcReock(area, diameter) : 0.0,
+    bbox: bKIWYSIFeatures ? calcBoundingBox(poly) : 0.0,
+    polsby: bKIWYSIFeatures ? calcPolsbyPopper(area, perimeter) : 0.0,
+    hull: bKIWYSIFeatures ? calcConvexHullFeature(area, hullArea) : 0.0,
+    schwartzberg: bKIWYSIFeatures ? calcSchwartzberg(area, perimeter) : 0.0,
 
+    // But still do the basic calculations for Reock and Polsby-Popper
     // For the Cartesian (flat earth) calculations that are typically done
     reockFlat: calcReock(areaFlat, diameterFlat),
     polsbyFlat: calcPolsbyPopper(areaFlat, perimeterFlat)
