@@ -5,7 +5,7 @@
 import * as GeoJSON from 'geojson';
 import {Poly} from '@dra2020/baseclient';
 
-import {featureizePoly} from './features';
+import {featureizePoly, featureizeCacheSize} from './features';
 import {scoreFeatureSet} from './kiwysi';
 import * as T from '../types/all';
 import {ratePolsby, rateReock} from '../rate/dra-ratings';
@@ -51,6 +51,9 @@ export function makeCompactnessScorecard(shapes: GeoJSON.FeatureCollection, bLog
   // For returning compactness by district to DRA
   // Note, these use the Cartesian (flat earth) measurements
   let byDistrict: T.Compactness[] = [];
+
+  // Give hint to featureize cache about how many features we are working with
+  featureizeCacheSize(shapes.features.length);
 
   for (let i = 0; i < shapes.features.length; i++)
   {

@@ -229,9 +229,74 @@ export function calcSchwartzberg(area: number, perimeter: number): number
 
 
 // CALCULATE THE 7 COMPACTNESS "FEATURES" FOR A POLYGON FOR THE KIWYSI COMPACTNESS MODEL
+interface CacheEntry
+{
+  lru: number,
+  ms: number,
+  features: T.CompactnessFeatures,
+}
+
+class featureizeCache
+{
+  map: Map<any, CacheEntry>;
+  size: number;
+  lru: number;
+
+  constructor()
+  {
+    this.map = new Map<any, CacheEntry>();
+    this.size = 200;
+    this.lru = 0;
+  }
+
+  setSize(size: number): void
+  {
+    this.size = Math.max(this.size, size);
+  }
+
+  find(hash: number): T.CompactnessFeatures|undefined
+  {
+    let e = this.map.get(hash);
+    if (e)
+    {
+      e.lru = this.lru++; // refresh LRU value to most current
+      //console.log(`featureize: saved ${e.ms} milliseconds`);
+      return e.features;
+    }
+    return undefined;
+  }
+
+  add(hash: number, features: T.CompactnessFeatures, ms: number): void
+  {
+    this.cull();
+    this.map.set(hash, { lru: this.lru++, ms, features });
+  }
+
+  cull(): void
+  {
+    // Let grow to twice size before culling since we do sort by lru to cull and don't want to do too often
+    if (this.map.size > 2*this.size)
+    {
+      let keys = Array.from(this.map.entries())
+                      .sort((a: [any, CacheEntry], b: [any, CacheEntry]) => a[1].lru - b[1].lru)
+                      .map((a: [any, CacheEntry]) => a[0])
+                      .slice(0, this.map.size - this.size);
+      keys.forEach(key => this.map.delete(key));
+      //console.log(`featureizeCache:cull: culled to ${this.map.size}`);
+    }
+  }
+}
+
+let cache = new featureizeCache();
+export function featureizeCacheSize(size: number): void { cache.setSize(size) }
 
 export function featureizePoly(poly: any, options?: Poly.PolyOptions, {bKIWYSIFeatures = true}: {bKIWYSIFeatures?: boolean} = {}): T.CompactnessFeatures
 {
+  let h = Poly.polyHash32(poly);
+  let r = cache.find(h);
+  if (r) return r;
+  let e = new Util.Elapsed();
+
   if (options === undefined) options = Poly.DefaultOptions;
 
   const area: number = Poly.polyArea(poly);
@@ -262,6 +327,7 @@ export function featureizePoly(poly: any, options?: Poly.PolyOptions, {bKIWYSIFe
     reockFlat: calcReock(areaFlat, diameterFlat),
     polsbyFlat: calcPolsbyPopper(areaFlat, perimeterFlat)
   };
+  cache.add(h, result, e.ms());
 
   return result;
 }
