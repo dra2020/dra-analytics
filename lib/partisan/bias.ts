@@ -518,163 +518,163 @@ export function calcGamma(Vf: number, Sf: number, r: number): number
 }
 
 
-// EXPERIMENTAL
+// // EXPERIMENTAL
 
-const pctWidth = 5;  // The size in % points of the 'local' window to bracket <V>
+// const pctWidth = 5;  // The size in % points of the 'local' window to bracket <V>
 
-// Average local asymmetry
-export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
-{
-  try
-  {
-    const dPts = svPointRange(Vf, dSVpoints);
-    const rPts = svPointRange(Vf, rSVpoints);
+// // Average local asymmetry
+// export function estLocalAsymmetry(Vf: number, dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number | undefined
+// {
+//   try
+//   {
+//     const dPts = svPointRange(Vf, dSVpoints);
+//     const rPts = svPointRange(Vf, rSVpoints);
 
-    if (!dPts || !rPts) return undefined;
+//     if (!dPts || !rPts) return undefined;
 
-    const lSym: number = rangeAsymmetry(dPts, rPts);
+//     const lSym: number = rangeAsymmetry(dPts, rPts);
 
-    return lSym;
-  }
-  catch (err)
-  {
-    console.log("Exception in estLocalAsymmetry ...");
-    return undefined;
-  }
-}
+//     return lSym;
+//   }
+//   catch (err)
+//   {
+//     console.log("Exception in estLocalAsymmetry ...");
+//     return undefined;
+//   }
+// }
 
-export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
-{
-  const ndPts: number = dSVpoints.length;
-  const nrPts: number = rSVpoints.length;
+// export function rangeAsymmetry(dSVpoints: T.SVpoint[], rSVpoints: T.SVpoint[]): number
+// {
+//   const ndPts: number = dSVpoints.length;
+//   const nrPts: number = rSVpoints.length;
 
-  console.assert(ndPts == nrPts, "# of D & R points don't match: ", ndPts, nrPts);
+//   console.assert(ndPts == nrPts, "# of D & R points don't match: ", ndPts, nrPts);
 
-  let tot: number = 0.0;
+//   let tot: number = 0.0;
 
-  for (let i in dSVpoints)
-  {
-    tot += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
-  }
+//   for (let i in dSVpoints)
+//   {
+//     tot += calcGeometricSeatsBias(dSVpoints[i].s, rSVpoints[i].s);
+//   }
 
-  return tot / ndPts;
-}
+//   return tot / ndPts;
+// }
 
-// Average local disproportionality
-export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
-{
-  try
-  {
-    const dPts = svPointRange(Vf, dSVpoints);
+// // Average local disproportionality
+// export function estLocalDisproportionality(Vf: number, dSVpoints: T.SVpoint[]): number | undefined
+// {
+//   try
+//   {
+//     const dPts = svPointRange(Vf, dSVpoints);
 
-    if (!dPts) return undefined;
+//     if (!dPts) return undefined;
 
-    const lProp: number = rangeDisproportionality(dPts);
+//     const lProp: number = rangeDisproportionality(dPts);
 
-    return lProp;
-  }
-  catch (err)
-  {
-    console.log("Exception in estLocalDisproportionality ...");
-    return undefined;
-  }
-}
+//     return lProp;
+//   }
+//   catch (err)
+//   {
+//     console.log("Exception in estLocalDisproportionality ...");
+//     return undefined;
+//   }
+// }
 
-export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
-{
-  const ndPts: number = dSVpoints.length;
+// export function rangeDisproportionality(dSVpoints: T.SVpoint[]): number
+// {
+//   const ndPts: number = dSVpoints.length;
 
-  let tot: number = 0.0;
+//   let tot: number = 0.0;
 
-  for (let i in dSVpoints)
-  {
-    tot += calcProp(dSVpoints[i].v, dSVpoints[i].s);
-  }
+//   for (let i in dSVpoints)
+//   {
+//     tot += calcProp(dSVpoints[i].v, dSVpoints[i].s);
+//   }
 
-  return tot / ndPts;
-}
+//   return tot / ndPts;
+// }
 
-// Average local disproportionality from the best # of seats (closest to proportional)
-export function estLocalDisproportionalityAlt(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
-{
-  const dPts = svPointRange(Vf, dSVpoints);
+// // Average local disproportionality from the best # of seats (closest to proportional)
+// export function estLocalDisproportionalityAlt(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
+// {
+//   const dPts = svPointRange(Vf, dSVpoints);
 
-  if (!dPts) return undefined;
+//   if (!dPts) return undefined;
 
-  const lPropAlt: number = rangeDisproportionalityAlt(N, dPts);
+//   const lPropAlt: number = rangeDisproportionalityAlt(N, dPts);
 
-  return lPropAlt;
-}
+//   return lPropAlt;
+// }
 
-// Dynamically calculate the best # seats, so this is a step function
-export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): number
-{
-  const ndPts: number = dSVpoints.length;
+// // Dynamically calculate the best # seats, so this is a step function
+// export function rangeDisproportionalityAlt(N: number, dSVpoints: T.SVpoint[]): number
+// {
+//   const ndPts: number = dSVpoints.length;
 
-  let tot: number = 0.0;
+//   let tot: number = 0.0;
 
-  for (let i in dSVpoints)
-  {
-    const bestS = bestSeats(N, dSVpoints[i].v);
-    const bestSf = bestSeatShare(bestS, N);
+//   for (let i in dSVpoints)
+//   {
+//     const bestS = bestSeats(N, dSVpoints[i].v);
+//     const bestSf = bestSeatShare(bestS, N);
 
-    tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
-  }
+//     tot += calcDisproportionalityFromBest(dSVpoints[i].s, bestSf);
+//   }
 
-  return tot / ndPts;
-}
+//   return tot / ndPts;
+// }
 
-// Average local unearned seats from the best # of seats (closest to proportional)
-export function estLocalUnearnedSeats(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
-{
-  const dPts = svPointRange(Vf, dSVpoints);
+// // Average local unearned seats from the best # of seats (closest to proportional)
+// export function estLocalUnearnedSeats(Vf: number, N: number, dSVpoints: T.SVpoint[]): number | undefined
+// {
+//   const dPts = svPointRange(Vf, dSVpoints);
 
-  if (!dPts) return undefined;
+//   if (!dPts) return undefined;
 
-  const lUE: number = rangeUnearnedSeats(N, dPts);
+//   const lUE: number = rangeUnearnedSeats(N, dPts);
 
-  return lUE;
-}
+//   return lUE;
+// }
 
-export function rangeUnearnedSeats(N: number, dSVpoints: T.SVpoint[]): number
-{
-  const ndPts: number = dSVpoints.length;
+// export function rangeUnearnedSeats(N: number, dSVpoints: T.SVpoint[]): number
+// {
+//   const ndPts: number = dSVpoints.length;
 
-  let tot: number = 0.0;
+//   let tot: number = 0.0;
 
-  for (let i in dSVpoints)
-  {
-    const estS: number = dSVpoints[i].s * N;
-    const bestS = bestSeats(N, dSVpoints[i].v);
+//   for (let i in dSVpoints)
+//   {
+//     const estS: number = dSVpoints[i].s * N;
+//     const bestS = bestSeats(N, dSVpoints[i].v);
 
-    tot += estUnearnedSeats(bestS, estS);
-  }
+//     tot += estUnearnedSeats(bestS, estS);
+//   }
 
-  return tot / ndPts;
-}
+//   return tot / ndPts;
+// }
 
-// Filter the full [0.25–0.75] range of S–V points down to the 'local' range.
-// Make sure that range is w/in the full range.
-function svPointRange(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
-{
-  const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
-  const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
-  const localWindow: number = pctWidth / 100;        // # of % points wide as a fraction
-  const plusMinus: number = localWindow / 2;         // +/– % as a fraction
-  const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
+// // Filter the full [0.25–0.75] range of S–V points down to the 'local' range.
+// // Make sure that range is w/in the full range.
+// function svPointRange(Vf: number, svPoints: T.SVpoint[]): T.SVpoint[] | undefined
+// {
+//   const svRange: number[] = [0.25, 0.75];            // The range over which we infer the S–V curve points
+//   const halfStep: number = (1 / 100) / 2;            // The V point increments, i.e., every half a percent
+//   const localWindow: number = pctWidth / 100;        // # of % points wide as a fraction
+//   const plusMinus: number = localWindow / 2;         // +/– % as a fraction
+//   const delta: number = plusMinus + (halfStep / 2);  // +/– % plus half a half step to deal w/ floating point precision
 
-  if ((Vf < svRange[0]) || (Vf > svRange[1])) return undefined;
+//   if ((Vf < svRange[0]) || (Vf > svRange[1])) return undefined;
 
-  const bracketingVs: number[] = [
-    findBracketingLowerVf(Vf, svPoints).v,
-    findBracketingUpperVf(Vf, svPoints).v
-  ];
+//   const bracketingVs: number[] = [
+//     findBracketingLowerVf(Vf, svPoints).v,
+//     findBracketingUpperVf(Vf, svPoints).v
+//   ];
 
-  const localRange: number[] = [bracketingVs[0] - delta, bracketingVs[1] + delta];
+//   const localRange: number[] = [bracketingVs[0] - delta, bracketingVs[1] + delta];
 
-  const subsetPts: T.SVpoint[] = svPoints.filter(x => inRange(x, localRange));
+//   const subsetPts: T.SVpoint[] = svPoints.filter(x => inRange(x, localRange));
 
-  return subsetPts;
-}
+//   return subsetPts;
+// }
 
-const inRange = (pt: T.SVpoint, range: number[]): boolean => {return (pt.v >= range[0]) && (pt.v <= range[1]);}
+// const inRange = (pt: T.SVpoint, range: number[]): boolean => {return (pt.v >= range[0]) && (pt.v <= range[1]);}

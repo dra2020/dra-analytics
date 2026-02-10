@@ -23,7 +23,9 @@ them for several elections, one at a time, and then generate statistics for them
 This repo & package can be integrated into other tools.
 The libraries here are normally included like this:
 
-    import { Compactness, Equal, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
+```TypeScript
+import { Compactness, Equal, Graph, Minority, Partisan, Splitting } from '@dra2020/dra-analytics';
+```
 
 Then the various functions of the different sets are available under their appropriate symbol.
 
