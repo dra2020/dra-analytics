@@ -1,6 +1,6 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "4.1.10",
+  "version": "4.1.11",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/lib/all/all.d.ts",
@@ -54,7 +54,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@dra2020/baseclient": "^1.0.169",
+    "@dra2020/baseclient": "^1.0.170",
     "cjs": "^0.0.11",
     "geojson": "^0.5.0",
     "yargs": "^12.0.5"
