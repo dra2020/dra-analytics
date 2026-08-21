@@ -161,10 +161,10 @@ export function printPartisanDetailsRow(xx: string, name: string, N: number, Vf:
     (s.bias.gamma) ? trim(s.bias.gamma) : s.bias.gamma,
 
     trim(s.bias.deviation),                                                                  // Simple deviation from best # of seats
-    // (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp,
-    (s.experimental.lPropAlt) ? trim(s.experimental.lPropAlt) : s.experimental.lPropAlt,
-    // trim(s.impact.unearnedS),
-    (s.experimental.lUE) ? trim(s.experimental.lUE) : s.experimental.lUE
-    // (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
+    // // (s.experimental.lProp) ? trim(s.experimental.lProp) : s.experimental.lProp,
+    // (s.experimental.lPropAlt) ? trim(s.experimental.lPropAlt) : s.experimental.lPropAlt,
+    // // trim(s.impact.unearnedS),
+    // (s.experimental.lUE) ? trim(s.experimental.lUE) : s.experimental.lUE
+    // // (s.experimental.lSym) ? trim(s.experimental.lSym) : s.experimental.lSym,
   );
 }

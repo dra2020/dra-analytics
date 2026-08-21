@@ -33,8 +33,8 @@ import
   invertSVPoints, keyRVpoints, calcDeclination,
   calcGlobalSymmetry, estGeometricSeatsBias, calcDisproportionality, calcMeanMedianDifference, calcLopsidedOutcomes, calcBigR, calcGamma,
   calcMinimalInverseResponsiveness,
-  // EXPERIMENTAL
-  estLocalAsymmetry, estLocalDisproportionality, estLocalDisproportionalityAlt, estLocalUnearnedSeats
+  // // EXPERIMENTAL
+  // estLocalAsymmetry, estLocalDisproportionality, estLocalDisproportionalityAlt, estLocalUnearnedSeats
 } from '../../lib/partisan/bias'
 
 import
@@ -104,12 +104,12 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const cD = estCompetitiveDistricts(VfArray);
   const cDf = estCompetitiveDistrictsShare(cD, N);
 
-  // EXPERIMENTAL
+  // // EXPERIMENTAL
 
-  const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
-  const lProp = estLocalDisproportionality(Vf, dSVpoints);
-  const lPropAlt = estLocalDisproportionalityAlt(Vf, N, dSVpoints);
-  const lUE = estLocalUnearnedSeats(Vf, N, dSVpoints);
+  // const lSym = estLocalAsymmetry(Vf, dSVpoints, rSVpoints);
+  // const lProp = estLocalDisproportionality(Vf, dSVpoints);
+  // const lPropAlt = estLocalDisproportionalityAlt(Vf, N, dSVpoints);
+  // const lUE = estLocalUnearnedSeats(Vf, N, dSVpoints);
 
   const biasMeasurements: T.Bias = {
     bestS: bestS,
@@ -156,12 +156,13 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
   const averageDVf = (DWins.length > 0) ? U.avgArray(DWins) : undefined;
   const averageRVf = (RWins.length > 0) ? U.avgArray(RWins) : undefined;
 
-  const experimentalMetrics: T.Experimental = {
-    lSym: lSym,
-    lProp: lProp,
-    lPropAlt: lPropAlt,
-    lUE: lUE
-  };
+  // // EXPERIMENTAL
+  // const experimentalMetrics: T.Experimental = {
+  //   lSym: lSym,
+  //   lProp: lProp,
+  //   lPropAlt: lPropAlt,
+  //   lUE: lUE
+  // };
 
   const s: T.PartisanScorecard = {
     bias: biasMeasurements,
@@ -171,7 +172,7 @@ export function makePartisanScorecard(Vf: number, VfArray: T.VfArray, bLog: bool
     rSVpoints: rSVpoints,
     averageDVf: averageDVf,
     averageRVf: averageRVf,
-    experimental: experimentalMetrics,
+    // experimental: experimentalMetrics,
     details: {}
   };
 

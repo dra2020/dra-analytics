@@ -1,13 +1,13 @@
 {
   "name": "@dra2020/dra-analytics",
-  "version": "4.1.11",
+  "version": "5.0.1",
   "description": "DRA analytics",
   "main": "dist/dra-analytics.js",
   "types": "./dist/lib/all/all.d.ts",
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "webpack": "node_modules/.bin/webpack",
+    "webpack": "webpack",
     "buildpartisan": "webpack --config cli/partisan.config.js",
     "buildcompactness": "webpack --config cli/compactness.config.js",
     "buildsplitting": "webpack --config cli/splitting.config.js"
